@@ -51,6 +51,10 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"See All\")")
+    public WebElement seeAllButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Most Popular\")")
+    public WebElement labelMostPopular;
 
 
     public void LogoGorunurTest() {

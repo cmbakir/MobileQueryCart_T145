@@ -110,6 +110,32 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
     }
 
+    @Given("User verifies that {string} menu title on the homepage")
+    public void user_verifies_that_menu_title_on_the_homepage(String string) {
+
+    }
+
+    @Given("User verifies that {string} icon on the homepage")
+    public void user_verifies_that_icon_on_the_homepage(String string) {
+
+    }
+
+    @Given("User verifies the {string} button is enabled")
+    public void user_verifies_the_button_is_enabled(String string) {
+
+    }
+
+    @Given("User verifies that most popular items are listed when clicked the see all button")
+    public void user_verifies_that_most_popular_items_are_listed_when_clicked_the_see_all_button() {
+
+    }
+
+    @Given("User verifies that the back button is enabled and navigated to homepage after clicking")
+    public void user_verifies_that_the_back_button_is_enabled_and_navigated_to_homepage_after_clicking() {
+
+    }
+
+
 
 }
 

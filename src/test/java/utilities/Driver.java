@@ -28,7 +28,7 @@ public class Driver {
                 case "Android":
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
-                    options.setApp("/Users/copperdevil/IdeaProjects/MobileQueryCart_T145/src/test/java/Apps/querycart2006.apk");
+                    options.setApp("C:\\Users\\legen\\IdeaProjects\\MobileQueryCart_T145\\src\\test\\java\\Apps\\querycart2006.apk");
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");

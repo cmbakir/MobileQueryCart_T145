@@ -29,7 +29,7 @@ public class QueryCardPage {
     }
 
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
-    private WebElement queryCardLogoElement;
+    public WebElement queryCardLogoElement;
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[2]")
     private WebElement searchBoxElement;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign In\").instance(1)")
@@ -56,12 +56,50 @@ public class QueryCardPage {
     public WebElement seeAllButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Most Popular\")")
     public WebElement labelMostPopular;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(8 Products Found)\"]")
+    public WebElement labelProductFound;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    public WebElement buttonBack;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")")
+    public WebElement buttonUseEmailInstead;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement emailTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Address\")")
+    public WebElement addressElement;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    public WebElement addressEditButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    public WebElement addressDeleteButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(4)")
+    public WebElement streetaddressBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Update Address\").instance(1)")
+    public WebElement updateAdressButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Address Updated Successfully!\"]")
+    public WebElement labelSuccessMessageForAdress;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(5)")
     private WebElement cartButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
     private WebElement searchBoxButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement searchBox;
+
 
 
     public void LogoGorunurTest() {
@@ -128,6 +166,26 @@ public class QueryCardPage {
         confirmPasswordBox.sendKeys(newPassword);
 
     }
+    public void emailTextBoxClickAndSendKeys(String email) {
+        buttonUseEmailInstead.click();
+        assertTrue(emailTextBox.isDisplayed());
+        emailTextBox.click();
+        emailTextBox.sendKeys(email);
+
+    }
+
+    public void viewAndClick (WebElement webelement){
+
+        assertTrue(webelement.isDisplayed());
+        assertTrue(webelement.isEnabled());
+        webelement.click();
+    }
+
+
+
+
+
+
 
     public void cartButtonVisibilityTest(){
         assertTrue(cartButton.isDisplayed());

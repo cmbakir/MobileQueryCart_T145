@@ -2,7 +2,11 @@ package stepdefinitions;
 
 import Page.QueryCardPage;
 import io.cucumber.java.en.Given;
+
 import org.junit.Assert;
+
+import org.openqa.selenium.By;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,13 +16,24 @@ import utilities.ReusableMethods;
 
 import javax.sound.midi.InvalidMidiDataException;
 
+
 import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
+
 import static utilities.Driver.getAppiumDriver;
 import static utilities.Driver.quitAppiumDriver;
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     Actions actions = new Actions(getAppiumDriver());
+
+    private final int TOTAL_CATEGORIES = 44;
+    private Set<String> visibleCategories = new HashSet<>();
 
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
@@ -207,6 +222,112 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.addressDeleteButton.isEnabled());
         card.addressDeleteButton.click();
         ReusableMethods.wait(2);
+    }
+
+
+    @Given("User verifies the {string} button is displayed")
+    public void user_verifies_the_button_is_displayed(String description) {
+
+        ReusableMethods.wait(2);
+        VerifyElementText(description);
+    }
+
+    @Given("User verifies the Cart button is displayed")
+    public void user_verifies_the_cart_button_is_displayed() {
+        card.cartButtonVisibilityTest();
+    }
+    @Given("User verifies the Search Box button is displayed")
+    public void user_verifies_the_search_box_button_is_displayed() {
+        ReusableMethods.wait(3);
+        card.searchBoxButtonVisibilityTest();
+    }
+
+    @Given("User verifies that the Home Page has been accessed")
+    public void user_verifies_that_the_home_page_has_been_accessed() {
+        assert card.labelMostPopular.isDisplayed();
+    }
+    @Given("User verifies that Categories is displayed")
+    public void user_verifies_that_categories_is_displayed() {
+        ReusableMethods.wait(3);
+        OptionsMet.VerifyElementText("Men");
+    }
+    @Given("User clicks the Cart button")
+    public void user_clicks_the_cart_button() {
+        card.cartButtonClick();
+    }
+    @Given("User verifies that the cart is displayed")
+    public void user_verifies_that_the_cart_is_displayed() {
+        ReusableMethods.wait(2);
+        OptionsMet.VerifyElementText("Shopping Cart");
+    }
+    @Given("User verifies that Wishlist is displayed")
+    public void user_verifies_that_wishlist_is_displayed() {
+        ReusableMethods.wait(2);
+        OptionsMet.VerifyElementText("Wishlist");
+    }
+    @Given("User verifies that the Profile is displayed")
+    public void user_verifies_that_the_profile_is_displayed() {
+        ReusableMethods.wait(2);
+        OptionsMet.VerifyElementText("My Account");
+    }
+
+    @Given("User logs in")
+    public void user_logs_in() {
+        ReusableMethods.wait(4);
+        clickButtonByDescription("Profile");
+        ReusableMethods.wait(2);
+        clickButtonByDescription("Sign In");
+        card.phoneTextBoxClickAndSendKeys("6505551212");
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Wise.123").perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+        card.signInLoginClick();
+        hideKeyboard();
+    }
+
+    @Given("User clicks the Search Box button")
+    public void user_clicks_the_search_box_button() {
+        card.searchBoxButtonClick();
+    }
+
+    @Given("User verifies that {string} text is visible")
+    public void user_verifies_that_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
+    }
+
+    @Given("User sends send keys {string}")
+    public void user_sends_send_keys(String key) {
+        card.searchBoxSendKeys(key);
+    }
+
+    @Given("User collect all visible categories by swiping")
+    public void user_collect_all_visible_categories_by_swiping() throws InvalidMidiDataException {
+
+        boolean allFound = false;
+
+        while (!allFound) {
+
+            List<WebElement> categoryElements = getAppiumDriver().findElements(By.xpath("//android.view.View[@content-desc]"));
+
+            for (WebElement category : categoryElements) {
+                String categoryText = category.getAttribute("contentDescription");
+                visibleCategories.add(categoryText);
+            }
+
+            if (visibleCategories.size() >= TOTAL_CATEGORIES) {
+                allFound = true;
+            } else {
+                swipe(1290, 1142, 85, 1142);
+            }
+        }
+    }
+    @Given("User verifies that all categories displayed")
+    public void user_verifies_that_all_categories_displayed() {
+        assertEquals(TOTAL_CATEGORIES, visibleCategories.size());
     }
 
 

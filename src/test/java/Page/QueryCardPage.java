@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import utilities.ConfigReader;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 
@@ -55,6 +56,7 @@ public class QueryCardPage {
     public WebElement seeAllButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Most Popular\")")
     public WebElement labelMostPopular;
+
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(8 Products Found)\"]")
     public WebElement labelProductFound;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
@@ -89,6 +91,14 @@ public class QueryCardPage {
 
 
 
+
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(5)")
+    private WebElement cartButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    private WebElement searchBoxButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
+    private WebElement searchBox;
 
 
 
@@ -176,6 +186,36 @@ public class QueryCardPage {
 
 
 
+
+    public void cartButtonVisibilityTest(){
+        assertTrue(cartButton.isDisplayed());
+    }
+
+    public void cartButtonClick(){
+        cartButton.click();
+        ReusableMethods.wait(1);
+    }
+
+    public void searchBoxButtonVisibilityTest(){
+        assertTrue(searchBoxButton.isDisplayed());
+    }
+
+    public void searchBoxButtonClick(){
+        searchBoxButton.click();
+        ReusableMethods.wait(1);
+    }
+
+    public void searchBoxSendKeys(String keys){
+        searchBox.click();
+        ReusableMethods.wait(1);
+
+        searchBox.sendKeys(keys);
+        ReusableMethods.wait(1);
+
+        Actions actions = new Actions(getAppiumDriver());
+        actions.sendKeys(Keys.ENTER).perform();
+        ReusableMethods.wait(1);
+    }
 
 }
 

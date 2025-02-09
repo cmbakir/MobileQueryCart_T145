@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import Page.QueryCardPage;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -31,6 +33,7 @@ import static utilities.Driver.quitAppiumDriver;
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     Actions actions = new Actions(getAppiumDriver());
+
 
     private final int TOTAL_CATEGORIES = 44;
     private Set<String> visibleCategories = new HashSet<>();
@@ -79,14 +82,16 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         VerifyElementText(userName);
     }
+
     /***US 11   **/
     @Given("As a user muss be {string} phone and {string} password Login")
     public void as_a_user_muss_be_phone_and_password_login(String phoneNumber, String password) {
-        card.Login(phoneNumber,password);
+        card.Login(phoneNumber, password);
     }
+
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
-    public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews,String price) {
-       xPathElementClick(itemName,reviews,price);
+    public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
+        xPathElementClick(itemName, reviews, price);
     }
 
 
@@ -94,35 +99,40 @@ public class Stepdefinition extends OptionsMet {
     public void driver_turns_off() {
         quitAppiumDriver();
     }
+
     @Given("Toaster is displayed")
     public void toast_is_displayed() {
         card.wishListToast();
 
     }
+
     @Given("User confirms that categories appear on the screen")
-    public void user_confirms_that_categories_appear_on_the_screen(){
-       // for (int i = 0; i <categoriesMen.size(); i++) {
+    public void user_confirms_that_categories_appear_on_the_screen() {
+        // for (int i = 0; i <categoriesMen.size(); i++) {
         //    assertTrue(categoriesMen.get(i).);
-      //  }
+        //  }
     }
 
     @Given("User clicks phone number textbox and {string} phone number")
     public void user_clicks_phone_number_textbox_and_phone_number(String phoneNumber) {
-     card. ForgetPasswordPhoneBox(phoneNumber);
+        card.ForgetPasswordPhoneBox(phoneNumber);
     }
+
     @Given("User clicks NewPasswordTextBox and confirmPasswordTextBox {string}")
     public void user_clicks_new_password_text_box_and_confirm_password_text_box(String newPassword) {
         card.NewPassword(newPassword);
     }
+
     @Given("User clicks tap coordinates {int}, {int}")
     public void user_clicks_tap_coordinates(Integer x, Integer y) {
         ReusableMethods.wait(1);
-        OptionsMet.touchDown(x,y);
+        OptionsMet.touchDown(x, y);
         ReusableMethods.wait(1);
     }
+
     @Given("User swipe to screen coordinates {int}, {int}, {int}, {int}")
     public void user_swipe_to_screen_coordinates(Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
-        OptionsMet.swipe(x,y,endX,endY);
+        OptionsMet.swipe(x, y, endX, endY);
         ReusableMethods.wait(2);
     }
 
@@ -176,21 +186,21 @@ public class Stepdefinition extends OptionsMet {
 
 
     }
-    @Given("User verifies the addressElement button is viewable and clickable")
-    public void user_verifies_the_button_is_viewable_and_clickable() {
 
-        assertTrue(card.addressElement.isDisplayed());
-        assertTrue(card.addressElement.isEnabled());
-        card.addressElement.click();
+    @Given("User verifies the {string} button is viewable and clickable")
+    public void user_verifies_the_button_is_viewable_and_clickable(String string) {
+
+        OptionsMet.viewAndClick("Address");
+
 
     }
 
     @Given("User verifies the addressEditButton button is viewable and clickable")
     public void user_verifies_the_buton_is_viewable_and_clickable() {
 
-        assertTrue(card.addressEditButton.isDisplayed());
-        assertTrue(card.addressEditButton.isEnabled());
-        card.addressEditButton.click();
+        assertTrue(card.addressEditIcon.isDisplayed());
+        assertTrue(card.addressEditIcon.isEnabled());
+        card.addressEditIcon.click();
         ReusableMethods.wait(2);
 
     }
@@ -207,21 +217,33 @@ public class Stepdefinition extends OptionsMet {
 
 
     }
-    @Given("User verifies that a success message appeared.")
-    public void user_verifies_that_a_success_message_apeared() {
 
-        assertTrue(card.labelSuccessMessageForAdress.isDisplayed());
+    @Given("User verifies that a success message for updating appeared.")
+    public void user_verifies_that_a_success_message_appeared() {
 
+        assertTrue(card.labelSuccessMessageForUpdatingAddress.getAttribute("content-desc").contains("Successfully"));
         ReusableMethods.wait(2);
 
     }
+
     @Given("User verifies the addressDeleteButton button is viewable and clickable")
     public void user_verifies_the_address_delete_button_button_is_viewable_and_clickable() {
 
-        assertTrue(card.addressDeleteButton.isDisplayed());
-        assertTrue(card.addressDeleteButton.isEnabled());
-        card.addressDeleteButton.click();
+        assertTrue(card.addressDeleteIcon.isDisplayed());
+        assertTrue(card.addressDeleteIcon.isEnabled());
+        card.addressDeleteIcon.click();
         ReusableMethods.wait(2);
+        OptionsMet.viewAndClick("Delete");
+
+    }
+
+    @Given("User enters new record on the address form and clicks the addAddressButton.")
+    public void user_enters_new_record_on_the_address_form_and_clicks_the_add_address_button() throws InterruptedException {
+
+        card.addNewAddressButton.click();
+        card.addNewAddress();
+
+
     }
 
 
@@ -236,6 +258,7 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_the_cart_button_is_displayed() {
         card.cartButtonVisibilityTest();
     }
+
     @Given("User verifies the Search Box button is displayed")
     public void user_verifies_the_search_box_button_is_displayed() {
         ReusableMethods.wait(3);
@@ -246,25 +269,30 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_the_home_page_has_been_accessed() {
         assert card.labelMostPopular.isDisplayed();
     }
+
     @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
         OptionsMet.VerifyElementText("Men");
     }
+
     @Given("User clicks the Cart button")
     public void user_clicks_the_cart_button() {
         card.cartButtonClick();
     }
+
     @Given("User verifies that the cart is displayed")
     public void user_verifies_that_the_cart_is_displayed() {
         ReusableMethods.wait(2);
         OptionsMet.VerifyElementText("Shopping Cart");
     }
+
     @Given("User verifies that Wishlist is displayed")
     public void user_verifies_that_wishlist_is_displayed() {
         ReusableMethods.wait(2);
         OptionsMet.VerifyElementText("Wishlist");
     }
+
     @Given("User verifies that the Profile is displayed")
     public void user_verifies_that_the_profile_is_displayed() {
         ReusableMethods.wait(2);
@@ -325,13 +353,27 @@ public class Stepdefinition extends OptionsMet {
             }
         }
     }
+
     @Given("User verifies that all categories displayed")
     public void user_verifies_that_all_categories_displayed() {
         assertEquals(TOTAL_CATEGORIES, visibleCategories.size());
     }
 
+    @Given("User verifies that a success message for deleting appeared.")
+    public void user_verifies_that_a_success_message_for_deleting_appeared() {
+
+        assertTrue(card.labelSuccessMessageForDeletingAddress.getAttribute("content-desc").contains("Successfully"));
+        ReusableMethods.wait(2);
+
+    }
+
+    @Given("User verifies that a success message for adding appeared.")
+    public void user_verifies_that_a_success_message_for_adding_appeared() {
+
+        assertTrue(card.labelSuccessMessageForAddingAddress.getAttribute("content-desc").contains("Successfully"));
+        ReusableMethods.wait(2);
 
 
+    }
 
 }
-

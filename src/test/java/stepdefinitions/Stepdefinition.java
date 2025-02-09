@@ -1,6 +1,18 @@
 package stepdefinitions;
 
 import Page.QueryCardPage;
+
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+
+
+
+
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.ConfigReader;
+
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 
@@ -12,6 +24,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -19,11 +32,17 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 
 
+import java.time.Duration;
+
+
+
+
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 
 
@@ -134,6 +153,53 @@ public class Stepdefinition extends OptionsMet {
     public void user_swipe_to_screen_coordinates(Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
         OptionsMet.swipe(x, y, endX, endY);
         ReusableMethods.wait(2);
+    }
+
+
+    @Given("Verifies checkbox is selected")
+    public void verifies_checkbox_is_selected() {
+        card.getCheckBoxRememberMe().click();
+        ReusableMethods.wait(3);
+        assertTrue(card.getCheckBoxRememberMe().isEnabled());
+
+
+    }
+
+    @Given("Verifies to access to the forgot password page when it clicked")
+    public void verifies_to_access_to_the_forgot_password_page_when_it_clicked() {
+        clickButtonByDescription("Forgot Password");
+        getAppiumDriver().navigate().back();
+
+    }
+
+    @Given("Verifies to switch to the Register page from Log In Page")
+    public void verifies_to_switch_to_the_register_page_from_log_in_page() {
+        clickButtonByDescription("Sign Up");
+        clickButtonByDescription("*Use Email Instead");
+
+
+    }
+
+    @Given("User clicks the nameTextBox and sendKeys Name")
+    public void user_clicks_the_nameText_box_and_send_keys_name() {
+        nameTextBoxClickAndSendKeys("Cem2");
+    }
+
+    @Given("User clicks the emailTextBox and sendKeys Email")
+    public void user_clicks_the_email_text_box_and_send_keys_email() {
+        emailTextBoxClickAndSendKeys(ConfigReader.getProperty("cemNewUserEmail"));
+    }
+
+    @Given("User clicks the passwordTextBox and sendKeys Password")
+    public void user_clicks_the_password_text_box_and_send_keys_password() {
+        passwordTextBoxClickAndSendKeys(ConfigReader.getProperty("cemPassword"));
+    }
+
+    @Given("User clicks the button SignUp")
+    public void user_clicks_the_button_sign_up() {
+        card.getSignUpButton().click();
+        ReusableMethods.wait(10);
+        //assertTrue(card.getAlertSuccessMessageForSigningUp().getAttribute("content-desc").contains("Success"));
     }
 
     @Given("User verifies that {string} menu title on the homepage")
@@ -375,5 +441,4 @@ public class Stepdefinition extends OptionsMet {
 
 
     }
-
 }

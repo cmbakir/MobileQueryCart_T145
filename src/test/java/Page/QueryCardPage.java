@@ -1,10 +1,13 @@
 package Page;
 
 
+
 import com.github.javafaker.Faker;
+
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.cucumber.java.bs.A;
 import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -148,6 +151,31 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement searchBox;
 
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement checkBoxRememberMe;
+    // Sign In Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement nameTextBox;
+    // Sign Up Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement emailTextBox;
+    // Sign Up Page
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement passwordTextBox2;
+    // Sign Up Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
+    private WebElement signUpButton;
+    // Sign Up Page
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Register Successfully.\"]")
+    private WebElement alertSuccessMessageForSigningUp;
+    // Sign Up Page
 
 
     public void LogoGorunurTest() {

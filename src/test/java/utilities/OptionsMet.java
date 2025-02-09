@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.Select;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
@@ -116,6 +117,7 @@ public class OptionsMet {
 
     }
 
+
     public void nameTextBoxClickAndSendKeys(String name) {
         assertTrue(card.getNameTextBox().isDisplayed());
         card.getNameTextBox().click();
@@ -137,6 +139,14 @@ public class OptionsMet {
 
     }
 
+    public static void viewAndClick (String text){
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + text + "\")"));
 
+        assertTrue(button.isDisplayed());
+        assertTrue(button.isEnabled());
+        button.click();
+    }
 }
 

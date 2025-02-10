@@ -52,6 +52,20 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"*Use Email Instead\"]")
+    private WebElement itemUseEmailInstead;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[1]")
+    private WebElement EmailBox;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[2]")
+    private WebElement PasswordBox;
+
+    //@AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"Sign In\"])[2]")
+    //private WebElement signInLoginButton;
+
+
+
 
     public void LogoGorunurTest() {
 

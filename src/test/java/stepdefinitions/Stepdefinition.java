@@ -2,11 +2,13 @@ package stepdefinitions;
 
 import Page.QueryCardPage;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
 
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -109,6 +111,25 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.swipe(x,y,endX,endY);
         ReusableMethods.wait(2);
     }
+
+
+    @Then("User clicks the button with {string}")
+    public void user_clicks_the_button_with(String UseEmailInstead) {
+
+
+
+    }
+    @Then("As a user must be {string} email and {string} password Login")
+    public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
+        card.Login(registeredEmail, registeredPassword);
+
+    }
+    @Then("User Verifies the visibility and functionality of the {string} button")
+    public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
+
+
+    }
+
 
 
 }

@@ -1,8 +1,13 @@
 package Page;
 
 
+
+import com.github.javafaker.Faker;
+
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.cucumber.java.bs.A;
 import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -23,13 +28,16 @@ import static utilities.Driver.getAppiumDriver;
 
 @Getter
 public class QueryCardPage {
+
+    Actions actions = new Actions(getAppiumDriver());
+    Faker faker=new Faker();
     public QueryCardPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
 
     }
 
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
-    private WebElement queryCardLogoElement;
+    public WebElement queryCardLogoElement;
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[2]")
     private WebElement searchBoxElement;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign In\").instance(1)")
@@ -56,12 +64,132 @@ public class QueryCardPage {
     public WebElement seeAllButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Most Popular\")")
     public WebElement labelMostPopular;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(8 Products Found)\"]")
+    public WebElement labelProductFound;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    public WebElement buttonBack;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")")
+    public WebElement buttonUseEmailInstead;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement emailTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Address\")")
+    public WebElement addressElement;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    public WebElement addressEditIcon;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    public WebElement addressDeleteIcon;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(4)")
+    public WebElement streetaddressBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Update Address\").instance(1)")
+    public WebElement updateAdressButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Address Updated Successfully!\"]")
+    public WebElement labelSuccessMessageForUpdatingAddress;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add New Address\")")
+    public WebElement addNewAddressButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    public WebElement fullNameTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    public WebElement addNewAddressEmailTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    public WebElement addNewAddressPhoneTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Country\")")
+    public WebElement countryDropDownMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"State\")")
+    public WebElement stateDropDownMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"City\")")
+    public WebElement cityDropDownMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(3)")
+    public WebElement zipCodeTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(4)")
+    public WebElement streetAddressTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add Address\")")
+    public WebElement addAddressButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
+    public WebElement addressDropDownSearchBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Turkey\")")
+    public WebElement firstOptionOfCountryDropDown;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Istanbul Province\")")
+    public WebElement firstOptionOfStateDropDown;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Istanbul\")")
+    public WebElement firstOptionOfCityDropDown;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Delete\")")
+    public WebElement addressDeleteButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Address Added Successfully!\"]")
+    public WebElement labelSuccessMessageForAddingAddress;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Address Deleted Successfully!\"]")
+    public WebElement labelSuccessMessageForDeletingAddress;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(5)")
     private WebElement cartButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
     private WebElement searchBoxButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement searchBox;
+
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement checkBoxRememberMe;
+    // Sign In Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement nameTextBox;
+    // Sign Up Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement emailTextBox;
+    // Sign Up Page
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement passwordTextBox2;
+    // Sign Up Page
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
+    private WebElement signUpButton;
+    // Sign Up Page
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Register Successfully.\"]")
+    private WebElement alertSuccessMessageForSigningUp;
+    // Sign Up Page
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"*Use Email Instead\"]")
+    private WebElement itemUseEmailInstead;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[1]")
+    private WebElement EmailBox;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[2]")
+    private WebElement PasswordBox;
+
+    //@AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"Sign In\"])[2]")
+    //private WebElement signInLoginButton;
+
+
 
 
     public void LogoGorunurTest() {
@@ -128,6 +256,21 @@ public class QueryCardPage {
         confirmPasswordBox.sendKeys(newPassword);
 
     }
+    public void emailTextBoxClickAndSendKeys(String email) {
+        buttonUseEmailInstead.click();
+        assertTrue(emailTextBox.isDisplayed());
+        emailTextBox.click();
+        emailTextBox.sendKeys(email);
+
+    }
+
+
+
+
+
+
+
+
 
     public void cartButtonVisibilityTest(){
         assertTrue(cartButton.isDisplayed());
@@ -157,6 +300,47 @@ public class QueryCardPage {
         Actions actions = new Actions(getAppiumDriver());
         actions.sendKeys(Keys.ENTER).perform();
         ReusableMethods.wait(1);
+    }
+
+    public void addNewAddress () throws InterruptedException {
+
+        fullNameTextBox.click();
+        fullNameTextBox.sendKeys(faker.name().fullName());
+        actions.sendKeys(Keys.TAB).perform();
+        addNewAddressEmailTextBox.sendKeys(faker.internet().emailAddress());
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(1);
+        addNewAddressPhoneTextBox.sendKeys(faker.numerify("##########"));
+        countryDropDownMenu.click();
+        addressDropDownSearchBox.click();
+        addressDropDownSearchBox.sendKeys("Turkey");
+        firstOptionOfCountryDropDown.click();
+        stateDropDownMenu.click();
+        addressDropDownSearchBox.click();
+        addressDropDownSearchBox.sendKeys("Istanbul Province");
+        ReusableMethods.wait(1);
+        firstOptionOfStateDropDown.click();
+        ReusableMethods.wait(1);
+        cityDropDownMenu.click();
+        addressDropDownSearchBox.click();
+        addressDropDownSearchBox.sendKeys("Istanbul");
+        firstOptionOfCityDropDown.click();
+        ReusableMethods.wait(1);
+        zipCodeTextBox.click();
+        zipCodeTextBox.sendKeys(faker.numerify("#####"));
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(2);
+        streetaddressBox.sendKeys(faker.address().streetAddress());
+        actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(2);
+        addAddressButton.click();
+    }
+
+    public void verifySuccessMessage(WebElement element){
+
+        assertTrue (element.getAttribute("content-desc").contains("Successfully"));
     }
 
 }

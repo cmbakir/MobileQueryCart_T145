@@ -1,7 +1,7 @@
 Feature: Home page
   Background: User opens the app
     * User makes driver adjustments
-  @1
+  @01
   Scenario: Sign In
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"

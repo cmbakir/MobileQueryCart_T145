@@ -177,6 +177,20 @@ public class QueryCardPage {
     private WebElement alertSuccessMessageForSigningUp;
     // Sign Up Page
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"*Use Email Instead\"]")
+    private WebElement itemUseEmailInstead;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[1]")
+    private WebElement EmailBox;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.EditText[2]")
+    private WebElement PasswordBox;
+
+    //@AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"Sign In\"])[2]")
+    //private WebElement signInLoginButton;
+
+
+
 
     public void LogoGorunurTest() {
 

@@ -16,6 +16,9 @@ import utilities.ConfigReader;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 
+import io.cucumber.java.en.Then;
+
+
 import org.junit.Assert;
 
 import org.openqa.selenium.By;
@@ -27,6 +30,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
 
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -336,6 +340,27 @@ public class Stepdefinition extends OptionsMet {
         assert card.labelMostPopular.isDisplayed();
     }
 
+
+    @Then("User clicks the button with {string}")
+    public void user_clicks_the_button_with(String UseEmailInstead) {
+
+
+
+    }
+    @Then("As a user must be {string} email and {string} password Login")
+    public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
+        card.Login(registeredEmail, registeredPassword);
+
+    }
+    @Then("User Verifies the visibility and functionality of the {string} button")
+    public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
+
+
+    }
+
+
+
+
     @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
@@ -352,6 +377,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
         OptionsMet.VerifyElementText("Shopping Cart");
     }
+
 
     @Given("User verifies that Wishlist is displayed")
     public void user_verifies_that_wishlist_is_displayed() {

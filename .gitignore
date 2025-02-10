@@ -32,7 +32,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 /Apps
-/src/test/java/utilities/Driver.java
+/src/test/java/Hooks/hooks.java
+/src/test/java/Runner/Runner.java
 
 ### VS Code ###
 .vscode/

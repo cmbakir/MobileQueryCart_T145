@@ -1,15 +1,18 @@
 package utilities;
 
+import Page.QueryCardPage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import io.cucumber.java.en.Given;
 import org.junit.Assert;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.Select;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
@@ -21,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 
 public class OptionsMet {
+
+    QueryCardPage card = new QueryCardPage();
 //
     public static void swipe(int x, int y, int endX, int endY) throws InvalidMidiDataException {
         /******  PointerInput ve Sequence Kullanımı: PointerInput ile parmak hareketlerini
@@ -112,5 +117,36 @@ public class OptionsMet {
 
     }
 
+
+    public void nameTextBoxClickAndSendKeys(String name) {
+        assertTrue(card.getNameTextBox().isDisplayed());
+        card.getNameTextBox().click();
+        card.getNameTextBox().sendKeys(name);
+
+    }
+
+    public void emailTextBoxClickAndSendKeys(String email) {
+        assertTrue(card.getEmailTextBox().isDisplayed());
+        card.getEmailTextBox().click();
+        card.getEmailTextBox().sendKeys(email);
+
+    }
+
+    public void passwordTextBoxClickAndSendKeys(String password) {
+        assertTrue(card.getPasswordTextBox2().isDisplayed());
+        card.getPasswordTextBox2().click();
+        card.getPasswordTextBox2().sendKeys(password);
+
+    }
+
+    public static void viewAndClick (String text){
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + text + "\")"));
+
+        assertTrue(button.isDisplayed());
+        assertTrue(button.isEnabled());
+        button.click();
+    }
 }
 

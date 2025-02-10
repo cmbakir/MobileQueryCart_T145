@@ -12,6 +12,7 @@ import utilities.ReusableMethods;
 
 import javax.sound.midi.InvalidMidiDataException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -244,6 +245,7 @@ public class Stepdefinition extends OptionsMet {
             }
         }
     }
+
     @Given("User verifies that all categories displayed")
     public void user_verifies_that_all_categories_displayed() {
         assertEquals(TOTAL_CATEGORIES, visibleCategories.size());

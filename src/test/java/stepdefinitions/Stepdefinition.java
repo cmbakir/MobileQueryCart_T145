@@ -4,6 +4,7 @@ import Page.ManagerPage;
 import Page.QueryCardPage;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 
@@ -913,6 +914,283 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         managerPage.labelDelivered.click();
         ReusableMethods.wait(1);
+    }
+    //TC01 regester Suleyman us007
+    @Given("The user verifies und enabled that the {string} icon is on the page.")
+    public void the_user_verifies_that_the_icon_is_on_the_page(String description) {
+        ReusableMethods.wait(6);
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement button = driver.findElement(MobileBy.accessibilityId("Profile"));
+
+        assertTrue(button.isDisplayed());
+        assertTrue(button.isEnabled());
+    }
+
+    @Given("Verifies that the Sign Up button is visible und enabled.")
+    public void verifies_that_the_sign_up_button_is_visible() {
+        assertTrue(card.getSignUpLoginButton().isDisplayed());
+        assertTrue(card.getSignUpLoginButton().isEnabled());
+
+    }
+
+    @Given("Fills out the form according to the rules.")
+    public void fills_out_the_form_according_to_the_rules() {
+        Faker faker = new Faker();
+        String fullName = faker.name().fullName(); // Rastgele isim
+        String phoneNumber = faker.number().digits(10); // 7 haneli rastgele telefon numarası
+        // İsim kutusuna tıkla ve Faker ile oluşturulan ismi gir
+        clickAndVerify(card.getNameBoxElement());
+        card.getNameBoxElement().sendKeys(fullName);
+        ReusableMethods.wait(2);
+        // TAB ile telefon kutusuna geç ve Faker ile oluşturulan telefon numarasını gir
+        actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB)
+                .sendKeys(phoneNumber)
+                .perform();
+        ReusableMethods.wait(2);
+        // TAB ile şifre kutusuna geç ve Faker ile oluşturulan şifreyi gir
+        actions.sendKeys(Keys.TAB)
+                .sendKeys("Wise.123")
+                .perform();
+        ReusableMethods.wait(2);
+        // ENTER ile formu gönder (REGISTER butonuna basmak için)
+        actions.sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
+        ReusableMethods.wait(1);
+    }
+
+    @Given("The user verifies that the Success message is {string}")
+    public void the_user_verifies_that_the_success_message_is(String expSuccessMassage) {
+
+        assertTrue (card.getSuccessMassage().getAttribute("content-desc").contains("Successfully"));
+    }
+
+    @Given("Verifies that the {string} button is visible.")
+    public void verifies_that_the_button_is_visible(String string) {
+        assertTrue(card.getSignInLoginButton().isDisplayed());
+
+    }
+    //TC 02 suleyman
+
+    @Given("User enters phone number.")
+    public void user_enters_phone_number() {
+        Faker faker = new Faker();
+        String phoneNumber = faker.number().digits(10);
+        card.getPhoneandEmailBox().click();
+        card.getPhoneandEmailBox().sendKeys(phoneNumber);
+
+    }
+    @Given("user enters password that they want to use.")
+    public void user_enters_password_that_they_want_to_use() {
+        card.getPasswordBox().click();
+        card.getPasswordBox().sendKeys("Wise.123");
+        ReusableMethods.wait(2);
+    }
+    @Given("user clicks on sign up login button.")
+    public void user_clicks_on_sign_up_login_button() {
+        card.getSignUpLoginButton().click();
+    }
+    @Given("user confirms that This field is required text is visible.")
+    public void user_confirms_that_this_field_is_required_text_is_visible() {
+        String expectedWrittigMassage="This field is required";
+        String actualWrittigMassage=card.getErrorWritingNameandPhone().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingNameandPhone().isDisplayed());
+        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+    }
+    @Given("user clicks on back button.")
+    public void user_clicks_on_back_button() {
+        card.getReturnButton().click();
+        ReusableMethods.wait(2);
+    }
+
+    @Given("user enters username.")
+    public void user_enters_username() {
+        Faker faker = new Faker();
+        String fullName = faker.name().fullName(); // Rastgele isim
+        card.getNameBoxElement().click();
+        card.getNameBoxElement().sendKeys(fullName);
+    }
+    @Given("User Verifies that Password is required text appears")
+    public void user_verifies_that_password_is_required_text_appears() {
+        String expectedWrittigMassage="Passord is required";
+        String actualWrittigMassage=card.getErrorWritingPassword().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingPassword().isDisplayed());
+        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+    }
+    @Given("The user clicks on the use email instead text on the sigUp form.")
+    public void the_user_clicks_on_the_use_email_instead_text_on_the_sig_up_form() {
+        card.getUseEmailInst().click();
+    }
+    @Given("The user confirms that the Email is required text appears.")
+    public void the_user_confirms_that_the_email_is_required_text_appears() {
+        String expectedWrittigMassage="Email is required";
+        String actualWrittigMassage=card.getErrorWritingEmail().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingEmail().isDisplayed());
+        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+    }
+    @Given("As a user, enters the necessary information on the Form.")
+    public void as_a_user_enters_the_necessary_information_on_the_form() {
+        Faker faker = new Faker();
+        String fullName = faker.name().fullName(); // Rastgele isim
+        String email = faker.internet().emailAddress();
+        card.getNameBoxElement().click();
+        card.getNameBoxElement().sendKeys(fullName);
+        ReusableMethods.wait(2);
+        // TAB ile telefon kutusuna geç ve Faker ile oluşturulan Email gir
+        actions.sendKeys(Keys.TAB)
+                .sendKeys(email)
+                .perform();
+        ReusableMethods.wait(2);
+        // TAB ile şifre kutusuna geç  şifreyi gir
+        actions.sendKeys(Keys.TAB)
+                .sendKeys("Wise.123")
+                .perform();
+        ReusableMethods.wait(2);
+
+    }
+    @Given("user enters a phone number of less than 7 digits.")
+    public void user_enters_a_phone_number_of_less_than_digits() {
+        Faker faker = new Faker();
+        String phoneNumber = faker.number().digits(6);
+        card.getPhoneandEmailBox().click();
+        card.getPhoneandEmailBox().sendKeys(phoneNumber);
+    }
+    @Given("user confirms receiving error message.")
+    public void user_confirms_receiving_error_message() {
+        assertTrue(card.getErrorMassagePhone().isDisplayed());
+        assertTrue (card.getErrorMassagePhone().getAttribute("content-desc").contains("The phone field must be at least 7 characters."));
+    }
+    @Given("user enters an Email that does not meet the Email criteria.")
+    public void user_enters_an_email_that_does_not_meet_the_email_criteria() {
+        Faker faker = new Faker();
+
+
+        String invalidEmail = faker.name().username() + "example.com";
+
+        card.getPhoneandEmailBox().click();
+        card.getPhoneandEmailBox().sendKeys(invalidEmail);
+        String expectedWrittingMassage="Enter Valid Email Address";
+        String actualWrittingMassage=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
+        assertEquals(expectedWrittingMassage,actualWrittingMassage);
+
+        card.getReturnButton().click();
+        card.getSignUpButton().click();
+        card.getUseEmailInst().click();
+
+        String invalidEmail2 = faker.name().username() + "@";
+
+        card.getPhoneandEmailBox().click();
+        card.getPhoneandEmailBox().sendKeys(invalidEmail2);
+        String expectedWrittingMassage2="Enter Valid Email Address";
+        String actualWrittingMassage2=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
+        assertEquals(expectedWrittingMassage2,actualWrittingMassage2);
+
+        card.getReturnButton().click();
+        card.getSignUpButton().click();
+        card.getUseEmailInst().click();
+
+        String invalidEmail3 = faker.internet().emailAddress().replace("@", "!");
+
+        card.getPhoneandEmailBox().click();
+        card.getPhoneandEmailBox().sendKeys(invalidEmail3);
+        String expectedWrittingMassage3="Enter Valid Email Address";
+        String actualWrittingMassage3=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
+        assertEquals(expectedWrittingMassage3,actualWrittingMassage3);
+
+    }
+    @Given("The user scrolls the screen {int} times to the screen coordinate from {int},{int} to {int},{int}.")
+    public void the_user_scrolls_the_screen_times_to_the_screen_coordinate_from_to(Integer n,Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
+        for (int i = 0; i < n; i++) {
+
+            OptionsMet.swipe(x,y,endX,endY);
+            ReusableMethods.wait(1);
+        }
+
+    }
+    @Given("user confirms that the juniors category is visible.")
+    public void user_confirms_that_the_juniors_category_is_visible() {
+        assertTrue(card.getBodyJuniorsCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Clothing subcategory is visible.")
+    public void user_confirms_that_the_juniors_clothing_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsClothingAltCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Seleepwear subcategory is visible.")
+    public void user_confirms_that_the_juniors_seleepwear_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsSleepwearAltCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Shose subcategory is visible.")
+    public void user_confirms_that_the_juniors_shose_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsShoesAltCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Accessories subcategory is visible.")
+    public void user_confirms_that_the_juniors_accessories_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsAccessoriesAltCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Bags subcategory is visible.")
+    public void user_confirms_that_the_juniors_bags_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsBagsAltCatgr().isDisplayed());
+    }
+    @Given("user confirms that the juniors Hat & Beres subcategory is visible.")
+    public void user_confirms_that_the_juniors_hat_beres_subcategory_is_visible() {
+        assertTrue(card.getBodyJuniorsHatAltCatgr().isDisplayed());
+    }
+    //TC02 US014 suleyman
+    @Given("User clicks on juniors category.")
+    public void user_clicks_on_juniors_category() {
+        card.getBodyJuniorsCatgr().click();
+    }
+    @Given("Verifies that the filter icon is visible and accessible.")
+    public void verifies_that_the_filter_icon_is_visible_and_accessible() {
+        assertTrue(card.getFiltreIkon().isDisplayed());
+        assertTrue(card.getFiltreIkon().isEnabled());
+    }
+    @Given("\\(5-6 years old) Adds Disney Mickey Mouse to wishlist.")
+    public void years_old_adds_disney_mickey_mouse_to_wishlist() {
+        card.getProductAddWishlist().click();
+        assertTrue (card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
+    }
+    @Given("\\(7-8 years old, yellow) Adds Kids Girls Raglan Style to wishlist.")
+    public void years_old_yellow_adds_kids_girls_raglan_style_to_wishlist() {
+        card.getProductNewAddWishlist().click();
+        assertTrue (card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
+    }
+    @Given("Adds capacity Large Student Backpack to wishlist and selects black color and adds to cart.")
+    public void adds_capacity_large_student_backpack_to_wishlist_and_selects_black_color_and_adds_to_cart() {
+
+        card.getProductSelectColor().click();
+        ReusableMethods.wait(3);
+        card.getAddToCart().click();
+        assertTrue (card.getSuccessPruductAddToCart().getAttribute("content-desc").contains("Product added to cart"));
+        ReusableMethods.wait(3);
+        card.getAddWishlistFavorite().click();
+        ReusableMethods.wait(3);
+        card.getCarttoButton().click();
+        ReusableMethods.wait(2);
+
+    }
+    @Given("user clicks on capacity Large Student Backpack")
+    public void user_clicks_on_capacity_Large_Student_Backpack() {
+        ReusableMethods.wait(2);
+        card.getProducktCapLargClick().click();
+        ReusableMethods.wait(2);
+    }
+
+    @Given("The user views their wishlist and confirms that they are on the {string} page.")
+    public void the_user_views_their_wishlist_and_confirms_that_they_are_on_the_page(String expectedtext) {
+
+        card.getWishlist().click();
+        ReusableMethods.wait(2);
+
+        String actuelurunsayisi=card.getWishlist().getAttribute("content-desc");
+        assertEquals(expectedtext,actuelurunsayisi);
+    }
+
+    @Given("User click on juniors category.")
+    public void user_click_on_juniors_category() {
+        card.getCategoryButton().click();
+        card.getJuniorsButton().click();
     }
 
   

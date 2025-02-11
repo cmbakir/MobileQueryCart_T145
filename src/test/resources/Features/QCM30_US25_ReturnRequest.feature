@@ -1,20 +1,21 @@
 
-Feature: As a registered user, I would like to have a page about the orders I want to return and be able to manage my product returns.
+Feature: QCM30-US025 As a registered user, I would like to have a page about the orders I want to return and be able to manage my product returns.
 
   Background: User opens the app
     * User makes driver adjustments
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * User enters "phoneNumber" and "password" and clicks on the “Sign In” button.
+    * User clicks the button with "*Use Email Instead"
+    * As a user must be "registeredEmail" email and "registeredPassword" password Login
 
-  Scenario: Return Request Button Visibility on Order History Page
+  Scenario: QCM47 TC_01 -> US025 Return Request Button Visibility on Order History Page
     Given User is on the Dashboard page
     When User clicks on the Order History section
     And User selects a delivered order
     Then the "Return Request" button should be visible and active
 
-  Scenario: Add Return Reason, Note, Attachment and Return Process Started
+  Scenario: QCM48 TC_02 -> US025 Add Return Reason, Note, Attachment and Return Process Started
     Given User is on the "Request Return" page with a selected product
     When User enters a reason for the return in the "Reason for Return" field
     And User enters a note in the "Note" field

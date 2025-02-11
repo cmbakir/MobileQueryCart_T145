@@ -6,9 +6,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 
-
-
-
+import io.cucumber.java.en.And;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
@@ -28,6 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -345,26 +344,6 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
-    @Then("User clicks the button with {string}")
-    public void user_clicks_the_button_with(String UseEmailInstead) {
-
-
-
-    }
-    @Then("As a user must be {string} email and {string} password Login")
-    public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
-        card.Login(registeredEmail, registeredPassword);
-
-    }
-    @Then("User Verifies the visibility and functionality of the {string} button")
-    public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
-
-
-    }
-
-
-
-
     @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
@@ -471,4 +450,51 @@ public class Stepdefinition extends OptionsMet {
 
 
     }
+
+    @Then("User clicks the button with {string}")
+    public void user_clicks_the_button_with(String UseEmailInstead) {
+        ReusableMethods.wait(2);
+        card.buttonUseEmailInstead.click();
+    }
+    @Then("As a user must be {string} email and {string} password Login")
+    public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
+        ReusableMethods.wait(2);
+        card.LoginWithEmail(registeredEmail, registeredPassword);
+    }
+    @Then("User Verifies the visibility and functionality of the {string} button")
+    public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
+        ReusableMethods.wait(2);
+        VerifyElementText(Wishlist);
+        clickButtonByDescription(Wishlist);
+    }
+    @Then("The {string} title should be displayed")
+    public void theTitleShouldBeDisplayed(String OrderHistory) {
+        ReusableMethods.wait(2);
+        OptionsMet.assertElementText(OrderHistory);
+    }
+    @And("User clicks on the first order in the list")
+    public void userClicksOnTheFirstOrderInTheList() {
+        ReusableMethods.wait(2);
+        card.getFirstOrderDetailsButton().click();
+    }
+    @And("User scroll down the screen")
+    public void userScrollDownTheScreen() throws InvalidMidiDataException {
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(600,2750,600,330);
+        ReusableMethods.wait(1);
+    }
+    @Then("User returns to previous page")
+    public void userReturnsToPreviousPage() {
+        ReusableMethods.wait(2);
+        Driver.getAppiumDriver().navigate().back();
+        ReusableMethods.wait(2);
+    }
+    @Then("User should see an {string} message on the popup page.")
+    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
+        ReusableMethods.wait(2);
+        OptionsMet.assertElementTextAndVisibility(expectedMessage);
+    }
+
+
+
 }

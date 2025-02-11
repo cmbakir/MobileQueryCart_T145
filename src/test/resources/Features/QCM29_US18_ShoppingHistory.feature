@@ -1,4 +1,4 @@
-Feature: View and manage shopping history in the Dashboard
+Feature: QCM29-US018 View and manage shopping history in the Dashboard
 
   As a registered user, I would like to have a page in my Dashboard where I can view my shopping history
 
@@ -7,9 +7,10 @@ Feature: View and manage shopping history in the Dashboard
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * User enters "phoneNumber" and "password" and clicks on the “Sign In” button.
+    * User clicks the button with "*Use Email Instead"
+    * As a user must be "registeredEmail" email and "registeredPassword" password Login
 
-  Scenario: Access and interact with the Order History page
+  Scenario:  QCM46 TC_01 -> US018 Access and interact with the Order History page
 
     Given User clicks the button with description "Profile"
     When User clicks the button with description "Order History"

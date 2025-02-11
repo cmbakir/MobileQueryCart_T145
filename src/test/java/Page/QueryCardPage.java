@@ -160,8 +160,8 @@ public class QueryCardPage {
     private WebElement nameTextBox;
     // Sign Up Page
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
-    private WebElement emailTextBox;
+    //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    //private WebElement emailTextBox;
     // Sign Up Page
 
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
@@ -190,6 +190,28 @@ public class QueryCardPage {
     //private WebElement signInLoginButton;
 
 
+    //OrderHistory
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"#1102251000\n" +
+            "02:36 AM, 11-02-2025\n" +
+            "Info: \n" +
+            "1 Product\n" +
+            "Delivery Status: \n" +
+            "Pending\n" +
+            "Payment Status: \n" +
+            "Paid\n" +
+            "Total: \n" +
+            "$110.98\")")
+    private WebElement firstOrderDetailsButton;
+    public void firstOrderDetailsButton(){
+    }
+
+    //OrderHistory
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Cancel Order\")")
+    private WebElement CancelOrderButton;
+
+    //OrderHistory
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Download Receipt\")")
+    private WebElement downloadReceiptButton;
 
 
     public void LogoGorunurTest() {
@@ -211,6 +233,16 @@ public class QueryCardPage {
         actions.sendKeys(ConfigReader.getProperty(password)).perform();
         ReusableMethods.wait(1);
         // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        signInLoginClick();
+    }
+
+    public void LoginWithEmail(String registeredEmail, String registeredPassword) {
+        Actions actions = new Actions(getAppiumDriver());
+        phoneTextBoxClickAndSendKeys(ConfigReader.getProperty(registeredEmail));
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(ConfigReader.getProperty(registeredPassword)).perform();
+        ReusableMethods.wait(1);
         actions.sendKeys(Keys.TAB).perform();
         signInLoginClick();
     }

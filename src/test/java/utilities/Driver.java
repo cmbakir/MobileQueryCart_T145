@@ -29,7 +29,7 @@ public class Driver {
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
 
-                    options.setApp("C:/Users/mehme/IdeaProjects//MobileQueryCart_T145//src//test//java//Apps//querycart2006.apk");
+                    options.setApp("src/test/java/Apps/querycart2006.apk");
 
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");

@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import Page.ManagerPage;
 import Page.QueryCardPage;
 
 import io.appium.java_client.MobileBy;
@@ -7,6 +8,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 
 import io.cucumber.java.en.And;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
@@ -35,26 +37,21 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 
 
+import java.sql.DriverManager;
 import java.util.ArrayList;
 
 
 import java.time.Duration;
 
 
-
-
+import static Page.ManagerPage.clickActionButtonForPendingRows;
 import static org.junit.Assert.*;
+import static utilities.Driver.*;
 
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-
-
-
-import static utilities.Driver.getAppiumDriver;
-import static utilities.Driver.quitAppiumDriver;
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
@@ -495,6 +492,36 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
     }
 
+    @Given("Manager is on the Dashboard page and accept order")
+    public void manager_is_on_the_dashboard_page_and_accept_order() {
+
+        ManagerPage managerPage= new ManagerPage();
+        WebDriver webdriver = Driver.getWebdriver();
+
+        String managerLoginUrl = ConfigReader.getProperty("managerLoginUrl");
+        String managerEmail = ConfigReader.getProperty("managerEmail");
+        String registeredPassword = ConfigReader.getProperty("registeredPassword");
+
+        managerPage.managerLogin(managerLoginUrl, managerEmail, registeredPassword);
+
+        managerPage.managerButton.click();
+        ReusableMethods.wait(1);
+        managerPage.dashboardButton.click();
+        ReusableMethods.wait(1);
+        managerPage.onlineOrdersButton.click();
+        ReusableMethods.wait(2);
+
+        ManagerPage.clickActionButtonForPendingRows(webdriver);
+
+        managerPage.acceptButton.click();
+        ReusableMethods.wait(1);
+        managerPage.accept2button.click();
+        ReusableMethods.wait(1);
+        managerPage.dropdownMenu.click();
+        ReusableMethods.wait(1);
+        managerPage.labelDelivered.click();
+        ReusableMethods.wait(1);
+    }
 
 
 }

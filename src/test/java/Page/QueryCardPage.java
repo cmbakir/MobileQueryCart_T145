@@ -335,8 +335,8 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add\")")
     public WebElement shipAddButton;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add Address\")")
-    public WebElement addAddressButton;
+   // @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add Address\")")
+   // public WebElement addAddressButton;
 
 
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
@@ -412,9 +412,82 @@ public class QueryCardPage {
             "    Removed from Wishlist\"]")
     public WebElement removedWish;
 
+    //Suleyman
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Register Successfully.\"]")
+    private WebElement successMassage;
+    @AndroidFindBy(accessibility = "*Use Email Instead")
+    private WebElement useEmailInst;
+    @AndroidFindBy(xpath ="//android.view.View[@content-desc=\"Error\n" +
+            "The phone field must be at least 7 characters.\"]")
+    private WebElement errorMassagePhone;
+    @AndroidFindBy(xpath= "//android.view.View[@content-desc=\"This field is required\"]")
+    private WebElement errorWritingNameandPhone;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Passord is required\"]")
+    private WebElement errorWritingPassword;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Email is required\"]")
+    private WebElement errorWritingEmail;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Enter Valid Email Address\"]")
+    private WebElement errorWritingFalseEmail;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement returnButton;
+   //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+   // private WebElement PasswordBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement PhoneandEmailBox;
+   // @AndroidFindBy(accessibility = "Sign Up")
+  // private WebElement signUpButton;
+    @AndroidFindBy(accessibility = "Juniors")
+    private WebElement bodyJuniorsCatgr;
+    @AndroidFindBy(accessibility = "Juniors Clothing")
+    private WebElement bodyJuniorsClothingAltCatgr;
+    @AndroidFindBy(accessibility = "Juniors Sleepwear")
+    private WebElement bodyJuniorsSleepwearAltCatgr;
+    @AndroidFindBy(accessibility = "Juniors Shoes")
+    private WebElement bodyJuniorsShoesAltCatgr;
+    @AndroidFindBy(accessibility = "Juniors Accessories")
+    private WebElement bodyJuniorsAccessoriesAltCatgr;
+    @AndroidFindBy(accessibility = "Juniors Bags")
+    private WebElement bodyJuniorsBagsAltCatgr;
+    @AndroidFindBy(accessibility = "Juniors Hat & Beres")
+    private WebElement bodyJuniorsHatAltCatgr;
+    @AndroidFindBy(accessibility = "Category")
+    private WebElement categoryButton;
+    @AndroidFindBy(accessibility = "Juniors")
+    private WebElement juniorsButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Add\n" +
+            "Added to Wishlist\"]")
+    private WebElement SuccessAddWishlist;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Wishlist\"]")
+    private WebElement wishlistviewTitle;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Product added to cart\"]")
+    private WebElement SuccessPruductAddToCart;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(3)")
+    private WebElement productAddWishlist;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(24)")
+    private WebElement productNewAddWishlist;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Capacity Large Student Backpack\n" +
+            "0 (0  Reviews)\n" +
+            "$15.00\"]")
+    private WebElement producktCapLargClick;
 
-
-
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Black\")")
+    private WebElement productSelectColor;
+    @AndroidFindBy(accessibility = "Add To Cart")
+    private WebElement addToCart;
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Favorite\"]")
+    private WebElement addWishlistFavorite;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement filtreIkon;
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Wishlist\"]")
+    private WebElement Wishlist;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
+    private WebElement carttoButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement nameBoxElement;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
+    private WebElement signUpLoginButton;
 
 
 

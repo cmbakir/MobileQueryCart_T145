@@ -1,14 +1,14 @@
 package stepdefinitions;
 
+import Page.ManagerPage;
 import Page.QueryCardPage;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 
-
-
-
+import io.cucumber.java.en.And;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
@@ -16,38 +16,57 @@ import utilities.ConfigReader;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 
+import io.cucumber.java.en.When;
+
+
+import io.cucumber.java.en.Then;
+
+
 import org.junit.Assert;
 
 import org.openqa.selenium.By;
 
+
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
 
 
 import javax.sound.midi.InvalidMidiDataException;
 
 
+import java.io.IOException;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static utilities.Driver.getAppiumDriver;
+import static utilities.Driver.quitAppiumDriver;
+
+
+import java.sql.DriverManager;
+import java.util.ArrayList;
+
+
 import java.time.Duration;
 
 
-
-
+import static Page.ManagerPage.clickActionButtonForPendingRows;
 import static org.junit.Assert.*;
+import static utilities.Driver.*;
+
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
-
-
-import static utilities.Driver.getAppiumDriver;
-import static utilities.Driver.quitAppiumDriver;
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
@@ -55,8 +74,10 @@ public class Stepdefinition extends OptionsMet {
     Faker faker=new Faker();
 
 
+
     private final int TOTAL_CATEGORIES = 44;
     private Set<String> visibleCategories = new HashSet<>();
+
 
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
@@ -65,6 +86,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User confirms to be on the homepage")
     public void user_confirms_to_be_on_the_homepage() {
+        ReusableMethods.wait(1);
         card.LogoGorunurTest();
     }
 
@@ -338,6 +360,7 @@ public class Stepdefinition extends OptionsMet {
         assert card.labelMostPopular.isDisplayed();
     }
 
+
     @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
@@ -353,6 +376,359 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_the_cart_is_displayed() {
         ReusableMethods.wait(2);
         OptionsMet.VerifyElementText("Shopping Cart");
+    }
+
+
+
+    @When("User see Popular Brands title.")
+    public void userSeePopularBrandsTitle() {
+        VerifyElementText("Popular Brands");
+
+    }
+
+    @When("User verify Popular Brands.")
+    public void userVerifyPopularBrands() throws InvalidMidiDataException {
+        VerifyElementText("Blossom Boutique");
+        VerifyElementText("Nike");
+        VerifyElementText("Dr. Martens");
+        VerifyElementText("Clarks");
+
+        OptionsMet.swipe(1306,2344,118,1282);
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(1306,2344,118,1282);
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(1306,2344,118,1282);
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(1306,2344,118,1282);
+        VerifyElementText("Urban Casuals");
+
+
+    }
+
+    @When("User verify Details, Videos, Review, Review, Shipping&Return title")
+    public void userVerifyDetailsVideosReviewReviewShippingReturnTitle() {
+        VerifyElementText("Details");
+        VerifyElementText("Videos");
+        VerifyElementText("Review");
+        VerifyElementText("Shipping & Return");
+
+    }
+
+    @When("User clicks  homepage tap coordinates {int}, {int}")
+    public void userClicksHomepageTapCoordinates(Integer x, Integer y) {
+        ReusableMethods.wait(4);
+        OptionsMet.touchDown(x,y);
+        ReusableMethods.wait(1);
+    }
+
+    @When("When the user clicks on this titles, the product information should be displayed.")
+    public void whenTheUserClicksOnThisTitlesTheProductInformationShouldBeDisplayed() {
+        card.detailsbutton.click();
+        assertTrue(card.detailscontent.isDisplayed());
+
+        card.videosbutton.click();
+        assertTrue(card.detailsvideos.isDisplayed());
+
+        card.reviewbutton.click();
+        assertTrue(card.detailreviewstar.isDisplayed());
+        assertTrue(card.detailreview2.isDisplayed());
+        assertTrue(card.detailreview3.isDisplayed());
+
+        card.shipReturnbutton.click();
+        assertTrue(card.detailsShipReturn.isDisplayed());
+
+
+    }
+
+    @When("User clicks the email button {string} and sendKeys {string}")
+    public void userClicksTheEmailButtonAndSendKeys(String elementName, String text) {
+        card.phoneTextBoxClickAndSendKeys(text);
+        // Telefon numarası alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Query.250203").perform();
+        ReusableMethods.wait(1);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+
+    }
+
+
+    @When("On the page that opens, click on the white heart sign in the upper right corner of the products.")
+    public void onThePageThatOpensClickOnTheWhiteHeartSignInTheUpperRightCornerOfTheProducts() {
+         card.whiteHeart.click();
+         //ReusableMethods.wait(3);
+        //assertTrue (card.addedWish.getAttribute("content-desc").contains("Add"));
+
+    }
+
+    @When("the user takes a {string} screenshot of the element they want to take a screenshot of")
+    public void theUserTakesAScreenshotOfTheElementTheyWantToTakeAScreenshotOf(String screen) throws IOException {
+        ReusableMethods.wait(4);
+        ReusableMethods.getScreenshot(screen);
+    }
+
+
+    @When("User see Wishlist title and wishlist item quantity")
+    public void userSeeWishlistTitleAndWishlistItemQuantity() {
+        VerifyElementText("Wishlist");
+
+        assertTrue(card.wishquant.isDisplayed());
+
+    }
+
+    @When("On the page that opens, click on the red heart sign in the upper right corner of the products.")
+    public void onThePageThatOpensClickOnTheRedHeartSignInTheUpperRightCornerOfTheProducts() {
+        card.whiteHeart.click();
+
+        //assertTrue (card.removedWish.getAttribute("content-desc").contains("Remove"));
+    }
+
+
+    @When("User clicks shopping bag")
+    public void userClicksShoppingBag() {
+         card.addcartbag.click();
+    }
+
+    @When("User verifies to open shopping cart page")
+    public void userVerifiesToOpenShoppingCartPage() {
+        VerifyElementText("Shopping Cart");
+
+    }
+
+
+    @When("User verifies to open shipping information")
+    public void userVerifiesToOpenShippingInformation() {
+        VerifyElementText("Shipping Information");
+    }
+
+    @When("User verify Delivery,pickup title")
+    public void userVerifyDeliveryPickupTitle() {
+        VerifyElementText("Delivery");
+        VerifyElementText("Pick Up");
+
+        assertTrue(card.pickup.isEnabled());
+        assertTrue(card.delivery.isEnabled());
+
+    }
+
+    @When("User display address information")
+    public void userDisplayAddressInformation() {
+
+        assertTrue(card.shippingAddress.isDisplayed());
+        assertTrue(card.shippingAddress.isEnabled());
+
+        assertTrue(card.customeraddress.isDisplayed());
+        assertTrue(card.customeraddress.isEnabled());
+
+    }
+
+
+    @When("User should be able to select a different address as billing address")
+    public void userShouldBeAbleToSelectADifferentAddressAsBillingAddress() {
+        assertTrue(card.billingsavetitle.isDisplayed());
+        assertTrue(card.billingsavetitle.isEnabled());
+
+        assertTrue(card.billingsavebutton.isDisplayed());
+        assertTrue(card.billingsavebutton.isEnabled());
+        card.billingsavebutton.click();
+
+        assertTrue(card.billingaddresstitle.isDisplayed());
+        assertTrue(card.billingaddresstitle.isEnabled());
+        ReusableMethods.wait(1);
+        card.billingsavebutton.click();
+
+    }
+
+    @When("User should be redirected to the page where they can redeem the discount coupon")
+    public void userShouldBeRedirectedToThePageWhereTheyCanRedeemTheDiscountCoupon() {
+
+        ReusableMethods.wait(1);
+        assertTrue(card.discountCouponTitle.isDisplayed());
+        assertTrue(card.discountCouponTitle.isEnabled());
+        card.discountCouponTitle.click();
+
+        assertTrue(card.couponEnterCodeTitle.isDisplayed());
+        assertTrue(card.couponEnterCodeTitle.isEnabled());
+
+        assertTrue(card.couponForYouTitle.isDisplayed());
+
+        ReusableMethods.wait(2);
+        assertTrue(card.couponEditBox.isDisplayed());
+        assertTrue(card.couponEditBox.isEnabled());
+        //assertTrue(card.couponEditBox.isSelected());
+
+    }
+
+    @When("The order fee summary should be displayed under the Order Summary heading.")
+    public void theOrderFeeSummaryShouldBeDisplayedUnderTheOrderSummaryHeading() throws InvalidMidiDataException {
+
+        assertTrue(card.orderSummaryTitle.isDisplayed());
+        assertTrue(card.orderSummaryTitle.isEnabled());
+
+        OptionsMet.swipe(651,1801,651,1282);
+
+        VerifyElementText("Subtotal");
+        VerifyElementText("Tax");
+        VerifyElementText("Shipping Charge");
+        VerifyElementText("Discount");
+        VerifyElementText("Total");
+
+    }
+
+    @When("User verify Save & Pay button")
+    public void userVerifySavePayButton() {
+
+        assertTrue(card.savePay.isDisplayed());
+        assertTrue(card.savePay.isEnabled());
+    }
+
+    @When("User change address information")
+    public void userChangeAddressInformation() throws InvalidMidiDataException, IOException {
+
+        assertTrue(card.editAdrButton.isDisplayed());
+        card.editAdrButton.click();
+
+        VerifyElementText("Address");
+
+        assertTrue(card.editWriButton.isDisplayed());
+        assertTrue(card.editWriButton.isEnabled());
+
+        card.editWriButton.click();
+
+        assertTrue(card.updateAdrTitle.isDisplayed());
+        assertTrue(card.updateAdrTitle.isEnabled());
+        //WebElement updname = card.updateadrnamebox;
+        //ReusableMethods.getScreenshot("android.widget.ScrollView");
+
+        card.updateadrnamebox.click();
+        actions.sendKeys("turk").perform();
+
+        //OptionsMet.clickAndSendKeys(updname,"caner ozturk");
+        OptionsMet.swipe(651,1801,651,1282);
+        OptionsMet.clickButtonByDescription("Update Address");
+        //ReusableMethods.wait(1);
+        //ReusableMethods.getScreenshot("android.widget.ScrollView");
+        assertTrue (card.updatedAddSuccess.getAttribute("content-desc").contains("Success"));
+        ReusableMethods.wait(3);
+        card.backButton.click();
+
+    }
+
+    @When("User add new adress")
+    public void userAddNewAdress() throws InterruptedException {
+        card.shipAddButton.click();
+
+        VerifyElementText("Add New Address");
+        VerifyElementText("Full Name");
+        card.addAddressNameBox.click();
+        card.addAddressNameBox.sendKeys("cihan öztürk");
+        actions.sendKeys(Keys.TAB)
+                .sendKeys("cihan@hotmail.com")
+                 .sendKeys(Keys.TAB).perform();
+                //.sendKeys(Keys.ENTER).perform();
+        //ReusableMethods.wait(2);
+        ReusableMethods.wait(2);
+        OptionsMet.touchDown(275,1226);
+        ReusableMethods.wait(1);
+         card.countryCode.click();
+       // ReusableMethods.scrollWithUiScrollableAndClickWithUi("+93");
+        Thread.sleep(2000);
+        actions.sendKeys(Keys.TAB)
+                .sendKeys("5556661122")
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.TAB)
+                .sendKeys("Cinnah Caddesi No : 18/7").perform();
+
+        card.addAddressCountry.click();
+        card.addAddressCountrybox.click();
+        actions.sendKeys("Turkey").perform();
+        card.addAddressCountryboxTurkey.click();
+
+        card.addAddressState.click();
+        card.addAddressStatebox.click();
+        actions.sendKeys("Ankara").perform();
+        card.addAddressStateboxAnkara.click();
+
+        card.addAddressCity.click();
+        card.addAddressCitybox.click();
+        actions.sendKeys("Çankaya").perform();
+        card.addAddressCityCankaya.click();
+
+        OptionsMet.hideKeyboard();
+        //clickButtonByDescription("Add Address");
+
+         ReusableMethods.wait(1);
+         WebElement addAddressButton = card.addAddressButton;
+         clickAndVerify(addAddressButton);
+      // ekenen adresin doğrulanması
+
+        assertTrue (card.addedAddSuccess.getAttribute("content-desc").contains("Success"));
+        assertTrue(card.addedAddress.isDisplayed());
+        assertTrue(card.addedAddress.isEnabled());
+
+        ReusableMethods.wait(1);
+
+    }
+
+    @When("User delete adress")
+    public void userDeleteAdress() throws IOException {
+
+        card.editAdrButton.click();
+        // update işleminnde açılan delete yapabilrsin
+        WebElement updatedeleteadr = card.updateadrDeleteBut;
+        OptionsMet.clickAndVerify(updatedeleteadr);
+         VerifyElementText("Cancel");
+        VerifyElementText("Delete");
+
+        card.updateDeleteButton.click();
+
+        //eklenen adresin adreslerden silindiğini görüntüler
+        //assertFalse(card.addedAddress.isDisplayed());
+
+        assertTrue (card.deletedAddSuccess.getAttribute("content-desc").contains("Success"));
+         ReusableMethods.wait(2);
+
+        card.backButton.click();
+
+        //getAppiumDriver().navigate().refresh();
+
+        ReusableMethods.getScreenshot("android.widget.ScrollView");
+
+        //getAttribute("content-desc").contains("Successfully"));
+        //@AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+               // "Address Added Successfully!\"]")
+       // public WebElement labelSuccessMessageForAddingAddress;
+
+    }
+
+    @When("User goes to pickup page")
+    public void userGoesToPickupPage() throws InvalidMidiDataException {
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(641,414,641,1285);
+        card.pickup.click();
+
+        ReusableMethods.wait(1);
+        assertTrue(card.orderSummaryTitle.isDisplayed());
+        assertTrue(card.orderSummaryTitle.isEnabled());
+
+        VerifyElementText("Subtotal");
+        VerifyElementText("Tax");
+        VerifyElementText("Shipping Charge");
+        VerifyElementText("Discount");
+        VerifyElementText("Total");
+
+        assertTrue(card.discountCouponTitle.isDisplayed());
+        assertTrue(card.discountCouponTitle.isEnabled());
+
+    }
+
+    @When("the user takes a {string} screenshot of that the yellow circle is identified in the shopping bag when the product is selected")
+    public void theUserTakesAScreenshotOfThatTheYellowCircleIsIdentifiedInTheShoppingBagWhenTheProductIsSelected(String screen) throws IOException {
+
+        ReusableMethods.wait(2);
+        ReusableMethods.getScreenshot(screen);
     }
 
     @Given("User verifies that Wishlist is displayed")
@@ -414,7 +790,7 @@ public class Stepdefinition extends OptionsMet {
                 visibleCategories.add(categoryText);
             }
 
-            if (visibleCategories.size() >= TOTAL_CATEGORIES) {
+            if (visibleCategories.size() == TOTAL_CATEGORIES) {
                 allFound = true;
             } else {
                 swipe(1290, 1142, 85, 1142);
@@ -443,6 +819,7 @@ public class Stepdefinition extends OptionsMet {
 
 
     }
+
     @Given("User adds an item to shopping card and goes to the shopping card.")
     public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card() throws InvalidMidiDataException {
         card.firstElementOfMostPopuler.click();
@@ -512,4 +889,104 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.labelThankYouForYourOrder.getAttribute("content-desc").contains("Thank you for your order!"));
     }
 
+
+
+
+    @Given("User verifies that {string}, {string}, {string} is displayed")
+    public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
+
+        ReusableMethods.wait(5);
+
+        VerifyElementText(description1);
+        VerifyElementText(description2);
+        VerifyElementText(description3);
+    }
+
+    @Given("User verifies that the Filter button is displayed and clicks it")
+    public void user_verifies_that_the_filter_button_is_displayed_and_clicks_it() {
+        ReusableMethods.wait(3);
+        card.verifyIconFilter();
+    }
+
+    @Given("User goes back")
+    public void user_goes_back() {
+        card.clickCategoryBackButton();
+    }
+
+    @Then("User clicks the button with {string}")
+    public void user_clicks_the_button_with(String UseEmailInstead) {
+        ReusableMethods.wait(2);
+        card.buttonUseEmailInstead.click();
+    }
+    @Then("As a user must be {string} email and {string} password Login")
+    public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
+        ReusableMethods.wait(2);
+        card.LoginWithEmail(registeredEmail, registeredPassword);
+    }
+    @Then("User Verifies the visibility and functionality of the {string} button")
+    public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
+        ReusableMethods.wait(2);
+        VerifyElementText(Wishlist);
+        clickButtonByDescription(Wishlist);
+    }
+    @Then("The {string} title should be displayed")
+    public void theTitleShouldBeDisplayed(String OrderHistory) {
+        ReusableMethods.wait(2);
+        OptionsMet.assertElementText(OrderHistory);
+    }
+    @And("User clicks on the first order in the list")
+    public void userClicksOnTheFirstOrderInTheList() {
+        ReusableMethods.wait(2);
+        card.getFirstOrderDetailsButton().click();
+    }
+    @And("User scroll down the screen")
+    public void userScrollDownTheScreen() throws InvalidMidiDataException {
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(600,2750,600,330);
+        ReusableMethods.wait(1);
+    }
+    @Then("User returns to previous page")
+    public void userReturnsToPreviousPage() {
+        ReusableMethods.wait(2);
+        Driver.getAppiumDriver().navigate().back();
+        ReusableMethods.wait(2);
+    }
+    @Then("User should see an {string} message on the popup page.")
+    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
+        ReusableMethods.wait(2);
+        OptionsMet.assertElementTextAndVisibility(expectedMessage);
+    }
+
+    @Given("Manager is on the Dashboard page and accept order")
+    public void manager_is_on_the_dashboard_page_and_accept_order() {
+
+        ManagerPage managerPage= new ManagerPage();
+        WebDriver webdriver = Driver.getWebdriver();
+
+        String managerLoginUrl = ConfigReader.getProperty("managerLoginUrl");
+        String managerEmail = ConfigReader.getProperty("managerEmail");
+        String registeredPassword = ConfigReader.getProperty("registeredPassword");
+
+        managerPage.managerLogin(managerLoginUrl, managerEmail, registeredPassword);
+
+        managerPage.managerButton.click();
+        ReusableMethods.wait(1);
+        managerPage.dashboardButton.click();
+        ReusableMethods.wait(1);
+        managerPage.onlineOrdersButton.click();
+        ReusableMethods.wait(2);
+
+        ManagerPage.clickActionButtonForPendingRows(webdriver);
+
+        managerPage.acceptButton.click();
+        ReusableMethods.wait(1);
+        managerPage.accept2button.click();
+        ReusableMethods.wait(1);
+        managerPage.dropdownMenu.click();
+        ReusableMethods.wait(1);
+        managerPage.labelDelivered.click();
+        ReusableMethods.wait(1);
+    }
+
+  
 }

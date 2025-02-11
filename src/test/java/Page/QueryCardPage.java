@@ -335,8 +335,8 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add\")")
     public WebElement shipAddButton;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add Address\")")
-    public WebElement addAddressButton;
+    //@AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add Address\")")
+    //public WebElement addAddressButton;
 
 
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")

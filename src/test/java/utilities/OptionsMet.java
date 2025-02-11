@@ -133,9 +133,9 @@ public class OptionsMet {
     }
 
     public void passwordTextBoxClickAndSendKeys(String password) {
-        assertTrue(card.getPasswordTextBox2().isDisplayed());
-        card.getPasswordTextBox2().click();
-        card.getPasswordTextBox2().sendKeys(password);
+        assertTrue(card.getPasswordTextBox().isDisplayed());
+        card.getPasswordTextBox().click();
+        card.getPasswordTextBox().sendKeys(password);
 
     }
 

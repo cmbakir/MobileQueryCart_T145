@@ -25,13 +25,9 @@ Feature: QCM-15 US024 As a registered user, I want to have a payment page where 
     * User fills card informations and clicks the confirm button
     * User verifies that getting success message for order completing
 
-  @pin
-  Scenario: QCM-54 TC_03 -> QCM-15 US024  Testing that order completion message should be displayed
-
-   * User verifies the Thank you for your order! Your order is confirmed. message is displayed.
 
   @pin
-  Scenario: QCM-55 TC_04 -> QCM-15 US024  Testing that order details and invoice should be viewable and shopping must be resumed
+  Scenario: QCM-55 TC_03 -> QCM-15 US024  Testing that order details and invoice should be viewable and shopping must be resumed
 
     * User verifies the "Go to order details" button is viewable and clickable
     * User verifies that order details could be appeared after click the last order history.

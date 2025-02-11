@@ -906,11 +906,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         assertTrue(card.invoiceTable.isDisplayed());
     }
-    @Given("User verifies the Thank you for your order! Your order is confirmed. message is displayed.")
-    public void user_verifies_the_thank_you_for_your_order_your_order_is_confirmed_message_is_displayed() {
 
-        assertTrue(card.labelThankYouForYourOrder.getAttribute("content-desc").contains("Thank you for your order!"));
-    }
 
 
 

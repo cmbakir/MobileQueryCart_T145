@@ -122,6 +122,66 @@ public class QueryCardPage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
             "Address Deleted Successfully!\"]")
     public WebElement labelSuccessMessageForDeletingAddress;
+    @AndroidFindBy(xpath = "//*[contains(@content-desc, 'Success Login')]")
+    public WebElement successMessageOzge;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Your payment has been confirmed\"]")
+    public WebElement labelSuccessMessageForPayment;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\")")
+    public WebElement firstElementOfMostPopuler;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    public WebElement mSizeButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
+    public WebElement sepetIcon;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Pinar Cay\n" +
+            "+615551212\n" +
+            "pinar.user@querycart.com\n" +
+            "Nieuwegein,Utrecht,NetherlandsThe,3437\n" +
+            "Updated1\")")
+    public WebElement LabelSecondAddress;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Confirm Order\")")
+    public WebElement confirmOrderButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"#100225997\n" +
+            "04:35 PM, 10-02-2025\n" +
+            "Info: \n" +
+            "1 Product\n" +
+            "Delivery Status: \n" +
+            "Pending\n" +
+            "Payment Status: \n" +
+            "Paid\n" +
+            "Total: \n" +
+            "$66.30\")")
+    public WebElement firstOrderHistory;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ScrollView\")")
+    public WebElement orderDetailsTable;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
+    public WebElement invoiceTable;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Error\n" +
+            "Please select payment method.\"]")
+    public WebElement labelErrorMessageForPaymentMethod;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(15)")
+    public WebElement stripeMethodCartBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"confirmBtn\")")
+    public WebElement confirmbtnStripeMethod;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Your payment has been confirmed\"]")
+    public WebElement labelSuccessMessageForOrder;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Thank you for your order!\n" +
+            "Your order is confirmed.\"]")
+    public WebElement labelThankYouForYourOrder;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,8 +220,8 @@ public class QueryCardPage {
     private WebElement nameTextBox;
     // Sign Up Page
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
-    private WebElement emailTextBox;
+    //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    //private WebElement emailTextBox;
     // Sign Up Page
 
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")

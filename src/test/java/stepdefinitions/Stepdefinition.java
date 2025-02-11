@@ -442,7 +442,7 @@ public class Stepdefinition extends OptionsMet {
                 visibleCategories.add(categoryText);
             }
 
-            if (visibleCategories.size() >= TOTAL_CATEGORIES) {
+            if (visibleCategories.size() == TOTAL_CATEGORIES) {
                 allFound = true;
             } else {
                 swipe(1290, 1142, 85, 1142);
@@ -470,5 +470,26 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
 
 
+    }
+
+    @Given("User verifies that {string}, {string}, {string} is displayed")
+    public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
+
+        ReusableMethods.wait(5);
+
+        VerifyElementText(description1);
+        VerifyElementText(description2);
+        VerifyElementText(description3);
+    }
+
+    @Given("User verifies that the Filter button is displayed and clicks it")
+    public void user_verifies_that_the_filter_button_is_displayed_and_clicks_it() {
+        ReusableMethods.wait(3);
+        card.verifyIconFilter();
+    }
+
+    @Given("User goes back")
+    public void user_goes_back() {
+        card.clickCategoryBackButton();
     }
 }

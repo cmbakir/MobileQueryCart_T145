@@ -3,6 +3,11 @@ package utilities;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,6 +20,7 @@ public class Driver {
 
     private static UiAutomator2Options options;
     private static AppiumDriver driver;
+    public static WebDriver webdriver;
 
     public static AppiumDriver getAppiumDriver() {
 
@@ -66,5 +72,36 @@ public class Driver {
         }
     }
 
+    public static WebDriver getWebdriver(){
+        String kullanilacakBrowser = ConfigReader.getProperty("browser");
+        if (webdriver == null){
+            switch (kullanilacakBrowser){
+
+                case "firefox" :
+                    webdriver = new FirefoxDriver();
+                    break;
+
+                case "safari" :
+                    webdriver = new SafariDriver();
+                    break;
+
+                case "edge" :
+                    webdriver = new EdgeDriver();
+                    break;
+
+                default:
+                    System.out.println("Chrome başlatılıyor..");
+                    webdriver = new ChromeDriver();
+
+            }
+            webdriver.manage().window().maximize();
+            webdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
+        return webdriver;
+    }
+    public static void quitDriver(){
+        webdriver.quit();
+        webdriver = null;
+    }
+
 }
-//

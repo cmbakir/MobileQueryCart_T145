@@ -192,6 +192,39 @@ public class QueryCardPage {
 
 
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Error\n" +
+            "Invalid credentials or you are blocked\"]")
+    public WebElement labelErrorMessageForSigningIn;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
+    public WebElement labelSuccessMessageForSigningIn;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Category\")")
+    private WebElement buttonWomenCategory;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women\"]")
+    private WebElement labelWomenInCategory;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(3)")
+    private WebElement iconWomenSubCategory;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Clothing\"]")
+    private WebElement labelWomenClothing;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Shoes\"]")
+    private WebElement labelWomenShoes;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Accessories\"]")
+    private WebElement labelWomenAccessories;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Login Successfully.\"]")
+    public WebElement successMessageOzge;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
+    public WebElement iconMSize;
+
+
 
 
 
@@ -220,7 +253,7 @@ public class QueryCardPage {
     private WebElement searchBox;
 
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
     private WebElement checkBoxRememberMe;
     // Sign In Page
 
@@ -229,9 +262,15 @@ public class QueryCardPage {
     // Sign Up Page
 
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement emailSignUpBox;
+
+
     //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     //private WebElement emailTextBox;
     // Sign Up Page
+
+    @AndroidFindBy (className = "android.view.View)")
 
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement passwordTextBox2;

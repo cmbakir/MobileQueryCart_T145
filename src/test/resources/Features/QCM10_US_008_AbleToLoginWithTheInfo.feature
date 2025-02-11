@@ -6,15 +6,28 @@ Feature: QCM8 US001 As a registered user, I would like to be able to log in with
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * Verifies checkbox is selected
     * Verifies to access to the forgot password page when it clicked
+    * User clicks to return back
     * Verifies to switch to the Register page from Log In Page
-    * User clicks the nameTextBox and sendKeys Name
+    * User clicks useEmailInstead
     * User clicks the emailTextBox and sendKeys Email
     * User clicks the passwordTextBox and sendKeys Password
-    * User clicks the button SignUp
+    * Verifies checkbox is selected
+    * User clicks the button "signInLoginButton"
+    * Verifies visitor is loggedin Successfully
     * Driver turns off
 
+  @09
+  Scenario: QCM57 TC_02 -> US008 The user should be able to see the elements on the sign in page and log in with the relevant information.
+    * User confirms to be on the homepage
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign In"
+    * User clicks useEmailInstead
+    * User clicks the emailTextBox and sendKeys Email
+    * User clicks the passwordTextBox and sendKeys invalidPassword
+    * User clicks the button "signInLoginButton"
+    * Verifies visitor is login not Successfully
+    * Driver turns off
 
 
 

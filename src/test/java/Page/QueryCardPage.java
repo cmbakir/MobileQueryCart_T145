@@ -9,6 +9,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.cucumber.java.bs.A;
 import lombok.Getter;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -122,6 +123,10 @@ public class QueryCardPage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
             "Address Deleted Successfully!\"]")
     public WebElement labelSuccessMessageForDeletingAddress;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement iconFilter;
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement categoryBackButton;
 
 
 
@@ -161,7 +166,7 @@ public class QueryCardPage {
     // Sign Up Page
 
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
-    private WebElement emailTextBox;
+    //private WebElement emailTextBox;
     // Sign Up Page
 
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
@@ -341,6 +346,17 @@ public class QueryCardPage {
     public void verifySuccessMessage(WebElement element){
 
         assertTrue (element.getAttribute("content-desc").contains("Successfully"));
+    }
+
+    public void verifyIconFilter(){
+        Assert.assertTrue(iconFilter.isDisplayed());
+        iconFilter.click();
+        ReusableMethods.wait(2);
+    }
+
+    public void clickCategoryBackButton(){
+        ReusableMethods.wait(1);
+        categoryBackButton.click();
     }
 
 }

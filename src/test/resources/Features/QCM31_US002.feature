@@ -13,7 +13,7 @@ Feature: QCM-31 US002 As a user, I would like to have easy links in the bottom b
     * Driver turns off
 
   @quick
-  Scenario: TC_02 -> US002 Functional testing of Easy Links on the home page
+  Scenario: QCM-75 TC_02 -> US002 Functional testing of Easy Links on the home page
     * User logs in
     * User clicks the button with description "Home"
     * User verifies that the Home Page has been accessed
@@ -28,7 +28,7 @@ Feature: QCM-31 US002 As a user, I would like to have easy links in the bottom b
     * Driver turns off
 
   @quick
-  Scenario: TC_03 -> US002 Visibility and Functional testing of Search Box on the home page
+  Scenario: QCM-76 TC_03 -> US002 Visibility and Functional testing of Search Box on the home page
     * User verifies the Search Box button is displayed
     * User clicks the Search Box button
     * User verifies that "Search" text is visible

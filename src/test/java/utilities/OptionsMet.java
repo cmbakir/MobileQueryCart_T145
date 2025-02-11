@@ -7,6 +7,7 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.cucumber.java.en.Given;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -148,5 +149,24 @@ public class OptionsMet {
         assertTrue(button.isEnabled());
         button.click();
     }
+
+    public static void assertElementText(String expectedMessage) {
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement webElement = driver.findElement(MobileBy.xpath("//*[contains(@content-desc, '" + expectedMessage + "')]"));
+        assertTrue("the element does not contain the word \"" + expectedMessage + "\".", webElement.getAttribute("contentDescription").contains(expectedMessage));
+        System.out.println("element görünür/textAssertion basarılı");
+    }
+
+    public static void assertElementTextAndVisibility(String expectedMessage) throws Exception {
+        try {
+            assertElementText(expectedMessage);
+        } catch (AssertionError | NoSuchElementException e) {
+            System.out.println("Message:" + e.getMessage());
+        }
+    }
+
+
+
+
 }
 

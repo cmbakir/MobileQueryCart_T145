@@ -238,10 +238,6 @@ public class QueryCardPage {
 
 
 
-    private WebElement backButton;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
-    private WebElement filterCloseButton;
-
 
 
 

@@ -1744,6 +1744,35 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
+    @Given("Verifies the visibility of the Profile menu")
+    public void verifies_the_visibility_of_the_profile_menu() {
+        assertTrue(card.profilButton.isDisplayed());
+        String textProfile = card.profilButton.getAttribute("contentDescription");
+        System.out.println(textProfile);
+        String actualText = "Profile";
+        assertEquals(textProfile, actualText);
+    }
+
+    @Given("Verifies the visibility of the Logout menu")
+    public void verifies_the_visibility_of_the_logout_menu() {
+        String textLogout = card.logoutMenu.getAttribute("contentDescription");
+        System.out.println(textLogout);
+        assertTrue(card.logoutMenu.isDisplayed());
+        String actualText = "Logout";
+        assertEquals(textLogout, actualText);
+        clickButtonByDescription("Logout");
+
+    }
+
+    @Given("Verifies user is loggedout Successfully")
+    public void verifies_user_is_loggedout_successfully() {
+        String logoutText = card.logutMessage.getAttribute("content-desc");
+        System.out.println(logoutText);
+        assertTrue(card.logutMessage.getAttribute("contentDescription").contains("Logged Out"));
+    }
+    //pinar
+
+
 }
 
 

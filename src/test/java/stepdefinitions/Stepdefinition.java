@@ -894,7 +894,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
 
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(3);
 
         VerifyElementText(description1);
         VerifyElementText(description2);
@@ -903,7 +903,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User verifies that the Filter button is displayed and clicks it")
     public void user_verifies_that_the_filter_button_is_displayed_and_clicks_it() {
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(2);
         card.verifyIconFilter();
     }
 
@@ -1365,6 +1365,8 @@ public class Stepdefinition extends OptionsMet {
         List<WebElement> categories = driver.findElements(By.xpath("//android.view.View[@content-desc]"));
 
 
+
+
         List<String> categoryNames = new ArrayList<>();
         for (WebElement category : categories) {
             String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
@@ -1470,7 +1472,15 @@ public class Stepdefinition extends OptionsMet {
         touchDown(352, 909);
     }
 
+    @Given("User verifies the {string} text is visible")
+    public void user_verifies_the_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
+    }
+
 
 //cembakir
+
+    // ahmet push
 }
 

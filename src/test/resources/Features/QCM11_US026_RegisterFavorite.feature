@@ -22,11 +22,10 @@ Feature: As a registered user, I want to have a favorite products page on the si
      #Registered user can view and remove the product they have marked as a Wishlist favorite
     * User clicks the button with description "Wishlist"
     * User see Wishlist title and wishlist item quantity
-    * the user takes a "android.widget.ScrollView" screenshot of the element they want to take a screenshot of
     #remove
     * On the page that opens, click on the red heart sign in the upper right corner of the products.
-    * User see Wishlist title and wishlist item quantity
-    * the user takes a "android.widget.ScrollView" screenshot of the element they want to take a screenshot of
+    * User see Wishlist title and wishlist item quantity when wishlist is empty
+
 
 
 

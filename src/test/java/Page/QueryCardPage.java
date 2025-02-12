@@ -124,8 +124,8 @@ public class QueryCardPage {
             "Address Deleted Successfully!\"]")
     public WebElement labelSuccessMessageForDeletingAddress;
 
-    @AndroidFindBy(xpath = "//*[contains(@content-desc, 'Success Login')]")
-    public WebElement successMessageOzge;
+   // @AndroidFindBy(xpath = "//*[contains(@content-desc, 'Success Login')]")
+  //  public WebElement successMessageOzge;
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
             "Your payment has been confirmed\"]")
     public WebElement labelSuccessMessageForPayment;
@@ -133,7 +133,7 @@ public class QueryCardPage {
             "0 (0  Reviews)\n" +
             "$65.00\")")
     public WebElement firstElementOfMostPopuler;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"L\")")
     public WebElement mSizeButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
     public WebElement sepetIcon;
@@ -189,6 +189,54 @@ public class QueryCardPage {
     private WebElement iconFilter;
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
     private WebElement categoryBackButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterCloseButton;
+
+
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Error\n" +
+            "Invalid credentials or you are blocked\"]")
+    public WebElement labelErrorMessageForSigningIn;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
+    public WebElement labelSuccessMessageForSigningIn;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Category\")")
+    private WebElement buttonWomenCategory;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women\"]")
+    private WebElement labelWomenInCategory;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(3)")
+    private WebElement iconWomenSubCategory;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Clothing\"]")
+    private WebElement labelWomenClothing;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Shoes\"]")
+    private WebElement labelWomenShoes;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Women Accessories\"]")
+    private WebElement labelWomenAccessories;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Login Successfully.\"]")
+    public WebElement successMessageOzge;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
+    public WebElement iconMSize;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Logged Out Successfully.\"]")
+    public WebElement logutMessage;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"M\"]")
+    public WebElement labelMSize;
+
+    @AndroidFindBy (xpath = "new UiSelector().description(\"(18, Wine Red) Womens Short Sleeve Tie Dye Blosue T-Shirt\")")
+    public WebElement labelWomenProductName;
+
+
 
 
 
@@ -220,7 +268,7 @@ public class QueryCardPage {
     private WebElement searchBox;
 
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
     private WebElement checkBoxRememberMe;
     // Sign In Page
 
@@ -229,9 +277,15 @@ public class QueryCardPage {
     // Sign Up Page
 
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement emailSignUpBox;
+
+
     //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     //private WebElement emailTextBox;
     // Sign Up Page
+
+    @AndroidFindBy (className = "android.view.View)")
 
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement passwordTextBox2;
@@ -550,6 +604,7 @@ public class QueryCardPage {
     private WebElement nameBoxElement;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
+
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Flower Print Foil T-shirt\n" +
             "0 (0  Reviews)\n" +
             "$65.00\"]")
@@ -586,6 +641,40 @@ public class QueryCardPage {
     private WebElement editPrflEmailBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement editPrflPhoneBox;
+
+
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Change Password\")")
+    public WebElement changePassword;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    public WebElement oldPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    public WebElement newPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    public WebElement confirmPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Save Changes\")")
+    public WebElement saveChangesPassw;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Change Password\n" +
+            "Password Updated Successfully\"]")
+    public WebElement successPass;
+
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
+    public WebElement profilButton;
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
+    public WebElement logoutMenu;
+
+
+
+
+
+
 
 
 
@@ -808,6 +897,13 @@ public class QueryCardPage {
         ReusableMethods.wait(1);
         categoryBackButton.click();
     }
+
+
+    public void clickFilterCloseButton(){
+        ReusableMethods.wait(1);
+        filterCloseButton.click();
+    }
+
 
 
 

@@ -359,6 +359,7 @@ public class Stepdefinition extends OptionsMet {
     public void userSeePopularBrandsTitle() {
         VerifyElementText("Popular Brands");
 
+
     }
 
     @When("User verify Popular Brands.")
@@ -401,6 +402,9 @@ public class Stepdefinition extends OptionsMet {
         card.detailsbutton.click();
         assertTrue(card.detailscontent.isDisplayed());
 
+        String detailscontentText = card.detailscontent.getAttribute("content-desc");
+        System.out.println("Details content: " + detailscontentText);
+
         card.videosbutton.click();
         assertTrue(card.detailsvideos.isDisplayed());
 
@@ -408,6 +412,9 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.detailreviewstar.isDisplayed());
         assertTrue(card.detailreview2.isDisplayed());
         assertTrue(card.detailreview3.isDisplayed());
+
+        String reviewcontentText = card.detailreview3.getAttribute("content-desc");
+        System.out.println("Review content: " + reviewcontentText);
 
         card.shipReturnbutton.click();
         assertTrue(card.detailsShipReturn.isDisplayed());
@@ -450,8 +457,24 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText("Wishlist");
 
         assertTrue(card.wishquant.isDisplayed());
+        assertTrue(card.wishquant.getAttribute("content-desc").contains("1  Products"));
+
+        String wishQuantityText = card.wishquant.getAttribute("content-desc");
+        System.out.println("Wishlist Item Quantity when added: " + wishQuantityText);
 
     }
+
+    @When("User see Wishlist title and wishlist item quantity when wishlist is empty")
+    public void userSeeWishlistTitleAndWishlistItemQuantityWhenWishlistIsEmpty() {
+
+        assertTrue(card.wishquant.isDisplayed());
+        assertTrue(card.wishquant.getAttribute("content-desc").contains("0  Products"));
+
+        String wishQuantityText = card.wishquant.getAttribute("content-desc");
+        System.out.println("Wishlist Item Quantity when wishlist is empty: " + wishQuantityText);
+
+    }
+
 
     @When("On the page that opens, click on the red heart sign in the upper right corner of the products.")
     public void onThePageThatOpensClickOnTheRedHeartSignInTheUpperRightCornerOfTheProducts() {
@@ -642,7 +665,6 @@ public class Stepdefinition extends OptionsMet {
         assertTrue (card.addedAddSuccess.getAttribute("content-desc").contains("Success"));
         assertTrue(card.addedAddress.isDisplayed());
         assertTrue(card.addedAddress.isEnabled());
-
         ReusableMethods.wait(1);
 
     }
@@ -1446,6 +1468,8 @@ public class Stepdefinition extends OptionsMet {
         }
         touchDown(352, 909);
     }
+
+
 //cembakir
 }
 

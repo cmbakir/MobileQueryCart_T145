@@ -821,6 +821,7 @@ public class Stepdefinition extends OptionsMet {
             () {
 
 
+
                 card.confirmOrderButton.click();
                 assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
                 ReusableMethods.wait(2);
@@ -836,7 +837,13 @@ public class Stepdefinition extends OptionsMet {
                 card.confirmbtnStripeMethod.click();
                 ReusableMethods.wait(5);
 
-            }
+        OptionsMet.clickButtonByDescription("Download Receipt");
+        ReusableMethods.wait(1);
+        assertTrue(card.invoiceTable.isDisplayed());
+    }
+
+
+
             @Given("User verifies that getting success message for order completing")
             public void user_verifies_that_getting_success_message_for_order_completing () {
                 assertTrue(card.labelSuccessMessageForOrder.getAttribute("content-desc").contains("Success"));

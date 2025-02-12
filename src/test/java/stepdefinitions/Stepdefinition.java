@@ -837,7 +837,7 @@ public class Stepdefinition extends OptionsMet {
     }
     @Given("User selects an address for shipping.")
     public void user_selects_an_address_for_shipping() throws InvalidMidiDataException {
-        card.LabelSecondAddress.click();
+        touchDown(889,838);
         OptionsMet.swipe(1185,2017,1185,1282);
     }
     @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
@@ -852,7 +852,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User fills card informations and clicks the confirm button")
     public void user_fills_card_informations_and_clicks_the_confirm_button() {
-        ReusableMethods.wait(8);
+        ReusableMethods.wait(4);
         card.stripeMethodCartBox.click();
         actions.sendKeys("424242424242424212261231234512").perform();
         ReusableMethods.wait(2);
@@ -867,7 +867,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("User verifies that order details could be appeared after click the last order history.")
     public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history() {
 
-        card.firstOrderHistory.click();
+        touchDown(666,826);
         ReusableMethods.wait(1);
         assertTrue(card.orderDetailsTable.isDisplayed());
     }
@@ -877,8 +877,9 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Given("User verifies that invoice is appeared when click download receipt button.")
-    public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() {
+    public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() throws InvalidMidiDataException {
 
+        OptionsMet.swipe(1100,2200,1100,220);
         OptionsMet.clickButtonByDescription("Download Receipt");
         ReusableMethods.wait(1);
         assertTrue(card.invoiceTable.isDisplayed());

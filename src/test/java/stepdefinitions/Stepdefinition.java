@@ -395,7 +395,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User verifies that {string} text is visible")
     public void user_verifies_that_text_is_visible(String text) {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         OptionsMet.VerifyElementText(text);
         card.clickFilterCloseButton();
     }
@@ -544,6 +544,12 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         managerPage.labelDelivered.click();
         ReusableMethods.wait(1);
+    }
+
+    @Given("User verifies the {string} text is visible")
+    public void user_verifies_the_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
     }
 
   

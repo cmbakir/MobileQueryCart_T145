@@ -835,8 +835,8 @@ public class QueryCardPage {
     public void clickCategoryBackButton(){
         ReusableMethods.wait(1);
         categoryBackButton.click();
-        ReusableMethods.wait(1);
     }
+
 
     public void clickFilterCloseButton(){
         ReusableMethods.wait(1);

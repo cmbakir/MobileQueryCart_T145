@@ -124,8 +124,8 @@ public class QueryCardPage {
             "Address Deleted Successfully!\"]")
     public WebElement labelSuccessMessageForDeletingAddress;
 
-    @AndroidFindBy(xpath = "//*[contains(@content-desc, 'Success Login')]")
-    public WebElement successMessageOzge;
+   // @AndroidFindBy(xpath = "//*[contains(@content-desc, 'Success Login')]")
+  //  public WebElement successMessageOzge;
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
             "Your payment has been confirmed\"]")
     public WebElement labelSuccessMessageForPayment;
@@ -223,6 +223,8 @@ public class QueryCardPage {
 
     @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
     public WebElement iconMSize;
+
+
 
 
 

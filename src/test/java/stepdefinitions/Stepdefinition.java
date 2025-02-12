@@ -31,14 +31,10 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 
 
-
-
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -47,7 +43,6 @@ import static utilities.Driver.quitAppiumDriver;
 
 
 import java.sql.DriverManager;
-import java.util.ArrayList;
 
 
 import java.time.Duration;
@@ -58,26 +53,17 @@ import static org.junit.Assert.*;
 import static utilities.Driver.*;
 
 
-import java.util.HashSet;
-
-
-
 import static org.junit.Assert.assertEquals;
 
 
 
 
-public class Stepdefinition extends OptionsMet {
-    QueryCardPage card = new QueryCardPage();
-    Actions actions = new Actions(getAppiumDriver());
-    AndroidDriver driver = (AndroidDriver) getAppiumDriver();
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     Actions actions = new Actions(getAppiumDriver());
     Faker faker=new Faker();
-
-
+    AndroidDriver driver = (AndroidDriver) getAppiumDriver();
 
     private final int TOTAL_CATEGORIES = 44;
     private Set<String> visibleCategories = new HashSet<>();
@@ -227,44 +213,58 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.getEmailSignUpBox().getAttribute("content-desc").contains("Successfully"));
     }
 
+    @Given("User verifies that {string} menu title on the homepage")
+    public void user_verifies_that_menu_title_on_the_homepage(String string) {
 
-    @Given("User swipe to Women category")
-    public void user_swipe_to_women_category() throws InvalidMidiDataException {
-        for (int i = 0; i < 3; i++) {
-            swipe(1149, 1154, 209, 1149);
-        }
-        touchDown(863, 1149);
- 
-
-
-    @Given("User clicks the passwordTextBox and sendKeys invalidPassword")
-    public void user_clicks_the_password_text_box_and_send_keys_invalid_password() {
-        passwordTextBoxClickAndSendKeys(ConfigReader.getProperty("cemInvalidPassword"));
+        assertTrue(card.labelMostPopular.isDisplayed());
 
     }
 
-    @Given("Verifies visitor is login not Successfully")
-    public void verifies_visitor_is_login_not_successfully() {
-        //System.out.println(card.labelErrorMessageForSigningIn.getText());
-        String hata = card.labelErrorMessageForSigningIn.getAttribute("contentDescription");
-        System.out.println(hata);
-        assertTrue(card.labelErrorMessageForSigningIn.getAttribute("content-desc").contains("Error"));
+    @Given("User verifies that {string} icon on the homepage")
+    public void user_verifies_that_icon_on_the_homepage(String string) {
+
+        assertTrue(card.seeAllButton.isDisplayed());
 
     }
 
-    @Given("User clicks to return back")
-    public void user_clicks_to_return_back() {
-        getAppiumDriver().navigate().back();
+    @Given("User verifies the {string} button is enabled")
+    public void user_verifies_the_button_is_enabled(String string) {
+        assertTrue(card.seeAllButton.isEnabled());
     }
 
-    @Given("User clicks useEmailInstead")
-    public void user_clicks_use_email_instead() {
-        clickButtonByDescription("*Use Email Instead");
+    @Given("User verifies that most popular items are listed when clicked the see all button")
+    public void user_verifies_that_most_popular_items_are_listed_when_clicked_the_see_all_button() {
+
+        assertTrue(card.labelProductFound.isDisplayed());
     }
 
-    @Given("Verifies visitor is loggedin Successfully")
-    public void verifies_visitor_is_loggedin_successfully() {
+    @Given("User verifies that the back button is enabled and navigated to homepage after clicking")
+    public void user_verifies_that_the_back_button_is_enabled_and_navigated_to_homepage_after_clicking() {
+
+        assertTrue(card.buttonBack.isEnabled());
+        card.buttonBack.click();
+        ReusableMethods.wait(2);
+        assertTrue(card.queryCardLogoElement.isDisplayed());
     }
+
+    @Given("User logs in with the valid {string} and {string}")
+    public void user_logs_in_with_the_valid_and(String email, String password) {
+        card.emailTextBoxClickAndSendKeys(email);
+        // email alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(password).perform();
+        ReusableMethods.wait(2);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+        ReusableMethods.wait(1);
+        card.signInLoginClick();
+        ReusableMethods.wait(2);
+
+
+    }
+
+
     @Given("User verifies the {string} button is viewable and clickable")
     public void user_verifies_the_button_is_viewable_and_clickable(String text) {
 
@@ -305,69 +305,53 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
-    @Given("User verifies the addressDeleteIcon is viewable and clickable")
-    public void user_verifies_the_address_delete_button_button_is_viewable_and_clickable() {
+    @Given("User enters new record on the address form and clicks the addAddressButton.")
+    public void user_enters_new_record_on_the_address_form_and_clicks_the_add_address_button() throws InterruptedException {
 
-        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10)); // 10 seconds wait
-        try {
-
-            //     wait.until(ExpectedConditions.visibilityOf(card.successMessageOzge));
-
-            //  assertTrue("Success mesajı görünmüyor!", card.successMessageOzge.isDisplayed());
-
-            // 2. Elementin metnini al ve doğrula
-            String actualText = card.successMessageOzge.getText();
-            String expectedText = "Success Login Successfully.";
-            //assertEquals(actualText, expectedText, "Success mesajı beklenenle eşleşmiyor!");
-
-            System.out.println("Success mesajı doğrulandı: " + actualText);
-            String hata2 = card.successMessageOzge.getAttribute("contentDescription");
-            System.out.println(hata2);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-
-        // System.out.println(card.labelSuccessMessageForSigningIn.getText());
-        //  assertTrue(card.labelSuccessMessageForSigningIn.getText().contains("Success"));
-        //  assertTrue (card.labelSuccessMessageForSigningIn.getAttribute("content-desc").contains("Successfully"));
+        card.addNewAddressButton.click();
+        card.addNewAddress();
     }
 
-    @Given("User clicks to category")
-    public void user_clicks_to_category() {
-        clickButtonByDescription("Category");
+    @Given("User verifies the {string} button is displayed")
+    public void user_verifies_the_button_is_displayed(String description) {
+
+        ReusableMethods.wait(2);
+        VerifyElementText(description);
     }
 
-    @Given("User clicks to subCategoryForWomen")
-    public void user_clicks_to_sub_category_for_women() {
-        card.getIconWomenSubCategory().click();
+    @Given("User verifies the Cart button is displayed")
+    public void user_verifies_the_cart_button_is_displayed() {
+        card.cartButtonVisibilityTest();
     }
 
+    @Given("User verifies the Search Box button is displayed")
+    public void user_verifies_the_search_box_button_is_displayed() {
+        ReusableMethods.wait(3);
+        card.searchBoxButtonVisibilityTest();
+    }
 
-    @Given("Verifies Women in SubCategory")
-    public void verifies_women_in_sub_category() {
+    @Given("User verifies that the Home Page has been accessed")
+    public void user_verifies_that_the_home_page_has_been_accessed() {
+        assert card.labelMostPopular.isDisplayed();
+    }
 
-
-    @Given("User verifies that Categories is displayed")
+        @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
         OptionsMet.VerifyElementText("Men");
     }
 
+    @Given("User clicks the Cart button")
+    public void user_clicks_the_cart_button() {
+        card.cartButtonClick();
+    }
 
+    @Given("User verifies that the cart is displayed")
+    public void user_verifies_that_the_cart_is_displayed() {
         ReusableMethods.wait(2);
-        List<WebElement> categories = driver.findElements(By.xpath("//android.view.View[@content-desc]"));
+        OptionsMet.VerifyElementText("Shopping Cart");
+    }
 
-
-        List<String> categoryNames = new ArrayList<>();
-        for (WebElement category : categories) {
-            String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
-            if (text != null && !text.trim().isEmpty()) {  // Null ve boşlukları filtrele
-                categoryNames.add(text);
-            }
-        }
 
 
 
@@ -728,51 +712,45 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.VerifyElementText("Wishlist");
     }
 
-
-// Konsola yazdırmak için kullandım
-        System.out.println("Kategori Listesi: " + categoryNames);
-
-// Beklenen kategorileri tanımlak icin kullandım
-        List<String> expectedCategories = Arrays.asList("Men", "Women", "Juniors");
-
-// Liste sırası değişirse sıralayarak kıyaslayalım
-        Collections.sort(categoryNames);
-        Collections.sort(expectedCategories);
-
-// Assert ile doğrulamak için kullandım
-        assertEquals("Kategori listesi beklendiği gibi değil!", expectedCategories, categoryNames);
-
-    }
-
-
-    @Given("User verify to have subCategoryOfWomen")
-    public void user_verify_to_have_sub_category_of_women() {
+    @Given("User verifies that the Profile is displayed")
+    public void user_verifies_that_the_profile_is_displayed() {
         ReusableMethods.wait(2);
-        List<WebElement> subCategories = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='0']"));
-        //android.view.View[@clickable='true' and @content-desc]
-
-        List<String> subCategoryNames = new ArrayList<>();
-        for (WebElement category : subCategories) {
-            String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
-            if (text != null && !text.trim().isEmpty()) {  // Null ve boşlukları filtrele
-                subCategoryNames.add(text);
-                  }
-        }
-
-        // Konsola yazdırmak için kullandım
-        System.out.println("Alt Kategori Listesi: " + subCategoryNames);
-
-        // Beklenen kategorileri tanımlamak için kullandım
-        List<String> expectedSubCategories = Arrays.asList("Women Clothing", "Women Shoes", "Women Accessories");
-
-        // Liste sırası değişirse sıralayarak kıyaslayalım
-        Collections.sort(subCategoryNames);
-        Collections.sort(expectedSubCategories);
-
-        // Assert ile doğrulamak için kullandım
-        assertEquals("Alt Kategori listesi beklendiği gibi değil!", expectedSubCategories, subCategoryNames);
-
+        OptionsMet.VerifyElementText("My Account");
     }
+
+    @Given("User logs in")
+    public void user_logs_in() {
+        ReusableMethods.wait(4);
+        clickButtonByDescription("Profile");
+        ReusableMethods.wait(2);
+        clickButtonByDescription("Sign In");
+        card.phoneTextBoxClickAndSendKeys("6505551212");
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Wise.123").perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+        card.signInLoginClick();
+        hideKeyboard();
+    }
+
+    @Given("User clicks the Search Box button")
+    public void user_clicks_the_search_box_button() {
+        card.searchBoxButtonClick();
+    }
+
+    @Given("User verifies that {string} text is visible")
+    public void user_verifies_that_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
+    }
+
+    @Given("User sends send keys {string}")
+    public void user_sends_send_keys(String key) {
+        card.searchBoxSendKeys(key);
+    }
+
 
     @Given("User collect all visible categories by swiping")
     public void user_collect_all_visible_categories_by_swiping() throws InvalidMidiDataException {
@@ -792,115 +770,72 @@ public class Stepdefinition extends OptionsMet {
                 allFound = true;
             } else {
                 swipe(1290, 1142, 85, 1142);
-
-        
-
-    @Given("User verify to be perform add to cart, add to favorite and view")
-    public void user_verify_to_be_perform_add_to_cart_add_to_favorite_and_view() throws InvalidMidiDataException {
-        ReusableMethods.wait(2);
-
-        // Tüm ürünleri liste olarak al
-        for (int i = 0; i <6 ; i++) {
-            List<WebElement> products = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='" + i + "']"));
-
-            for (WebElement product : products) {
-                String productName = product.getAttribute("content-desc");
-                if (productName != null && !productName.trim().isEmpty()) {
-                    System.out.println("Ürün: " + productName);
-                    System.out.println(product.getSize());
-
-
-
-                    // Ürünü tıklayarak detayına gir
-                    touchDown(352, 909);
-                   // product.click();
-                    ReusableMethods.wait(2);
-
-                    // "Add to Cart" butonunu bul ve tıkla
-                    OptionsMet.swipe(700,2369,679,914);
-                    card.iconMSize.click();
-                    clickButtonByDescription("Add To Cart");
-                   // WebElement addToCartButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Cart']"));
-                   // addToCartButton.click();
-                    ReusableMethods.wait(1);
-                    System.out.println(productName + " sepete eklendi.");
-
-                    // "Add to Favorites" butonunu bul ve tıkla
-                    clickButtonByDescription("Favorite");
-                    //WebElement favoriteButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Favorite']"));
-                   // favoriteButton.click();
-                    ReusableMethods.wait(1);
-                    System.out.println(productName + " favorilere eklendi.");
-
-                    // Geri git (Back tuşu)
-                    driver.navigate().back();
-                    ReusableMethods.wait(1);
-                }
-        }
+            }
         }
     }
-
-}
-
-
-    @Given("User adds an item to shopping card and goes to the shopping card.")
-    public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card() throws InvalidMidiDataException {
-        card.firstElementOfMostPopuler.click();
-        card.mSizeButton.click();
-
-        OptionsMet.swipe(832,1772,832,1242);
-        ReusableMethods.wait(2);
-        OptionsMet.clickButtonByDescription("Add To Cart");
-        ReusableMethods.wait(1);
-        card.sepetIcon.click();
-        ReusableMethods.wait(1);
-
-
-
+    @Given("User verifies that all categories displayed")
+    public void user_verifies_that_all_categories_displayed() {
+        assertEquals(TOTAL_CATEGORIES, visibleCategories.size());
     }
-    @Given("User selects an address for shipping.")
-    public void user_selects_an_address_for_shipping() throws InvalidMidiDataException {
-        card.LabelSecondAddress.click();
-        OptionsMet.swipe(1185,2017,1185,1282);
-    }
-    @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
-    public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared() {
 
+    @Given("User verifies that a success message for deleting appeared.")
+    public void user_verifies_that_a_success_message_for_deleting_appeared() {
 
-        card.confirmOrderButton.click();
-        assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
+        assertTrue(card.labelSuccessMessageForDeletingAddress.getAttribute("content-desc").contains("Successfully"));
         ReusableMethods.wait(2);
 
     }
+    @Given("User verifies that a success message for adding appeared.")
+    public void user_verifies_that_a_success_message_for_adding_appeared() {
 
-    @Given("User fills card informations and clicks the confirm button")
-    public void user_fills_card_informations_and_clicks_the_confirm_button() {
-        ReusableMethods.wait(8);
-        card.stripeMethodCartBox.click();
-        actions.sendKeys("424242424242424212261231234512").perform();
+        assertTrue(card.labelSuccessMessageForAddingAddress.getAttribute("content-desc").contains("Successfully"));
         ReusableMethods.wait(2);
-        card.confirmbtnStripeMethod.click();
-        ReusableMethods.wait(5);
+
 
     }
-    @Given("User verifies that getting success message for order completing")
-    public void user_verifies_that_getting_success_message_for_order_completing() {
-        assertTrue(card.labelSuccessMessageForOrder.getAttribute("content-desc").contains("Success"));
-    }
-    @Given("User verifies that order details could be appeared after click the last order history.")
-    public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history() {
 
-        card.firstOrderHistory.click();
-        ReusableMethods.wait(1);
-        assertTrue(card.orderDetailsTable.isDisplayed());
-    }
-    @Given("User navigates to back")
-    public void user_navigates_to_back() {
-        OptionsMet.KeyBack();
-    }
 
-    @Given("User verifies that invoice is appeared when click download receipt button.")
-    public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() {
+
+            @Given("User adds an item to shopping card and goes to the shopping card.")
+            public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card () throws
+            InvalidMidiDataException {
+                card.firstElementOfMostPopuler.click();
+                card.mSizeButton.click();
+
+                OptionsMet.swipe(832, 1772, 832, 1242);
+                ReusableMethods.wait(2);
+                OptionsMet.clickButtonByDescription("Add To Cart");
+                ReusableMethods.wait(1);
+                card.sepetIcon.click();
+                ReusableMethods.wait(1);
+
+
+            }
+            @Given("User selects an address for shipping.")
+            public void user_selects_an_address_for_shipping () throws InvalidMidiDataException {
+                card.LabelSecondAddress.click();
+                OptionsMet.swipe(1185, 2017, 1185, 1282);
+            }
+            @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
+            public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared
+            () {
+
+
+
+                card.confirmOrderButton.click();
+                assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
+                ReusableMethods.wait(2);
+
+            }
+
+            @Given("User fills card informations and clicks the confirm button")
+            public void user_fills_card_informations_and_clicks_the_confirm_button () {
+                ReusableMethods.wait(8);
+                card.stripeMethodCartBox.click();
+                actions.sendKeys("424242424242424212261231234512").perform();
+                ReusableMethods.wait(2);
+                card.confirmbtnStripeMethod.click();
+                ReusableMethods.wait(5);
 
         OptionsMet.clickButtonByDescription("Download Receipt");
         ReusableMethods.wait(1);
@@ -909,7 +844,29 @@ public class Stepdefinition extends OptionsMet {
 
 
 
+            @Given("User verifies that getting success message for order completing")
+            public void user_verifies_that_getting_success_message_for_order_completing () {
+                assertTrue(card.labelSuccessMessageForOrder.getAttribute("content-desc").contains("Success"));
+            }
+            @Given("User verifies that order details could be appeared after click the last order history.")
+            public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history () {
 
+                card.firstOrderHistory.click();
+                ReusableMethods.wait(1);
+                assertTrue(card.orderDetailsTable.isDisplayed());
+            }
+            @Given("User navigates to back")
+            public void user_navigates_to_back () {
+                OptionsMet.KeyBack();
+            }
+
+            @Given("User verifies that invoice is appeared when click download receipt button.")
+            public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button () {
+
+                OptionsMet.clickButtonByDescription("Download Receipt");
+                ReusableMethods.wait(1);
+                assertTrue(card.invoiceTable.isDisplayed());
+            }
 
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
@@ -1284,6 +1241,211 @@ public class Stepdefinition extends OptionsMet {
         card.getJuniorsButton().click();
     }
 
-  
+    @Given("User swipe to Women category")
+    public void user_swipe_to_women_category() throws InvalidMidiDataException {
+        for (int i = 0; i < 3; i++) {
+            swipe(1149, 1154, 209, 1149);
+        }
+        touchDown(863, 1149);
+
+    }
+
+    @Given("User clicks the passwordTextBox and sendKeys invalidPassword")
+    public void user_clicks_the_password_text_box_and_send_keys_invalid_password() {
+        passwordTextBoxClickAndSendKeys(ConfigReader.getProperty("cemInvalidPassword"));
+
+    }
+
+    @Given("Verifies visitor is login not Successfully")
+    public void verifies_visitor_is_login_not_successfully() {
+        //System.out.println(card.labelErrorMessageForSigningIn.getText());
+        String hata = card.labelErrorMessageForSigningIn.getAttribute("contentDescription");
+        System.out.println(hata);
+        assertTrue(card.labelErrorMessageForSigningIn.getAttribute("content-desc").contains("Error"));
+
+    }
+
+    @Given("User clicks to return back")
+    public void user_clicks_to_return_back() {
+        getAppiumDriver().navigate().back();
+    }
+
+    @Given("User clicks useEmailInstead")
+    public void user_clicks_use_email_instead() {
+        clickButtonByDescription("*Use Email Instead");
+    }
+
+    @Given("Verifies visitor is loggedin Successfully")
+    public void verifies_visitor_is_loggedin_successfully() {
+    }
+
+    @Given("User verifies the addressDeleteIcon is viewable and clickable")
+    public void user_verifies_the_address_delete_button_button_is_viewable_and_clickable() {
+
+        assertTrue(card.addressDeleteIcon.isDisplayed());
+        assertTrue(card.addressDeleteIcon.isEnabled());
+        card.addressDeleteIcon.click();
+        ReusableMethods.wait(2);
+        OptionsMet.viewAndClick("Delete");
+
+    }
+
+    /*
+    @Given("User verifies the addressDeleteIcon is viewable and clickable")
+    public void user_verifies_the_address_delete_button_button_is_viewable_and_clickable() {
+
+
+    }
+
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10)); // 10 seconds wait
+        try {
+
+            //     wait.until(ExpectedConditions.visibilityOf(card.successMessageOzge));
+
+            //  assertTrue("Success mesajı görünmüyor!", card.successMessageOzge.isDisplayed());
+
+            // 2. Elementin metnini al ve doğrula
+            String actualText = card.successMessageOzge.getText();
+            String expectedText = "Success Login Successfully.";
+            //assertEquals(actualText, expectedText, "Success mesajı beklenenle eşleşmiyor!");
+
+            System.out.println("Success mesajı doğrulandı: " + actualText);
+            String hata2 = card.successMessageOzge.getAttribute("contentDescription");
+            System.out.println(hata2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
+        // System.out.println(card.labelSuccessMessageForSigningIn.getText());
+        //  assertTrue(card.labelSuccessMessageForSigningIn.getText().contains("Success"));
+        //  assertTrue (card.labelSuccessMessageForSigningIn.getAttribute("content-desc").contains("Successfully"));
+    }
+*/
+    @Given("User clicks to category")
+    public void user_clicks_to_category() {
+        clickButtonByDescription("Category");
+    }
+
+    @Given("User clicks to subCategoryForWomen")
+    public void user_clicks_to_sub_category_for_women() {
+        card.getIconWomenSubCategory().click();
+    }
+
+
+    @Given("Verifies Women in SubCategory")
+    public void verifies_women_in_sub_category() {
+
+        ReusableMethods.wait(2);
+        List<WebElement> categories = driver.findElements(By.xpath("//android.view.View[@content-desc]"));
+
+
+        List<String> categoryNames = new ArrayList<>();
+        for (WebElement category : categories) {
+            String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
+            if (text != null && !text.trim().isEmpty()) {  // Null ve boşlukları filtrele
+                categoryNames.add(text);
+            }
+        }
+        // Konsola yazdırmak için kullandım
+        System.out.println("Kategori Listesi: " + categoryNames);
+
+        // Beklenen kategorileri tanımlak icin kullandım
+        List<String> expectedCategories = Arrays.asList("Men", "Women", "Juniors");
+
+        // Liste sırası değişirse sıralayarak kıyaslayalım
+        Collections.sort(categoryNames);
+        Collections.sort(expectedCategories);
+
+        // Assert ile doğrulamak için kullandım
+        assertEquals("Kategori listesi beklendiği gibi değil!", expectedCategories, categoryNames);
+
+    }
+
+
+    @Given("User verify to have subCategoryOfWomen")
+    public void user_verify_to_have_sub_category_of_women() {
+        ReusableMethods.wait(2);
+        List<WebElement> subCategories = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='0']"));
+        //android.view.View[@clickable='true' and @content-desc]
+
+        List<String> subCategoryNames = new ArrayList<>();
+        for (WebElement category : subCategories) {
+            String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
+            if (text != null && !text.trim().isEmpty()) {  // Null ve boşlukları filtrele
+                subCategoryNames.add(text);
+            }
+        }
+
+        // Konsola yazdırmak için kullandım
+        System.out.println("Alt Kategori Listesi: " + subCategoryNames);
+
+        // Beklenen kategorileri tanımlamak için kullandım
+        List<String> expectedSubCategories = Arrays.asList("Women Clothing", "Women Shoes", "Women Accessories");
+
+        // Liste sırası değişirse sıralayarak kıyaslayalım
+        Collections.sort(subCategoryNames);
+        Collections.sort(expectedSubCategories);
+
+        // Assert ile doğrulamak için kullandım
+        assertEquals("Alt Kategori listesi beklendiği gibi değil!", expectedSubCategories, subCategoryNames);
+
+    }
+
+
+    @Given("User verify to be perform add to cart, add to favorite and view")
+    public void user_verify_to_be_perform_add_to_cart_add_to_favorite_and_view () throws
+            InvalidMidiDataException {
+        ReusableMethods.wait(2);
+
+        // Tüm ürünleri liste olarak al
+        for (int j = 0; j <5; j++) {
+
+            for (int i = 0; i < 6; i++) {
+                List<WebElement> products = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='" + i + "']"));
+
+                for (WebElement product : products) {
+                    String productName = product.getAttribute("content-desc");
+                    if (productName != null && !productName.trim().isEmpty()) {
+                        System.out.println("Ürün: " + productName);
+                        System.out.println(product.getSize());
+                        System.out.println(products);
+                    }
+                        products.get(i).click();
+                        // Ürünü tıklayarak detayına gir
+                        touchDown(352, 909);
+                        // product.click();
+                        ReusableMethods.wait(2);
+
+                        // "Add to Cart" butonunu bul ve tıkla
+                        OptionsMet.swipe(700, 2369, 679, 914);
+                        touchDown(184, 2497);
+
+                        clickButtonByDescription("Add To Cart");
+                        // WebElement addToCartButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Cart']"));
+                        // addToCartButton.click();
+                        ReusableMethods.wait(1);
+                        System.out.println(productName + " sepete eklendi.");
+
+                        // "Add to Favorites" butonunu bul ve tıkla
+                        clickButtonByDescription("Favorite");
+                        //WebElement favoriteButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Favorite']"));
+                        // favoriteButton.click();
+                        ReusableMethods.wait(1);
+                        System.out.println(productName + " favorilere eklendi.");
+
+                        // Geri git (Back tuşu)
+                        driver.navigate().back();
+                        ReusableMethods.wait(1);
+
+                }
+
+            }
+        }
+        touchDown(352, 909);
+    }
+//cembakir
 }
 

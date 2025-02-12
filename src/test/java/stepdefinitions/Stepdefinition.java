@@ -397,6 +397,7 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_text_is_visible(String text) {
         ReusableMethods.wait(1);
         OptionsMet.VerifyElementText(text);
+        card.clickFilterCloseButton();
     }
 
     @Given("User sends send keys {string}")
@@ -452,7 +453,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
 
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(3);
 
         VerifyElementText(description1);
         VerifyElementText(description2);
@@ -461,7 +462,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User verifies that the Filter button is displayed and clicks it")
     public void user_verifies_that_the_filter_button_is_displayed_and_clicks_it() {
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(2);
         card.verifyIconFilter();
     }
 

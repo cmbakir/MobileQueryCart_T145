@@ -845,7 +845,7 @@ public class Stepdefinition extends OptionsMet {
                 ReusableMethods.wait(2);
 
             }
-          
+
 
 
     @Given("User fills card informations and clicks the confirm button")
@@ -857,9 +857,9 @@ public class Stepdefinition extends OptionsMet {
         card.confirmbtnStripeMethod.click();
         ReusableMethods.wait(5);
 
-      
+
     }
-  
+
 
     @Given("User verifies that invoice is appeared when click download receipt button.")
     public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() throws InvalidMidiDataException {
@@ -870,7 +870,7 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
-    
+
 
 
             @Given("User verifies that getting success message for order completing")
@@ -889,7 +889,7 @@ public class Stepdefinition extends OptionsMet {
                 OptionsMet.KeyBack();
             }
 
-            
+
 
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
@@ -1482,5 +1482,52 @@ public class Stepdefinition extends OptionsMet {
 //cembakir
 
     // ahmet push
+    @Given("User verifies to be perform adding to cart, adding to favorite and view")
+    public void user_verifies_to_be_perform_adding_to_cart_adding_to_favorite_and_view() throws InvalidMidiDataException {
+        ReusableMethods.wait(2);
+
+        // Tüm ürünleri liste olarak al
+        List<WebElement> products = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='0']"));
+
+        for (WebElement product : products) {
+            String productName = product.getAttribute("content-desc");
+            if (productName != null && !productName.trim().isEmpty()) {
+                System.out.println("Ürün Adı: " + productName);
+                //  System.out.println(products);
+                System.out.println();
+            }
+            // Ürünü tıklayarak detayına gir
+            touchDown(352, 909);
+            // product.click();
+            ReusableMethods.wait(2);
+
+            // "Add to Cart" butonunu bul ve tıkla
+            OptionsMet.swipe(700, 2369, 679, 914);
+            card.iconMSize.click();  // M Size'a tıklamak için
+            System.out.println(productName + " boyut/renk seçildi.");
+            System.out.println();
+
+            clickButtonByDescription("Add To Cart");
+            // WebElement addToCartButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Cart']"));
+            // addToCartButton.click();
+            ReusableMethods.wait(1);
+            System.out.println(productName + " sepete eklendi.");
+            System.out.println();
+
+            // "Add to Favorites" butonunu bul ve tıkla
+            clickButtonByDescription("Favorite");
+            //WebElement favoriteButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Favorite']"));
+            // favoriteButton.click();
+            ReusableMethods.wait(1);
+            System.out.println(productName + " favorilere eklendi.");
+
+            // Geri git (Back tuşu)
+            //     driver.navigate().back();
+            ReusableMethods.wait(1);
+
+        }
+
+    }
+
 }
 

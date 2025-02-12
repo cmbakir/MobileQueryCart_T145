@@ -605,11 +605,42 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
 
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Change Password\")")
+    public WebElement changePassword;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    public WebElement oldPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    public WebElement newPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    public WebElement confirmPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Save Changes\")")
+    public WebElement saveChangesPassw;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Change Password\n" +
+            "Password Updated Successfully\"]")
+    public WebElement successPass;
+
+
+
+
+
+
+
+
+
+
+
     @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
     public WebElement profilButton;
 
     @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
     public WebElement logoutMenu;
+
 
 
 
@@ -842,6 +873,8 @@ public class QueryCardPage {
         ReusableMethods.wait(1);
         filterCloseButton.click();
     }
+
+
 
 
 }

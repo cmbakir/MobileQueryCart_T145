@@ -224,6 +224,10 @@ public class QueryCardPage {
     @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
     public WebElement iconMSize;
 
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Logged Out Successfully.\"]")
+    public WebElement logutMessage;
+
 
 
 
@@ -591,6 +595,14 @@ public class QueryCardPage {
     private WebElement nameBoxElement;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
+    public WebElement profilButton;
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
+    public WebElement logoutMenu;
+
+
 
 
 

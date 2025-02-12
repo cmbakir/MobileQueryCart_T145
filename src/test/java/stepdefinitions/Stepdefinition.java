@@ -766,6 +766,7 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_text_is_visible(String text) {
         ReusableMethods.wait(1);
         OptionsMet.VerifyElementText(text);
+        card.clickFilterCloseButton();
     }
 
     @Given("User sends send keys {string}")

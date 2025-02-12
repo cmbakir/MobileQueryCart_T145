@@ -189,6 +189,8 @@ public class QueryCardPage {
     private WebElement iconFilter;
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
     private WebElement categoryBackButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterCloseButton;
 
 
 
@@ -828,6 +830,11 @@ public class QueryCardPage {
         categoryBackButton.click();
     }
 
+
+    public void clickFilterCloseButton(){
+        ReusableMethods.wait(1);
+        filterCloseButton.click();
+    }
 
 
 }

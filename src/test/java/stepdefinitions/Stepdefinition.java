@@ -1364,11 +1364,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
         List<WebElement> categories = driver.findElements(By.xpath("//android.view.View[@content-desc]"));
 
-    @Given("User verifies the {string} text is visible")
-    public void user_verifies_the_text_is_visible(String text) {
-        ReusableMethods.wait(1);
-        OptionsMet.VerifyElementText(text);
-    }
+
 
 
         List<String> categoryNames = new ArrayList<>();
@@ -1474,6 +1470,12 @@ public class Stepdefinition extends OptionsMet {
             }
         }
         touchDown(352, 909);
+    }
+
+    @Given("User verifies the {string} text is visible")
+    public void user_verifies_the_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
     }
 
 

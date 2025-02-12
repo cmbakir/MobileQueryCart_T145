@@ -32,7 +32,7 @@ import java.util.Date;
 public class ReusableMethods {
    private static DesiredCapabilities desiredCapabilities=new DesiredCapabilities();
 
-
+    public static Process githubPush;
 
 
     public static void apkYukle(){
@@ -115,5 +115,6 @@ public class ReusableMethods {
     }
 
 
-
 }
+
+

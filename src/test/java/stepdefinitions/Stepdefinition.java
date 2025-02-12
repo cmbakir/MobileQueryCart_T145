@@ -721,6 +721,7 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
+
     @When("the user takes a {string} screenshot of that the yellow circle is identified in the shopping bag when the product is selected")
     public void theUserTakesAScreenshotOfThatTheYellowCircleIsIdentifiedInTheShoppingBagWhenTheProductIsSelected(String screen) throws IOException {
 
@@ -1469,7 +1470,71 @@ public class Stepdefinition extends OptionsMet {
         touchDown(352, 909);
     }
 
-
 //cembakir
+
+
+    @When("User see Change Password title and click.")
+    public void userSeeChangePasswordTitleAndClick() {
+        card.changePassword.isDisplayed();
+        card.changePassword.isEnabled();
+        card.changePassword.click();
+
+    }
+
+    @When("User see Old password, New password, Confirm password title.")
+    public void userSeeOldPasswordNewPasswordConfirmPasswordTitle() {
+
+        VerifyElementText("Old Password");
+        VerifyElementText("New Password");
+        VerifyElementText("Confirm Password");
+    }
+
+    @When("User see Old password, New password, Confirm password boxes")
+    public void userSeeOldPasswordNewPasswordConfirmPasswordBoxes() {
+        card.oldPasswordbox.isDisplayed();
+        card.oldPasswordbox.isEnabled();
+
+        card.newPasswordbox.isDisplayed();
+        card.newPasswordbox.isEnabled();
+
+        card.confirmPasswordbox.isDisplayed();
+        card.confirmPasswordbox.isEnabled();
+
+    }
+
+    @When("User change password {string} to {string} successfully with use boxes.")
+    public void userChangePasswordToSuccessfullyWithUseBoxes(String old, String newest) {
+        card.oldPasswordbox.click();
+        actions.sendKeys(old)
+                .sendKeys(Keys.TAB)
+                .sendKeys(newest)
+                .sendKeys(Keys.TAB)
+                .sendKeys(newest)
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.ENTER).perform();
+
+        ReusableMethods.wait(2);
+        assertTrue (card.successPass.getAttribute("content-desc").contains("Successfully"));
+    }
+
+    @When("User clicks the email button {string} and sendKeys {string} with that password {string}")
+    public void userClicksTheEmailButtonAndSendKeysWithThatPassword(String elementName, String text, String pass) {
+
+        card.phoneTextBoxClickAndSendKeys(text);
+        // Telefon numarası alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(pass).perform();
+        ReusableMethods.wait(1);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+
+    }
+
+
+
+
+
 }
 

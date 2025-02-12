@@ -27,10 +27,8 @@ Feature: QCM12 US015 As a registered user, I would like to be able to see the ca
     * User clicks the button "signInLoginButton"
     * User clicks to category
     * User clicks the button with description "Women"
-    * User verify to be perform add to cart, add to favorite and view
-
-
-
+    * User verifies to be perform adding to cart, adding to favorite and view
+  #  * User verify to be perform add to cart, add to favorite and view
     * Driver turns off
 
 

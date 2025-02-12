@@ -133,7 +133,7 @@ public class QueryCardPage {
             "0 (0  Reviews)\n" +
             "$65.00\")")
     public WebElement firstElementOfMostPopuler;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"L\")")
     public WebElement mSizeButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
     public WebElement sepetIcon;
@@ -189,6 +189,8 @@ public class QueryCardPage {
     private WebElement iconFilter;
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
     private WebElement categoryBackButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterCloseButton;
 
 
 
@@ -223,6 +225,17 @@ public class QueryCardPage {
 
     @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
     public WebElement iconMSize;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Logged Out Successfully.\"]")
+    public WebElement logutMessage;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"M\"]")
+    public WebElement labelMSize;
+
+    @AndroidFindBy (xpath = "new UiSelector().description(\"(18, Wine Red) Womens Short Sleeve Tie Dye Blosue T-Shirt\")")
+    public WebElement labelWomenProductName;
+
 
 
 
@@ -592,6 +605,7 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
 
+
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Change Password\")")
     public WebElement changePassword;
 
@@ -619,6 +633,13 @@ public class QueryCardPage {
 
 
 
+
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
+    public WebElement profilButton;
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
+    public WebElement logoutMenu;
 
 
 
@@ -847,6 +868,11 @@ public class QueryCardPage {
         categoryBackButton.click();
     }
 
+
+    public void clickFilterCloseButton(){
+        ReusableMethods.wait(1);
+        filterCloseButton.click();
+    }
 
 
 

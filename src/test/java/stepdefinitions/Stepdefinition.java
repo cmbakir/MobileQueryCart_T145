@@ -767,6 +767,7 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_text_is_visible(String text) {
         ReusableMethods.wait(1);
         OptionsMet.VerifyElementText(text);
+        card.clickFilterCloseButton();
     }
 
     @Given("User sends send keys {string}")
@@ -824,8 +825,7 @@ public class Stepdefinition extends OptionsMet {
             InvalidMidiDataException {
                 card.firstElementOfMostPopuler.click();
                 card.mSizeButton.click();
-
-                OptionsMet.swipe(832, 1772, 832, 1242);
+               OptionsMet.swipe(832, 1772, 832, 1242);
                 ReusableMethods.wait(2);
                 OptionsMet.clickButtonByDescription("Add To Cart");
                 ReusableMethods.wait(1);
@@ -833,38 +833,45 @@ public class Stepdefinition extends OptionsMet {
                 ReusableMethods.wait(1);
 
 
-            }
-            @Given("User selects an address for shipping.")
-            public void user_selects_an_address_for_shipping () throws InvalidMidiDataException {
-                card.LabelSecondAddress.click();
-                OptionsMet.swipe(1185, 2017, 1185, 1282);
-            }
-            @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
-            public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared
-            () {
-
-
-
-                card.confirmOrderButton.click();
+    }
+    @Given("User selects an address for shipping.")
+    public void user_selects_an_address_for_shipping() throws InvalidMidiDataException {
+        touchDown(889,838);
+        OptionsMet.swipe(1185,2017,1185,1282);
+    }
+    @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
+    public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared() {
+                      card.confirmOrderButton.click();
                 assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
                 ReusableMethods.wait(2);
 
             }
+          
 
-            @Given("User fills card informations and clicks the confirm button")
-            public void user_fills_card_informations_and_clicks_the_confirm_button () {
-                ReusableMethods.wait(8);
-                card.stripeMethodCartBox.click();
-                actions.sendKeys("424242424242424212261231234512").perform();
-                ReusableMethods.wait(2);
-                card.confirmbtnStripeMethod.click();
-                ReusableMethods.wait(5);
 
+    @Given("User fills card informations and clicks the confirm button")
+    public void user_fills_card_informations_and_clicks_the_confirm_button() {
+        ReusableMethods.wait(4);
+        card.stripeMethodCartBox.click();
+        actions.sendKeys("424242424242424212261231234512").perform();
+        ReusableMethods.wait(2);
+        card.confirmbtnStripeMethod.click();
+        ReusableMethods.wait(5);
+
+      
+    }
+  
+
+    @Given("User verifies that invoice is appeared when click download receipt button.")
+    public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() throws InvalidMidiDataException {
+          OptionsMet.swipe(1100,2200,1100,220);
         OptionsMet.clickButtonByDescription("Download Receipt");
         ReusableMethods.wait(1);
         assertTrue(card.invoiceTable.isDisplayed());
     }
 
+
+    
 
 
             @Given("User verifies that getting success message for order completing")
@@ -874,27 +881,21 @@ public class Stepdefinition extends OptionsMet {
             @Given("User verifies that order details could be appeared after click the last order history.")
             public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history () {
 
-                card.firstOrderHistory.click();
-                ReusableMethods.wait(1);
-                assertTrue(card.orderDetailsTable.isDisplayed());
+               touchDown(666,826);
+               ReusableMethods.wait(1);
+               assertTrue(card.orderDetailsTable.isDisplayed());
             }
             @Given("User navigates to back")
             public void user_navigates_to_back () {
                 OptionsMet.KeyBack();
             }
 
-            @Given("User verifies that invoice is appeared when click download receipt button.")
-            public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button () {
-
-                OptionsMet.clickButtonByDescription("Download Receipt");
-                ReusableMethods.wait(1);
-                assertTrue(card.invoiceTable.isDisplayed());
-            }
+            
 
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
 
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(3);
 
         VerifyElementText(description1);
         VerifyElementText(description2);
@@ -903,7 +904,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User verifies that the Filter button is displayed and clicks it")
     public void user_verifies_that_the_filter_button_is_displayed_and_clicks_it() {
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(2);
         card.verifyIconFilter();
     }
 
@@ -1365,6 +1366,8 @@ public class Stepdefinition extends OptionsMet {
         List<WebElement> categories = driver.findElements(By.xpath("//android.view.View[@content-desc]"));
 
 
+
+
         List<String> categoryNames = new ArrayList<>();
         for (WebElement category : categories) {
             String text = category.getAttribute("content-desc"); // Sadece content-desc kullanılıyor
@@ -1470,6 +1473,7 @@ public class Stepdefinition extends OptionsMet {
         touchDown(352, 909);
     }
 
+
 //cembakir
 
 
@@ -1535,6 +1539,18 @@ public class Stepdefinition extends OptionsMet {
 
 
 
+
+
+    @Given("User verifies the {string} text is visible")
+    public void user_verifies_the_text_is_visible(String text) {
+        ReusableMethods.wait(1);
+        OptionsMet.VerifyElementText(text);
+    }
+
+
+//cembakir
+
+ // ahmet push
 
 }
 

@@ -259,6 +259,7 @@ public class QueryCardPage {
 
 
 
+
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(5)")
     private WebElement cartButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
@@ -834,9 +835,8 @@ public class QueryCardPage {
     public void clickCategoryBackButton(){
         ReusableMethods.wait(1);
         categoryBackButton.click();
-        ReusableMethods.wait(1);
-        backButton.click();
     }
+
 
     public void clickFilterCloseButton(){
         ReusableMethods.wait(1);

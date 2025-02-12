@@ -228,6 +228,13 @@ public class QueryCardPage {
             "Logged Out Successfully.\"]")
     public WebElement logutMessage;
 
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"M\"]")
+    public WebElement labelMSize;
+
+    @AndroidFindBy (xpath = "new UiSelector().description(\"(18, Wine Red) Womens Short Sleeve Tie Dye Blosue T-Shirt\")")
+    public WebElement labelWomenProductName;
+
+
 
 
 

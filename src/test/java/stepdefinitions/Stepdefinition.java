@@ -721,6 +721,7 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
+
     @When("the user takes a {string} screenshot of that the yellow circle is identified in the shopping bag when the product is selected")
     public void theUserTakesAScreenshotOfThatTheYellowCircleIsIdentifiedInTheShoppingBagWhenTheProductIsSelected(String screen) throws IOException {
 
@@ -1263,6 +1264,150 @@ public class Stepdefinition extends OptionsMet {
         card.getCategoryButton().click();
         card.getJuniorsButton().click();
     }
+    //suleyman US021
+    @Given("Verifies that the Edit Profile button is visible und enabled.")
+    public void verifies_that_the_edit_profile_button_is_visible_und_enabled() {
+        VerifyElementText("Edit Profile");
+    }
+    @Given("Verifies that the Save Changes button is visible und enabled.")
+    public void verifies_that_the_save_changes_button_is_visible_und_enabled() {
+        VerifyElementText("Save Changes");
+    }
+    @Given("User updates Full Name, Email, Phone information.")
+    public void user_updates_full_name_email_phone_information() {
+        Faker faker = new Faker();
+        String fullName = faker.name().fullName(); // Rastgele isim
+        String email = faker.internet().emailAddress();
+        String phoneNumber = faker.number().digits(10);
+        card.getEditPrflNameBox().click();
+        card.getEditPrflNameBox().clear();;
+        card.getEditPrflNameBox().sendKeys(fullName);
+        ReusableMethods.wait(2);
+        //
+        card.getEditPrflEmailBox().click();
+        card.getEditPrflEmailBox().clear();
+        card.getEditPrflEmailBox().sendKeys(email);
+        ReusableMethods.wait(2);
+
+        card.getEditPrflPhoneBox().click();
+        card.getEditPrflPhoneBox().sendKeys(Keys.TAB);
+        card.getEditPrflPhoneBox().clear();
+        card.getEditPrflPhoneBox().sendKeys(phoneNumber);
+        ReusableMethods.wait(2);
+
+        card.getEditSaveChngButton().click();
+        card.getEditProfileClck().click();
+
+        card.getEditPrflNameBox().click();
+        card.getEditPrflNameBox().clear();;
+        card.getEditPrflNameBox().sendKeys("suleyman");
+        ReusableMethods.wait(2);
+
+        card.getEditPrflEmailBox().click();
+        card.getEditPrflEmailBox().clear();
+        card.getEditPrflEmailBox().sendKeys("suleymanuser@querycart.com");
+        ReusableMethods.wait(2);
+
+        card.getEditPrflPhoneBox().click();
+        card.getEditPrflPhoneBox().sendKeys(Keys.TAB);
+        card.getEditPrflPhoneBox().clear();
+        card.getEditPrflPhoneBox().sendKeys("5556511212");
+        ReusableMethods.wait(2);
+        card.getEditSaveChngButton().click();
+    }
+    @Given("The user verifies that the Success message is Updated Successfully.")
+    public void the_user_verifies_that_the_success_message_is_updated_successfully() {
+        assertTrue (card.getPrflUpSuccessfully().getAttribute("content-desc").contains("Updated Successfully"));
+    }
+    //suleyman US027
+    @Given("The user selects the products to add to the cart and adds them to the cart.")
+    public void the_user_selects_the_products_to_add_to_the_cart_and_adds_them_to_the_cart() throws InvalidMidiDataException {
+
+        card.getFirstProductSelection().click();
+        ReusableMethods.wait(1);
+
+        OptionsMet.swipe(680,2728,620,1115);//680,2728 to 620,1115.
+        ReusableMethods.wait(1);
+
+        card.getProductSizeClick().click();
+        ReusableMethods.wait(1);
+
+        card.getAddToCart().click();
+        ReusableMethods.wait(3);
+
+        card.getReturnButton().click();
+        ReusableMethods.wait(1);
+
+        card.getSecondProductSelection().click();
+        ReusableMethods.wait(1);
+
+
+        OptionsMet.swipe(523,2492,523,1889);//680,2728 to 620,1115.
+        ReusableMethods.wait(1);
+
+        card.getProductSizeClick().click();
+
+        ReusableMethods.wait(1);
+
+        card.getAddToCart().click();
+
+        ReusableMethods.wait(3);
+
+
+
+    }
+    @Given("user clicks on cart.")
+    public void user_clicks_on_cart() {
+        card.getCartButton().click();
+        ReusableMethods.wait(3);
+    }
+    @Given("The user verifies that the items in the cart are visible.")
+    public void the_user_verifies_that_the_items_in_the_cart_are_visible() {
+        assertTrue("Sepet boş olmamalı!", !card.getCartProducts().isEmpty());
+        ReusableMethods.wait(3);
+
+    }
+    @Given("Verifies that the subtotal text is visible und enabled.")
+    public void verifies_that_the_subtotal_text_is_visible_und_enabled() {
+        card.getReturnButton().click();
+        ReusableMethods.wait(2);
+
+        assertTrue(card.getSubtotal_Text().isDisplayed());
+        assertTrue( card.getSubtotal_Text().isEnabled());
+        //  VerifyElementText("Subtotal");
+    }
+    @Given("The user confirms that an item in the cart can be deleted.")
+    public void the_user_confirms_that_an_item_in_the_cart_can_be_deleted() {
+        ReusableMethods.wait(1);
+        card.getRemove_Button().click();
+    }
+    @Given("The Proceed to Checkout button appears and confirms that it is accessible.")
+    public void the_proceed_to_checkout_button_appears_and_confirms_that_it_is_accessible() {
+        ReusableMethods.wait(1);
+        assertTrue(card.getProceedtoCheckoutButton().isDisplayed());
+        assertTrue( card.getProceedtoCheckoutButton().isEnabled());
+        // VerifyElementText("Proceed to Checkout");
+    }
+    @Given("The user clicks on the Proceed to Checkout button and confirms that they are in the payment section.")
+    public void the_user_clicks_on_the_proceed_to_checkout_button_and_confirms_that_they_are_in_the_payment_section() {
+        ReusableMethods.wait(1);
+        card.getProceedtoCheckoutButton().click();
+        ReusableMethods.wait(1);
+        assertTrue(card.getSave_PayButton().isDisplayed());
+        assertTrue( card.getSave_PayButton().isEnabled());
+        //VerifyElementText("Save & Pay");
+        ReusableMethods.wait(1);
+        card.getReturnButton().click();
+    }
+    @Given("the user has no products left in the cart, the Go To Shopping button appears and confirms that it is active and clicks it.")
+    public void the_user_has_no_products_left_in_the_cart_the_go_to_shopping_button_appears_and_confirms_that_it_is_active_and_clicks_it() {
+        ReusableMethods.wait(1);
+        card.getRemove_Button().click();
+        ReusableMethods.wait(1);
+        clickAndVerify(card.getGotoShopping_Button());
+        //suleyman the end
+    }
+  
 
     @Given("User swipe to Women category")
     public void user_swipe_to_women_category() throws InvalidMidiDataException {
@@ -1472,6 +1617,74 @@ public class Stepdefinition extends OptionsMet {
         touchDown(352, 909);
     }
 
+
+//cembakir
+
+
+    @When("User see Change Password title and click.")
+    public void userSeeChangePasswordTitleAndClick() {
+        card.changePassword.isDisplayed();
+        card.changePassword.isEnabled();
+        card.changePassword.click();
+
+    }
+
+    @When("User see Old password, New password, Confirm password title.")
+    public void userSeeOldPasswordNewPasswordConfirmPasswordTitle() {
+
+        VerifyElementText("Old Password");
+        VerifyElementText("New Password");
+        VerifyElementText("Confirm Password");
+    }
+
+    @When("User see Old password, New password, Confirm password boxes")
+    public void userSeeOldPasswordNewPasswordConfirmPasswordBoxes() {
+        card.oldPasswordbox.isDisplayed();
+        card.oldPasswordbox.isEnabled();
+
+        card.newPasswordbox.isDisplayed();
+        card.newPasswordbox.isEnabled();
+
+        card.confirmPasswordbox.isDisplayed();
+        card.confirmPasswordbox.isEnabled();
+
+    }
+
+    @When("User change password {string} to {string} successfully with use boxes.")
+    public void userChangePasswordToSuccessfullyWithUseBoxes(String old, String newest) {
+        card.oldPasswordbox.click();
+        actions.sendKeys(old)
+                .sendKeys(Keys.TAB)
+                .sendKeys(newest)
+                .sendKeys(Keys.TAB)
+                .sendKeys(newest)
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.ENTER).perform();
+
+        ReusableMethods.wait(2);
+        assertTrue (card.successPass.getAttribute("content-desc").contains("Successfully"));
+    }
+
+    @When("User clicks the email button {string} and sendKeys {string} with that password {string}")
+    public void userClicksTheEmailButtonAndSendKeysWithThatPassword(String elementName, String text, String pass) {
+
+        card.phoneTextBoxClickAndSendKeys(text);
+        // Telefon numarası alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(pass).perform();
+        ReusableMethods.wait(1);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+
+    }
+
+
+
+
+
+
     @Given("User verifies the {string} text is visible")
     public void user_verifies_the_text_is_visible(String text) {
         ReusableMethods.wait(1);
@@ -1480,6 +1693,7 @@ public class Stepdefinition extends OptionsMet {
 
 
 //cembakir
+
 
     // ahmet push
     @Given("User verifies to be perform adding to cart, adding to favorite and view")
@@ -1529,5 +1743,7 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
+
 }
+
 

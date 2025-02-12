@@ -605,6 +605,44 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\"]")
+    private WebElement firstProductSelection;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Floral Print Midi Dress\n" +
+            "0 (0  Reviews)\n" +
+            "$100.00\"]")
+    private WebElement secondProductSelection;
+    @AndroidFindBy(accessibility = "Proceed to Checkout")
+    private WebElement proceedtoCheckoutButton;
+    @AndroidFindBy(accessibility = "Save & Pay")
+    private WebElement Save_PayButton;
+    @AndroidFindBy(accessibility = "Subtotal")
+    private WebElement subtotal_Text;
+    @AndroidFindBy(accessibility = "Remove")
+    private WebElement remove_Button;
+    @AndroidFindBy(accessibility = "Go to Shopping")
+    private WebElement GotoShopping_Button;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(6)")
+    private List<WebElement> cartProducts;
+    @AndroidFindBy(accessibility = "S")
+    private WebElement productSizeClick;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Black\")")
+    @AndroidFindBy(accessibility = "Edit Profile")
+    private WebElement editProfileClck;
+    @AndroidFindBy(accessibility = "Save Changes")
+    private WebElement editSaveChngButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"PROFILE_UPDATE\n" +
+            "Profile Updated Successfully\"]")
+    private WebElement prflUpSuccessfully;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement editPrflNameBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement editPrflEmailBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement editPrflPhoneBox;
+
+
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Change Password\")")
     public WebElement changePassword;
@@ -626,20 +664,12 @@ public class QueryCardPage {
     public WebElement successPass;
 
 
-
-
-
-
-
-
-
-
-
     @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
     public WebElement profilButton;
 
     @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
     public WebElement logoutMenu;
+
 
 
 

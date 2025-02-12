@@ -62,12 +62,11 @@ import static org.junit.Assert.assertEquals;
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     Actions actions = new Actions(getAppiumDriver());
-    Faker faker=new Faker();
+    Faker faker = new Faker();
     AndroidDriver driver = (AndroidDriver) getAppiumDriver();
 
     private final int TOTAL_CATEGORIES = 44;
     private Set<String> visibleCategories = new HashSet<>();
-
 
 
     @Given("User makes driver adjustments")
@@ -299,8 +298,8 @@ public class Stepdefinition extends OptionsMet {
     public void user_verifies_that_a_success_message_appeared() {
 
         assertTrue(card.labelSuccessMessageForUpdatingAddress.getAttribute("content-desc").contains("Successful"));
-        String mesaj=card.labelSuccessMessageForUpdatingAddress.getAttribute("contentDescription");
-        System.out.println("sonuç="+mesaj);
+        String mesaj = card.labelSuccessMessageForUpdatingAddress.getAttribute("contentDescription");
+        System.out.println("sonuç=" + mesaj);
         ReusableMethods.wait(2);
 
     }
@@ -335,7 +334,7 @@ public class Stepdefinition extends OptionsMet {
         assert card.labelMostPopular.isDisplayed();
     }
 
-        @Given("User verifies that Categories is displayed")
+    @Given("User verifies that Categories is displayed")
     public void user_verifies_that_categories_is_displayed() {
         ReusableMethods.wait(3);
         OptionsMet.VerifyElementText("Men");
@@ -353,8 +352,6 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
-
-
     @When("User see Popular Brands title.")
     public void userSeePopularBrandsTitle() {
         VerifyElementText("Popular Brands");
@@ -368,13 +365,13 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText("Dr. Martens");
         VerifyElementText("Clarks");
 
-        OptionsMet.swipe(1306,2344,118,1282);
+        OptionsMet.swipe(1306, 2344, 118, 1282);
         ReusableMethods.wait(1);
-        OptionsMet.swipe(1306,2344,118,1282);
+        OptionsMet.swipe(1306, 2344, 118, 1282);
         ReusableMethods.wait(1);
-        OptionsMet.swipe(1306,2344,118,1282);
+        OptionsMet.swipe(1306, 2344, 118, 1282);
         ReusableMethods.wait(1);
-        OptionsMet.swipe(1306,2344,118,1282);
+        OptionsMet.swipe(1306, 2344, 118, 1282);
         VerifyElementText("Urban Casuals");
 
 
@@ -392,7 +389,7 @@ public class Stepdefinition extends OptionsMet {
     @When("User clicks  homepage tap coordinates {int}, {int}")
     public void userClicksHomepageTapCoordinates(Integer x, Integer y) {
         ReusableMethods.wait(4);
-        OptionsMet.touchDown(x,y);
+        OptionsMet.touchDown(x, y);
         ReusableMethods.wait(1);
     }
 
@@ -432,8 +429,8 @@ public class Stepdefinition extends OptionsMet {
 
     @When("On the page that opens, click on the white heart sign in the upper right corner of the products.")
     public void onThePageThatOpensClickOnTheWhiteHeartSignInTheUpperRightCornerOfTheProducts() {
-         card.whiteHeart.click();
-         //ReusableMethods.wait(3);
+        card.whiteHeart.click();
+        //ReusableMethods.wait(3);
         //assertTrue (card.addedWish.getAttribute("content-desc").contains("Add"));
 
     }
@@ -463,7 +460,7 @@ public class Stepdefinition extends OptionsMet {
 
     @When("User clicks shopping bag")
     public void userClicksShoppingBag() {
-         card.addcartbag.click();
+        card.addcartbag.click();
     }
 
     @When("User verifies to open shopping cart page")
@@ -542,7 +539,7 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.orderSummaryTitle.isDisplayed());
         assertTrue(card.orderSummaryTitle.isEnabled());
 
-        OptionsMet.swipe(651,1801,651,1282);
+        OptionsMet.swipe(651, 1801, 651, 1282);
 
         VerifyElementText("Subtotal");
         VerifyElementText("Tax");
@@ -581,11 +578,11 @@ public class Stepdefinition extends OptionsMet {
         actions.sendKeys("turk").perform();
 
         //OptionsMet.clickAndSendKeys(updname,"caner ozturk");
-        OptionsMet.swipe(651,1801,651,1282);
+        OptionsMet.swipe(651, 1801, 651, 1282);
         OptionsMet.clickButtonByDescription("Update Address");
         //ReusableMethods.wait(1);
         //ReusableMethods.getScreenshot("android.widget.ScrollView");
-        assertTrue (card.updatedAddSuccess.getAttribute("content-desc").contains("Success"));
+        assertTrue(card.updatedAddSuccess.getAttribute("content-desc").contains("Success"));
         ReusableMethods.wait(3);
         card.backButton.click();
 
@@ -601,14 +598,14 @@ public class Stepdefinition extends OptionsMet {
         card.addAddressNameBox.sendKeys("cihan öztürk");
         actions.sendKeys(Keys.TAB)
                 .sendKeys("cihan@hotmail.com")
-                 .sendKeys(Keys.TAB).perform();
-                //.sendKeys(Keys.ENTER).perform();
+                .sendKeys(Keys.TAB).perform();
+        //.sendKeys(Keys.ENTER).perform();
         //ReusableMethods.wait(2);
         ReusableMethods.wait(2);
-        OptionsMet.touchDown(275,1226);
+        OptionsMet.touchDown(275, 1226);
         ReusableMethods.wait(1);
-         card.countryCode.click();
-       // ReusableMethods.scrollWithUiScrollableAndClickWithUi("+93");
+        card.countryCode.click();
+        // ReusableMethods.scrollWithUiScrollableAndClickWithUi("+93");
         Thread.sleep(2000);
         actions.sendKeys(Keys.TAB)
                 .sendKeys("5556661122")
@@ -634,12 +631,12 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.hideKeyboard();
         //clickButtonByDescription("Add Address");
 
-         ReusableMethods.wait(1);
-         WebElement addAddressButton = card.addAddressButton;
-         clickAndVerify(addAddressButton);
-      // ekenen adresin doğrulanması
+        ReusableMethods.wait(1);
+        WebElement addAddressButton = card.addAddressButton;
+        clickAndVerify(addAddressButton);
+        // ekenen adresin doğrulanması
 
-        assertTrue (card.addedAddSuccess.getAttribute("content-desc").contains("Success"));
+        assertTrue(card.addedAddSuccess.getAttribute("content-desc").contains("Success"));
         assertTrue(card.addedAddress.isDisplayed());
         assertTrue(card.addedAddress.isEnabled());
 
@@ -654,7 +651,7 @@ public class Stepdefinition extends OptionsMet {
         // update işleminnde açılan delete yapabilrsin
         WebElement updatedeleteadr = card.updateadrDeleteBut;
         OptionsMet.clickAndVerify(updatedeleteadr);
-         VerifyElementText("Cancel");
+        VerifyElementText("Cancel");
         VerifyElementText("Delete");
 
         card.updateDeleteButton.click();
@@ -662,8 +659,8 @@ public class Stepdefinition extends OptionsMet {
         //eklenen adresin adreslerden silindiğini görüntüler
         //assertFalse(card.addedAddress.isDisplayed());
 
-        assertTrue (card.deletedAddSuccess.getAttribute("content-desc").contains("Success"));
-         ReusableMethods.wait(2);
+        assertTrue(card.deletedAddSuccess.getAttribute("content-desc").contains("Success"));
+        ReusableMethods.wait(2);
 
         card.backButton.click();
 
@@ -673,15 +670,15 @@ public class Stepdefinition extends OptionsMet {
 
         //getAttribute("content-desc").contains("Successfully"));
         //@AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Success\n" +
-               // "Address Added Successfully!\"]")
-       // public WebElement labelSuccessMessageForAddingAddress;
+        // "Address Added Successfully!\"]")
+        // public WebElement labelSuccessMessageForAddingAddress;
 
     }
 
     @When("User goes to pickup page")
     public void userGoesToPickupPage() throws InvalidMidiDataException {
         ReusableMethods.wait(1);
-        OptionsMet.swipe(641,414,641,1285);
+        OptionsMet.swipe(641, 414, 641, 1285);
         card.pickup.click();
 
         ReusableMethods.wait(1);
@@ -773,6 +770,7 @@ public class Stepdefinition extends OptionsMet {
             }
         }
     }
+
     @Given("User verifies that all categories displayed")
     public void user_verifies_that_all_categories_displayed() {
         assertEquals(TOTAL_CATEGORIES, visibleCategories.size());
@@ -785,6 +783,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
 
     }
+
     @Given("User verifies that a success message for adding appeared.")
     public void user_verifies_that_a_success_message_for_adding_appeared() {
 
@@ -795,47 +794,47 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
-
-            @Given("User adds an item to shopping card and goes to the shopping card.")
-            public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card () throws
+    @Given("User adds an item to shopping card and goes to the shopping card.")
+    public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card() throws
             InvalidMidiDataException {
-                card.firstElementOfMostPopuler.click();
-                card.mSizeButton.click();
+        card.firstElementOfMostPopuler.click();
+        card.mSizeButton.click();
 
-                OptionsMet.swipe(832, 1772, 832, 1242);
-                ReusableMethods.wait(2);
-                OptionsMet.clickButtonByDescription("Add To Cart");
-                ReusableMethods.wait(1);
-                card.sepetIcon.click();
-                ReusableMethods.wait(1);
+        OptionsMet.swipe(832, 1772, 832, 1242);
+        ReusableMethods.wait(2);
+        OptionsMet.clickButtonByDescription("Add To Cart");
+        ReusableMethods.wait(1);
+        card.sepetIcon.click();
+        ReusableMethods.wait(1);
 
 
-            }
-            @Given("User selects an address for shipping.")
-            public void user_selects_an_address_for_shipping () throws InvalidMidiDataException {
-                card.LabelSecondAddress.click();
-                OptionsMet.swipe(1185, 2017, 1185, 1282);
-            }
-            @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
-            public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared
+    }
+
+    @Given("User selects an address for shipping.")
+    public void user_selects_an_address_for_shipping() throws InvalidMidiDataException {
+        card.LabelSecondAddress.click();
+        OptionsMet.swipe(1185, 2017, 1185, 1282);
+    }
+
+    @Given("User clicks the confirm order button without selected payment method, then an error message should be appeared.")
+    public void user_clicks_the_confirm_order_button_without_selected_payment_method_then_an_error_message_should_be_appeared
             () {
 
 
+        card.confirmOrderButton.click();
+        assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
+        ReusableMethods.wait(2);
 
-                card.confirmOrderButton.click();
-                assertTrue(card.labelErrorMessageForPaymentMethod.getAttribute("content-desc").contains("Error"));
-                ReusableMethods.wait(2);
+    }
 
-            }
-
-            @Given("User fills card informations and clicks the confirm button")
-            public void user_fills_card_informations_and_clicks_the_confirm_button () {
-                ReusableMethods.wait(8);
-                card.stripeMethodCartBox.click();
-                actions.sendKeys("424242424242424212261231234512").perform();
-                ReusableMethods.wait(2);
-                card.confirmbtnStripeMethod.click();
-                ReusableMethods.wait(5);
+    @Given("User fills card informations and clicks the confirm button")
+    public void user_fills_card_informations_and_clicks_the_confirm_button() {
+        ReusableMethods.wait(8);
+        card.stripeMethodCartBox.click();
+        actions.sendKeys("424242424242424212261231234512").perform();
+        ReusableMethods.wait(2);
+        card.confirmbtnStripeMethod.click();
+        ReusableMethods.wait(5);
 
         OptionsMet.clickButtonByDescription("Download Receipt");
         ReusableMethods.wait(1);
@@ -843,30 +842,31 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
+    @Given("User verifies that getting success message for order completing")
+    public void user_verifies_that_getting_success_message_for_order_completing() {
+        assertTrue(card.labelSuccessMessageForOrder.getAttribute("content-desc").contains("Success"));
+    }
 
-            @Given("User verifies that getting success message for order completing")
-            public void user_verifies_that_getting_success_message_for_order_completing () {
-                assertTrue(card.labelSuccessMessageForOrder.getAttribute("content-desc").contains("Success"));
-            }
-            @Given("User verifies that order details could be appeared after click the last order history.")
-            public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history () {
+    @Given("User verifies that order details could be appeared after click the last order history.")
+    public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history() {
 
-                card.firstOrderHistory.click();
-                ReusableMethods.wait(1);
-                assertTrue(card.orderDetailsTable.isDisplayed());
-            }
-            @Given("User navigates to back")
-            public void user_navigates_to_back () {
-                OptionsMet.KeyBack();
-            }
+        card.firstOrderHistory.click();
+        ReusableMethods.wait(1);
+        assertTrue(card.orderDetailsTable.isDisplayed());
+    }
 
-            @Given("User verifies that invoice is appeared when click download receipt button.")
-            public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button () {
+    @Given("User navigates to back")
+    public void user_navigates_to_back() {
+        OptionsMet.KeyBack();
+    }
 
-                OptionsMet.clickButtonByDescription("Download Receipt");
-                ReusableMethods.wait(1);
-                assertTrue(card.invoiceTable.isDisplayed());
-            }
+    @Given("User verifies that invoice is appeared when click download receipt button.")
+    public void user_verifies_that_invoice_is_appeared_when_click_download_receipt_button() {
+
+        OptionsMet.clickButtonByDescription("Download Receipt");
+        ReusableMethods.wait(1);
+        assertTrue(card.invoiceTable.isDisplayed());
+    }
 
     @Given("User verifies that {string}, {string}, {string} is displayed")
     public void user_verifies_that_is_displayed(String description1, String description2, String description3) {
@@ -894,39 +894,46 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
         card.buttonUseEmailInstead.click();
     }
+
     @Then("As a user must be {string} email and {string} password Login")
     public void as_a_user_must_be_email_and_password_login(String registeredEmail, String registeredPassword) {
         ReusableMethods.wait(2);
         card.LoginWithEmail(registeredEmail, registeredPassword);
     }
+
     @Then("User Verifies the visibility and functionality of the {string} button")
     public void user_verifies_the_visibility_and_functionality_of_the_button(String Wishlist) {
         ReusableMethods.wait(2);
         VerifyElementText(Wishlist);
         clickButtonByDescription(Wishlist);
     }
+
     @Then("The {string} title should be displayed")
     public void theTitleShouldBeDisplayed(String OrderHistory) {
         ReusableMethods.wait(2);
         OptionsMet.assertElementText(OrderHistory);
     }
+
     @And("User clicks on the first order in the list")
     public void userClicksOnTheFirstOrderInTheList() {
         ReusableMethods.wait(2);
         card.getFirstOrderDetailsButton().click();
     }
+
     @And("User scroll down the screen")
     public void userScrollDownTheScreen() throws InvalidMidiDataException {
         ReusableMethods.wait(1);
-        OptionsMet.swipe(600,2750,600,330);
+        OptionsMet.swipe(600, 2750, 600, 330);
         ReusableMethods.wait(1);
     }
+
     @Then("User returns to previous page")
     public void userReturnsToPreviousPage() {
         ReusableMethods.wait(2);
         Driver.getAppiumDriver().navigate().back();
         ReusableMethods.wait(2);
     }
+
     @Then("User should see an {string} message on the popup page.")
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
         ReusableMethods.wait(2);
@@ -936,7 +943,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("Manager is on the Dashboard page and accept order")
     public void manager_is_on_the_dashboard_page_and_accept_order() {
 
-        ManagerPage managerPage= new ManagerPage();
+        ManagerPage managerPage = new ManagerPage();
         WebDriver webdriver = Driver.getWebdriver();
 
         String managerLoginUrl = ConfigReader.getProperty("managerLoginUrl");
@@ -963,6 +970,7 @@ public class Stepdefinition extends OptionsMet {
         managerPage.labelDelivered.click();
         ReusableMethods.wait(1);
     }
+
     //TC01 regester Suleyman us007
     @Given("The user verifies und enabled that the {string} icon is on the page.")
     public void the_user_verifies_that_the_icon_is_on_the_page(String description) {
@@ -1008,7 +1016,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("The user verifies that the Success message is {string}")
     public void the_user_verifies_that_the_success_message_is(String expSuccessMassage) {
 
-        assertTrue (card.getSuccessMassage().getAttribute("content-desc").contains("Successfully"));
+        assertTrue(card.getSuccessMassage().getAttribute("content-desc").contains("Successfully"));
     }
 
     @Given("Verifies that the {string} button is visible.")
@@ -1026,23 +1034,27 @@ public class Stepdefinition extends OptionsMet {
         card.getPhoneandEmailBox().sendKeys(phoneNumber);
 
     }
+
     @Given("user enters password that they want to use.")
     public void user_enters_password_that_they_want_to_use() {
         card.getPasswordBox().click();
         card.getPasswordBox().sendKeys("Wise.123");
         ReusableMethods.wait(2);
     }
+
     @Given("user clicks on sign up login button.")
     public void user_clicks_on_sign_up_login_button() {
         card.getSignUpLoginButton().click();
     }
+
     @Given("user confirms that This field is required text is visible.")
     public void user_confirms_that_this_field_is_required_text_is_visible() {
-        String expectedWrittigMassage="This field is required";
-        String actualWrittigMassage=card.getErrorWritingNameandPhone().getAttribute("content-desc");
+        String expectedWrittigMassage = "This field is required";
+        String actualWrittigMassage = card.getErrorWritingNameandPhone().getAttribute("content-desc");
         assertTrue(card.getErrorWritingNameandPhone().isDisplayed());
-        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+        assertEquals(expectedWrittigMassage, actualWrittigMassage);
     }
+
     @Given("user clicks on back button.")
     public void user_clicks_on_back_button() {
         card.getReturnButton().click();
@@ -1056,24 +1068,28 @@ public class Stepdefinition extends OptionsMet {
         card.getNameBoxElement().click();
         card.getNameBoxElement().sendKeys(fullName);
     }
+
     @Given("User Verifies that Password is required text appears")
     public void user_verifies_that_password_is_required_text_appears() {
-        String expectedWrittigMassage="Passord is required";
-        String actualWrittigMassage=card.getErrorWritingPassword().getAttribute("content-desc");
+        String expectedWrittigMassage = "Passord is required";
+        String actualWrittigMassage = card.getErrorWritingPassword().getAttribute("content-desc");
         assertTrue(card.getErrorWritingPassword().isDisplayed());
-        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+        assertEquals(expectedWrittigMassage, actualWrittigMassage);
     }
+
     @Given("The user clicks on the use email instead text on the sigUp form.")
     public void the_user_clicks_on_the_use_email_instead_text_on_the_sig_up_form() {
         card.getUseEmailInst().click();
     }
+
     @Given("The user confirms that the Email is required text appears.")
     public void the_user_confirms_that_the_email_is_required_text_appears() {
-        String expectedWrittigMassage="Email is required";
-        String actualWrittigMassage=card.getErrorWritingEmail().getAttribute("content-desc");
+        String expectedWrittigMassage = "Email is required";
+        String actualWrittigMassage = card.getErrorWritingEmail().getAttribute("content-desc");
         assertTrue(card.getErrorWritingEmail().isDisplayed());
-        assertEquals(expectedWrittigMassage,actualWrittigMassage);
+        assertEquals(expectedWrittigMassage, actualWrittigMassage);
     }
+
     @Given("As a user, enters the necessary information on the Form.")
     public void as_a_user_enters_the_necessary_information_on_the_form() {
         Faker faker = new Faker();
@@ -1094,6 +1110,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
 
     }
+
     @Given("user enters a phone number of less than 7 digits.")
     public void user_enters_a_phone_number_of_less_than_digits() {
         Faker faker = new Faker();
@@ -1101,11 +1118,13 @@ public class Stepdefinition extends OptionsMet {
         card.getPhoneandEmailBox().click();
         card.getPhoneandEmailBox().sendKeys(phoneNumber);
     }
+
     @Given("user confirms receiving error message.")
     public void user_confirms_receiving_error_message() {
         assertTrue(card.getErrorMassagePhone().isDisplayed());
-        assertTrue (card.getErrorMassagePhone().getAttribute("content-desc").contains("The phone field must be at least 7 characters."));
+        assertTrue(card.getErrorMassagePhone().getAttribute("content-desc").contains("The phone field must be at least 7 characters."));
     }
+
     @Given("user enters an Email that does not meet the Email criteria.")
     public void user_enters_an_email_that_does_not_meet_the_email_criteria() {
         Faker faker = new Faker();
@@ -1115,10 +1134,10 @@ public class Stepdefinition extends OptionsMet {
 
         card.getPhoneandEmailBox().click();
         card.getPhoneandEmailBox().sendKeys(invalidEmail);
-        String expectedWrittingMassage="Enter Valid Email Address";
-        String actualWrittingMassage=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        String expectedWrittingMassage = "Enter Valid Email Address";
+        String actualWrittingMassage = card.getErrorWritingFalseEmail().getAttribute("content-desc");
         assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
-        assertEquals(expectedWrittingMassage,actualWrittingMassage);
+        assertEquals(expectedWrittingMassage, actualWrittingMassage);
 
         card.getReturnButton().click();
         card.getSignUpButton().click();
@@ -1128,10 +1147,10 @@ public class Stepdefinition extends OptionsMet {
 
         card.getPhoneandEmailBox().click();
         card.getPhoneandEmailBox().sendKeys(invalidEmail2);
-        String expectedWrittingMassage2="Enter Valid Email Address";
-        String actualWrittingMassage2=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        String expectedWrittingMassage2 = "Enter Valid Email Address";
+        String actualWrittingMassage2 = card.getErrorWritingFalseEmail().getAttribute("content-desc");
         assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
-        assertEquals(expectedWrittingMassage2,actualWrittingMassage2);
+        assertEquals(expectedWrittingMassage2, actualWrittingMassage2);
 
         card.getReturnButton().click();
         card.getSignUpButton().click();
@@ -1141,76 +1160,89 @@ public class Stepdefinition extends OptionsMet {
 
         card.getPhoneandEmailBox().click();
         card.getPhoneandEmailBox().sendKeys(invalidEmail3);
-        String expectedWrittingMassage3="Enter Valid Email Address";
-        String actualWrittingMassage3=card.getErrorWritingFalseEmail().getAttribute("content-desc");
+        String expectedWrittingMassage3 = "Enter Valid Email Address";
+        String actualWrittingMassage3 = card.getErrorWritingFalseEmail().getAttribute("content-desc");
         assertTrue(card.getErrorWritingFalseEmail().isDisplayed());
-        assertEquals(expectedWrittingMassage3,actualWrittingMassage3);
+        assertEquals(expectedWrittingMassage3, actualWrittingMassage3);
 
     }
+
     @Given("The user scrolls the screen {int} times to the screen coordinate from {int},{int} to {int},{int}.")
-    public void the_user_scrolls_the_screen_times_to_the_screen_coordinate_from_to(Integer n,Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
+    public void the_user_scrolls_the_screen_times_to_the_screen_coordinate_from_to(Integer n, Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
         for (int i = 0; i < n; i++) {
 
-            OptionsMet.swipe(x,y,endX,endY);
+            OptionsMet.swipe(x, y, endX, endY);
             ReusableMethods.wait(1);
         }
 
     }
+
     @Given("user confirms that the juniors category is visible.")
     public void user_confirms_that_the_juniors_category_is_visible() {
         assertTrue(card.getBodyJuniorsCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Clothing subcategory is visible.")
     public void user_confirms_that_the_juniors_clothing_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsClothingAltCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Seleepwear subcategory is visible.")
     public void user_confirms_that_the_juniors_seleepwear_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsSleepwearAltCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Shose subcategory is visible.")
     public void user_confirms_that_the_juniors_shose_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsShoesAltCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Accessories subcategory is visible.")
     public void user_confirms_that_the_juniors_accessories_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsAccessoriesAltCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Bags subcategory is visible.")
     public void user_confirms_that_the_juniors_bags_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsBagsAltCatgr().isDisplayed());
     }
+
     @Given("user confirms that the juniors Hat & Beres subcategory is visible.")
     public void user_confirms_that_the_juniors_hat_beres_subcategory_is_visible() {
         assertTrue(card.getBodyJuniorsHatAltCatgr().isDisplayed());
     }
+
     //TC02 US014 suleyman
     @Given("User clicks on juniors category.")
     public void user_clicks_on_juniors_category() {
         card.getBodyJuniorsCatgr().click();
     }
+
     @Given("Verifies that the filter icon is visible and accessible.")
     public void verifies_that_the_filter_icon_is_visible_and_accessible() {
         assertTrue(card.getFiltreIkon().isDisplayed());
         assertTrue(card.getFiltreIkon().isEnabled());
     }
+
     @Given("\\(5-6 years old) Adds Disney Mickey Mouse to wishlist.")
     public void years_old_adds_disney_mickey_mouse_to_wishlist() {
         card.getProductAddWishlist().click();
-        assertTrue (card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
+        assertTrue(card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
     }
+
     @Given("\\(7-8 years old, yellow) Adds Kids Girls Raglan Style to wishlist.")
     public void years_old_yellow_adds_kids_girls_raglan_style_to_wishlist() {
         card.getProductNewAddWishlist().click();
-        assertTrue (card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
+        assertTrue(card.getSuccessAddWishlist().getAttribute("content-desc").contains("Added to Wishlist"));
     }
+
     @Given("Adds capacity Large Student Backpack to wishlist and selects black color and adds to cart.")
     public void adds_capacity_large_student_backpack_to_wishlist_and_selects_black_color_and_adds_to_cart() {
 
         card.getProductSelectColor().click();
         ReusableMethods.wait(3);
         card.getAddToCart().click();
-        assertTrue (card.getSuccessPruductAddToCart().getAttribute("content-desc").contains("Product added to cart"));
+        assertTrue(card.getSuccessPruductAddToCart().getAttribute("content-desc").contains("Product added to cart"));
         ReusableMethods.wait(3);
         card.getAddWishlistFavorite().click();
         ReusableMethods.wait(3);
@@ -1218,6 +1250,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(2);
 
     }
+
     @Given("user clicks on capacity Large Student Backpack")
     public void user_clicks_on_capacity_Large_Student_Backpack() {
         ReusableMethods.wait(2);
@@ -1231,8 +1264,8 @@ public class Stepdefinition extends OptionsMet {
         card.getWishlist().click();
         ReusableMethods.wait(2);
 
-        String actuelurunsayisi=card.getWishlist().getAttribute("content-desc");
-        assertEquals(expectedtext,actuelurunsayisi);
+        String actuelurunsayisi = card.getWishlist().getAttribute("content-desc");
+        assertEquals(expectedtext, actuelurunsayisi);
     }
 
     @Given("User click on juniors category.")
@@ -1396,12 +1429,12 @@ public class Stepdefinition extends OptionsMet {
 
 
     @Given("User verify to be perform add to cart, add to favorite and view")
-    public void user_verify_to_be_perform_add_to_cart_add_to_favorite_and_view () throws
+    public void user_verify_to_be_perform_add_to_cart_add_to_favorite_and_view() throws
             InvalidMidiDataException {
         ReusableMethods.wait(2);
 
         // Tüm ürünleri liste olarak al
-        for (int j = 0; j <5; j++) {
+        for (int j = 0; j < 5; j++) {
 
             for (int i = 0; i < 6; i++) {
                 List<WebElement> products = driver.findElements(By.xpath("//android.view.View[@content-desc and @index='" + i + "']"));
@@ -1413,39 +1446,72 @@ public class Stepdefinition extends OptionsMet {
                         System.out.println(product.getSize());
                         System.out.println(products);
                     }
-                        products.get(i).click();
-                        // Ürünü tıklayarak detayına gir
-                        touchDown(352, 909);
-                        // product.click();
-                        ReusableMethods.wait(2);
+                    products.get(i).click();
+                    // Ürünü tıklayarak detayına gir
+                    touchDown(352, 909);
+                    // product.click();
+                    ReusableMethods.wait(2);
 
-                        // "Add to Cart" butonunu bul ve tıkla
-                        OptionsMet.swipe(700, 2369, 679, 914);
-                        touchDown(184, 2497);
+                    // "Add to Cart" butonunu bul ve tıkla
+                    OptionsMet.swipe(700, 2369, 679, 914);
+                    touchDown(184, 2497);
 
-                        clickButtonByDescription("Add To Cart");
-                        // WebElement addToCartButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Cart']"));
-                        // addToCartButton.click();
-                        ReusableMethods.wait(1);
-                        System.out.println(productName + " sepete eklendi.");
+                    clickButtonByDescription("Add To Cart");
+                    // WebElement addToCartButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Cart']"));
+                    // addToCartButton.click();
+                    ReusableMethods.wait(1);
+                    System.out.println(productName + " sepete eklendi.");
 
-                        // "Add to Favorites" butonunu bul ve tıkla
-                        clickButtonByDescription("Favorite");
-                        //WebElement favoriteButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Favorite']"));
-                        // favoriteButton.click();
-                        ReusableMethods.wait(1);
-                        System.out.println(productName + " favorilere eklendi.");
+                    // "Add to Favorites" butonunu bul ve tıkla
+                    clickButtonByDescription("Favorite");
+                    //WebElement favoriteButton = driver.findElement(By.xpath("//android.widget.Button[@content-desc='Add to Favorite']"));
+                    // favoriteButton.click();
+                    ReusableMethods.wait(1);
+                    System.out.println(productName + " favorilere eklendi.");
 
-                        // Geri git (Back tuşu)
-                        driver.navigate().back();
-                        ReusableMethods.wait(1);
+                    // Geri git (Back tuşu)
+                    driver.navigate().back();
+                    ReusableMethods.wait(1);
 
                 }
 
             }
+            touchDown(352, 909);
         }
-        touchDown(352, 909);
+
     }
-//cembakir
+
+    //cembakir
+    @Given("Verifies the visibility of the Profile menu")
+    public void verifies_the_visibility_of_the_profile_menu() {
+        assertTrue(card.profilButton.isDisplayed());
+        String textProfile = card.profilButton.getAttribute("contentDescription");
+        System.out.println(textProfile);
+        String actualText = "Profile";
+        assertEquals(textProfile, actualText);
+    }
+
+    @Given("Verifies the visibility of the Logout menu")
+    public void verifies_the_visibility_of_the_logout_menu() {
+        String textLogout = card.logoutMenu.getAttribute("contentDescription");
+        System.out.println(textLogout);
+        assertTrue(card.logoutMenu.isDisplayed());
+        String actualText = "Logout";
+        assertEquals(textLogout, actualText);
+        clickButtonByDescription("Logout");
+
+    }
+
+    @Given("Verifies user is loggedout Successfully")
+    public void verifies_user_is_loggedout_successfully() {
+        String logoutText = card.logutMessage.getAttribute("content-desc");
+        System.out.println(logoutText);
+        assertTrue(card.logutMessage.getAttribute("contentDescription").contains("Logged Out"));
+    }
+
 }
+
+
+
+
 

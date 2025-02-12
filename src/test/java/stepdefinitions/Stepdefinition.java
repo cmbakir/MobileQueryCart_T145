@@ -1770,6 +1770,7 @@ public class Stepdefinition extends OptionsMet {
         System.out.println(logoutText);
         assertTrue(card.logutMessage.getAttribute("contentDescription").contains("Logged Out"));
     }
+    //xxx
 
 
 }

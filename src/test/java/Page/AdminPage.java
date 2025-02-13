@@ -5,6 +5,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -13,8 +14,12 @@ import utilities.ReusableMethods;
 import java.util.List;
 
 import static utilities.Driver.getAppiumDriver;
+import static utilities.Driver.startActivity;
 
 public class AdminPage {
+
+    AdminPage admin = new AdminPage();
+    //Actions action = new Actions(startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", false));
 
     public AdminPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
@@ -44,13 +49,13 @@ public class AdminPage {
      * Bekleyen siparişleri tespit eder ve action butonuna tıklar.
      */
 
-
     public void clickActionButtonForPendingRows() {
         AndroidDriver driver = (AndroidDriver) getAppiumDriver();
 
         try {
             // Tüm sipariş satırlarını al
-            List<WebElement> orderRows = driver.findElements(By.xpath("//tr"));
+            List<WebElement> orderRows = driver.findElements(By.xpath("(//android.view.View[@content-desc=\"\"])[1]/android.view.View"));
+
 
             // Eğer sipariş yoksa hata mesajı ver
             if (orderRows.isEmpty()) {
@@ -61,12 +66,12 @@ public class AdminPage {
             for (WebElement row : orderRows) {
                 try {
                     // Siparişin durumunu belirten hücreyi bul
-                    WebElement statusElement = row.findElement(By.xpath(".//td[contains(@class, 'status-column')]"));
-                    String statusText = statusElement.getText().trim();
+                    WebElement statusElement = row.findElement(By.xpath(".//android.view.View[contains(@content-desc, 'Status:')]"));
+                    String statusText = statusElement.getAttribute("content-desc").trim();
 
                     // Eğer sipariş "Pending" durumundaysa, işlem butonuna tıkla
-                    if (statusText.equalsIgnoreCase("Pending")) {
-                        WebElement actionButton = row.findElement(By.xpath(".//button[contains(@class, 'db-table-action view')]"));
+                    if (statusText.contains("Pending")) {
+                        WebElement actionButton = row.findElement(By.xpath(".//android.widget.Button[contains(@content-desc, 'Action')]"));
                         actionButton.click();
                         System.out.println("Pending sipariş bulundu ve Action butonuna tıklandı.");
 
@@ -87,36 +92,42 @@ public class AdminPage {
     }
 
 
+
     // ======= Manager Giriş Elementleri =======
-    @AndroidFindBy(xpath = "(//*[@class='w-full h-12 px-4 rounded-lg text-base border border-[#D9DBE9] hover:border-primary/30 focus-within:border-primary/30 transition-all duration-500'])[1]")
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"formEmail\"]")
     public WebElement inputEmail;
 
-    @AndroidFindBy(xpath = "(//*[@class='w-full h-12 px-4 rounded-lg text-base border border-[#D9DBE9] hover:border-primary/30 focus-within:border-primary/30 transition-all duration-500'])[2]")
+    @AndroidFindBy(xpath ="//android.widget.EditText[@resource-id=\"formPassword\"]")
     public WebElement inputPassword;
 
-    @AndroidFindBy(xpath = "(//*[@class='font-bold text-center w-full h-12 leading-12 rounded-full bg-primary text-white capitalize mb-6'])[1]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"Sign In\"]")
     public WebElement adminSignInButton;
 
     // ======= Panel ve Dashboard Elementleri =======
-    @AndroidFindBy(xpath = "(//*[@class='lab-line-user text-xl py-5'])[1]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"\uE001 Profile\"]")
     public WebElement managerButton;
 
-    @AndroidFindBy(xpath = "(//*[@class='text-sm font-medium capitalize whitespace-nowrap'])[1]")
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"\uE065 Dashboard\"]")
     public WebElement dashboardButton;
 
-    @AndroidFindBy(xpath = "(//*[@class='text-base flex-auto'])[1]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"\uF036\"]")
+    public WebElement sidebar;
+
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Overview\"]")
     public WebElement onlineOrdersButton;
 
+    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"\uF00D\"]")
+    public WebElement xbutton;
+
     // ======= Sipariş Yönetimi =======
-    @AndroidFindBy(xpath = "(//*[@class='flex items-center justify-center text-white gap-2 px-4 h-[38px] rounded shadow-db-card bg-[#2AC769]'])[1]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text=\"\uE050 Accept\"]")
     public WebElement acceptButton;
 
-    @AndroidFindBy(xpath = "//*[@class='swal2-confirm swal2-styled']")
-    public WebElement accept2button;
 
-    @AndroidFindBy(xpath = "(//*[@class='text-sm capitalize appearance-none pl-4 pr-10 h-[38px] rounded border border-primary bg-white text-primary'])[2]")
+    @AndroidFindBy(xpath = "//android.view.View[@text=\"Confirmed\"]")
     public WebElement dropdownMenu;
 
-    @AndroidFindBy(xpath = "(//option[@value='10'])[2]")
+    @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@resource-id=\"android:id/text1\" and @text=\"Delivered\"]")
     public WebElement labelDelivered;
 }

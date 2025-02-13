@@ -25,7 +25,7 @@ Feature: QCM30-US025 As a registered user, I would like to have a page about the
     When User enters a reason for the return in the "Return Reason" field
     And User enters a note in the "Return Note" field
     And User attaches a document or photo in the "Attachment" field
-    And User clicks the "Request Return" button
+    And User clicks "Request Return" button
     Then User should be redirected to the Return Orders page
     And the Return Orders page should show a notification or status indicating that the return process has started
     And Driver turns off

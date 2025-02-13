@@ -934,7 +934,6 @@ public class Stepdefinition extends OptionsMet {
     @And("User clicks on the first order in the list")
     public void userClicksOnTheFirstOrderInTheList() {
         ReusableMethods.wait(2);
-        //card.getFirstOrderDetailsButton().click();
         touchDown(666,826);
     }
     @And("User scroll down the screen")
@@ -1669,7 +1668,7 @@ public class Stepdefinition extends OptionsMet {
 
 
     @Given("Manager is on the Dashboard page and accept order")
-    public void manager_is_on_the_dashboard_page_and_accept_order() {
+    public void manager_is_on_the_dashboard_page_and_accept_order() throws InvalidMidiDataException {
         System.out.println("Chrome tarayıcısına geçiş yapılıyor ve admin paneline giriş yapılıyor...");
 
         ReusableMethods.wait(3);
@@ -1691,18 +1690,19 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         adminPage.dashboardButton.click();
         ReusableMethods.wait(1);
+        adminPage.sidebar.click();
+        ReusableMethods.wait(1);
         adminPage.onlineOrdersButton.click();
         ReusableMethods.wait(2);
-        System.out.println("Dashboard ekranına geçildi.");
+        adminPage.xbutton.click();
+        OptionsMet.swipe(1250,1550,100,1550);
 
         // Bekleyen siparişi kabul et
         adminPage.clickActionButtonForPendingRows();
         ReusableMethods.wait(1);
         adminPage.acceptButton.click();
-        System.out.println("Sipariş onaylandı.");
-
         ReusableMethods.wait(1);
-        adminPage.accept2button.click();
+        touchDown(444,1793); // yes, Accept it button . click
         ReusableMethods.wait(1);
 
         // Siparişi "Delivered" olarak işaretle
@@ -1711,7 +1711,6 @@ public class Stepdefinition extends OptionsMet {
         adminPage.labelDelivered.click();
         ReusableMethods.wait(1);
         System.out.println("Sipariş başarıyla 'Delivered' olarak işaretlendi.");
-
         System.out.println("Yönetici sipariş işlemlerini tamamladı.");
     }
 
@@ -1852,6 +1851,47 @@ public class Stepdefinition extends OptionsMet {
         actions.sendKeys(Keys.ENTER).perform();
         card.signInLoginClick();
         hideKeyboard();
+    }
+
+
+
+    @Given("User is on the {string} page and should be selected product")
+    public void user_is_on_the_page_and_should_be_selected_product(String string) {
+        touchDown(142,649);
+    }
+    @When("User enters a reason for the return in the {string} field")
+    public void user_enters_a_reason_for_the_return_in_the_field(String string) throws InvalidMidiDataException {
+        card.returnReason.click();
+        ReusableMethods.wait(1);
+        card.returnReasonSelectButton.click();
+    }
+    @When("User enters a note in the {string} field")
+    public void user_enters_a_note_in_the_field(String string) throws InvalidMidiDataException {
+        card.returnReasonEditText.sendKeys("Product size does not fit.");
+        OptionsMet.swipe(500,1800,500,900);
+
+    }
+    @When("User attaches a document or photo in the {string} field")
+    public void user_attaches_a_document_or_photo_in_the_field(String string) {
+        card.returnReasonAttachmentButton.click();
+        ReusableMethods.wait(1);
+        card.selectImage.click();
+    }
+    @When("User clicks {string} button")
+    public void user_clicks_button(String RequestReturn) {
+        card.requestReturnButton.click();
+
+    }
+    @Then("User should be redirected to the Return Orders page")
+    public void user_should_be_redirected_to_the_return_orders_page() {
+        assertTrue(card.returnOrdersTitle.isDisplayed());
+
+    }
+    @Then("the Return Orders page should show a notification or status indicating that the return process has started")
+    public void the_return_orders_page_should_show_a_notification_or_status_indicating_that_the_return_process_has_started() {
+        touchDown(1150,598);
+        ReusableMethods.wait(1);
+        assertTrue(card.returnResponseTitle.isDisplayed());
     }
 
 

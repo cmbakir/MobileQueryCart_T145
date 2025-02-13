@@ -133,7 +133,7 @@ public class QueryCardPage {
             "0 (0  Reviews)\n" +
             "$65.00\")")
     public WebElement firstElementOfMostPopuler;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"L\")")
     public WebElement mSizeButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
     public WebElement sepetIcon;
@@ -189,6 +189,8 @@ public class QueryCardPage {
     private WebElement iconFilter;
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
     private WebElement categoryBackButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterCloseButton;
 
 
 
@@ -223,6 +225,17 @@ public class QueryCardPage {
 
     @AndroidFindBy (uiAutomator = "new UiSelector().description(\"M\")")
     public WebElement iconMSize;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Success\n" +
+            "Logged Out Successfully.\"]")
+    public WebElement logutMessage;
+
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"M\"]")
+    public WebElement labelMSize;
+
+    @AndroidFindBy (xpath = "new UiSelector().description(\"(18, Wine Red) Womens Short Sleeve Tie Dye Blosue T-Shirt\")")
+    public WebElement labelWomenProductName;
+
 
 
 
@@ -592,6 +605,75 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")//new UiSelector().description("Sign Up").instance(1)
     private WebElement signUpLoginButton;
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\"]")
+    private WebElement firstProductSelection;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Floral Print Midi Dress\n" +
+            "0 (0  Reviews)\n" +
+            "$100.00\"]")
+    private WebElement secondProductSelection;
+    @AndroidFindBy(accessibility = "Proceed to Checkout")
+    private WebElement proceedtoCheckoutButton;
+    @AndroidFindBy(accessibility = "Save & Pay")
+    private WebElement Save_PayButton;
+    @AndroidFindBy(accessibility = "Subtotal")
+    private WebElement subtotal_Text;
+    @AndroidFindBy(accessibility = "Remove")
+    private WebElement remove_Button;
+    @AndroidFindBy(accessibility = "Go to Shopping")
+    private WebElement GotoShopping_Button;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(6)")
+    private List<WebElement> cartProducts;
+    @AndroidFindBy(accessibility = "S")
+    private WebElement productSizeClick;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Black\")")
+    @AndroidFindBy(accessibility = "Edit Profile")
+    private WebElement editProfileClck;
+    @AndroidFindBy(accessibility = "Save Changes")
+    private WebElement editSaveChngButton;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"PROFILE_UPDATE\n" +
+            "Profile Updated Successfully\"]")
+    private WebElement prflUpSuccessfully;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement editPrflNameBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement editPrflEmailBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement editPrflPhoneBox;
+
+
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Change Password\")")
+    public WebElement changePassword;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    public WebElement oldPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    public WebElement newPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    public WebElement confirmPasswordbox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Save Changes\")")
+    public WebElement saveChangesPassw;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Change Password\n" +
+            "Password Updated Successfully\"]")
+    public WebElement successPass;
+
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Profile\"]")
+    public WebElement profilButton;
+
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
+    public WebElement logoutMenu;
+
+
+
+
+
 
 
 
@@ -815,6 +897,13 @@ public class QueryCardPage {
         ReusableMethods.wait(1);
         categoryBackButton.click();
     }
+
+
+    public void clickFilterCloseButton(){
+        ReusableMethods.wait(1);
+        filterCloseButton.click();
+    }
+
 
 
 

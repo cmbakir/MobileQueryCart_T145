@@ -1,16 +1,17 @@
 package stepdefinitions;
 
-import Page.ManagerPage;
+import Page.AdminPage;
 import Page.QueryCardPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en_lol.AN;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
+import utilities.*;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -22,10 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import utilities.Driver;
-import utilities.OptionsMet;
-import utilities.ReusableMethods;
-
 
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -48,7 +45,6 @@ import java.sql.DriverManager;
 import java.time.Duration;
 
 
-import static Page.ManagerPage.clickActionButtonForPendingRows;
 import static org.junit.Assert.*;
 import static utilities.Driver.*;
 
@@ -913,7 +909,8 @@ public class Stepdefinition extends OptionsMet {
     @And("User clicks on the first order in the list")
     public void userClicksOnTheFirstOrderInTheList() {
         ReusableMethods.wait(2);
-        card.getFirstOrderDetailsButton().click();
+        //card.getFirstOrderDetailsButton().click();
+        touchDown(666,826);
     }
     @And("User scroll down the screen")
     public void userScrollDownTheScreen() throws InvalidMidiDataException {
@@ -933,36 +930,7 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
     }
 
-    @Given("Manager is on the Dashboard page and accept order")
-    public void manager_is_on_the_dashboard_page_and_accept_order() {
 
-        ManagerPage managerPage= new ManagerPage();
-        WebDriver webdriver = Driver.getWebdriver();
-
-        String managerLoginUrl = ConfigReader.getProperty("managerLoginUrl");
-        String managerEmail = ConfigReader.getProperty("managerEmail");
-        String registeredPassword = ConfigReader.getProperty("registeredPassword");
-
-        managerPage.managerLogin(managerLoginUrl, managerEmail, registeredPassword);
-
-        managerPage.managerButton.click();
-        ReusableMethods.wait(1);
-        managerPage.dashboardButton.click();
-        ReusableMethods.wait(1);
-        managerPage.onlineOrdersButton.click();
-        ReusableMethods.wait(2);
-
-        ManagerPage.clickActionButtonForPendingRows(webdriver);
-
-        managerPage.acceptButton.click();
-        ReusableMethods.wait(1);
-        managerPage.accept2button.click();
-        ReusableMethods.wait(1);
-        managerPage.dropdownMenu.click();
-        ReusableMethods.wait(1);
-        managerPage.labelDelivered.click();
-        ReusableMethods.wait(1);
-    }
     //TC01 regester Suleyman us007
     @Given("The user verifies und enabled that the {string} icon is on the page.")
     public void the_user_verifies_that_the_icon_is_on_the_page(String description) {
@@ -1447,5 +1415,62 @@ public class Stepdefinition extends OptionsMet {
         touchDown(352, 909);
     }
 //cembakir
+
+
+
+
+
+    @Given("Manager is on the Dashboard page and accept order")
+    public void manager_is_on_the_dashboard_page_and_accept_order() {
+        System.out.println("Chrome tarayıcısına geçiş yapılıyor ve admin paneline giriş yapılıyor...");
+
+        ReusableMethods.wait(3);
+        // Chrome tarayıcısına geçiş yap
+        Driver.startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", false);
+
+        // Manager sayfasını başlat
+        AdminPage adminPage = new AdminPage();
+        // Manager giriş bilgileri
+        String managerEmail = ConfigReader.getProperty("managerEmail");
+        String managerPassword = ConfigReader.getProperty("registeredPassword");
+
+        // Admin paneline giriş yap
+        adminPage.managerLogin(managerEmail, managerPassword);
+        System.out.println("Yönetici başarıyla giriş yaptı.");
+
+        // Dashboard'a git
+        adminPage.managerButton.click();
+        ReusableMethods.wait(1);
+        adminPage.dashboardButton.click();
+        ReusableMethods.wait(1);
+        adminPage.onlineOrdersButton.click();
+        ReusableMethods.wait(2);
+        System.out.println("Dashboard ekranına geçildi.");
+
+        // Bekleyen siparişi kabul et
+        adminPage.clickActionButtonForPendingRows();
+        ReusableMethods.wait(1);
+        adminPage.acceptButton.click();
+        System.out.println("Sipariş onaylandı.");
+
+        ReusableMethods.wait(1);
+        adminPage.accept2button.click();
+        ReusableMethods.wait(1);
+
+        // Siparişi "Delivered" olarak işaretle
+        adminPage.dropdownMenu.click();
+        ReusableMethods.wait(1);
+        adminPage.labelDelivered.click();
+        ReusableMethods.wait(1);
+        System.out.println("Sipariş başarıyla 'Delivered' olarak işaretlendi.");
+
+        System.out.println("Yönetici sipariş işlemlerini tamamladı.");
+    }
+
+    @Given("Returns to the Query Cart app as the user")
+    public void returns_to_the_query_cart_app_as_the_user() {
+        Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity", false);
+    }
+
 }
 

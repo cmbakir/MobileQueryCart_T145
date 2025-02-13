@@ -10,10 +10,11 @@ Feature: QCM30-US025 As a registered user, I would like to have a page about the
     * As a user must be "registeredEmail" email and "registeredPassword" password Login
 
   Scenario: QCM47 TC_01 -> US025 Return Request Button Visibility on Order History Page
-    Given Manager is on the Dashboard page and accept order
     Given User clicks the button with description "Profile"
     When User clicks the button with description "Order History"
     Then The "Order History" title should be displayed
+    Given Manager is on the Dashboard page and accept order
+    And Returns to the Query Cart app as the user
     And User clicks on the first order in the list
     And User scroll down the screen
     And User clicks the button with description "Return Request"
@@ -28,4 +29,3 @@ Feature: QCM30-US025 As a registered user, I would like to have a page about the
     Then User should be redirected to the Return Orders page
     And the Return Orders page should show a notification or status indicating that the return process has started
     And Driver turns off
-

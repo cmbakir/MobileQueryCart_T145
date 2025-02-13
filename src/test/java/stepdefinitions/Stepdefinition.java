@@ -123,6 +123,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
+        ReusableMethods.wait(2);
         xPathElementClick(itemName, reviews, price);
     }
 
@@ -1771,6 +1772,62 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.logutMessage.getAttribute("contentDescription").contains("Logged Out"));
     }
     //pinar
+
+    @Given("User logs in with email")
+    public void user_logs_in_with_email() {
+        ReusableMethods.wait(2);
+        clickButtonByDescription("*Use Email Instead");
+        ReusableMethods.wait(1);
+        card.phoneTextBoxClickAndSendKeys(ConfigReader.getProperty("emailAhmet"));
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(ConfigReader.getProperty("registeredPassword")).perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+        card.signInLoginClick();
+        hideKeyboard();
+    }
+
+    @Given("User registers")
+    public void user_registers() {
+
+        clickButtonByDescription("Sign Up");
+        ReusableMethods.wait(1);
+
+        Faker faker = new Faker();
+
+        String fullName = faker.name().fullName();
+        String email = faker.internet().emailAddress();
+
+        clickButtonByDescription("*Use Email Instead");
+        ReusableMethods.wait(1);
+
+        card.getNameBoxElement().click();
+        card.getNameBoxElement().sendKeys(fullName);
+        ReusableMethods.wait(2);
+
+        actions.sendKeys(Keys.TAB)
+                .sendKeys(email)
+                .perform();
+        ReusableMethods.wait(2);
+
+        actions.sendKeys(Keys.TAB)
+                .sendKeys("Query.250203")
+                .perform();
+        card.getSignUpLoginButton().click();
+        ReusableMethods.wait(5);
+
+        card.phoneTextBoxClickAndSendKeys(email);
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Query.250203").perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys(Keys.ENTER).perform();
+        card.signInLoginClick();
+        hideKeyboard();
+    }
 
 
 }

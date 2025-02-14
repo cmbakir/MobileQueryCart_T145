@@ -1684,33 +1684,43 @@ public class Stepdefinition extends OptionsMet {
         // Admin paneline giriş yap
         adminPage.managerLogin(managerEmail, managerPassword);
         System.out.println("Yönetici başarıyla giriş yaptı.");
+        ReusableMethods.wait(4);
 
         // Dashboard'a git
-        adminPage.managerButton.click();
-        ReusableMethods.wait(1);
-        adminPage.dashboardButton.click();
-        ReusableMethods.wait(1);
-        adminPage.sidebar.click();
-        ReusableMethods.wait(1);
-        adminPage.onlineOrdersButton.click();
+        touchDown(1235,2710);
+        //adminPage.managerButton.click();
         ReusableMethods.wait(2);
-        adminPage.xbutton.click();
+        touchDown(222,1030);
+        //adminPage.dashboardButton.click();
+        ReusableMethods.wait(2);
+        touchDown(900,347);
+        //adminPage.sidebar.click();
+        ReusableMethods.wait(2);
+        touchDown(285,1093);
+        //adminPage.onlineOrdersButton.click();
+        ReusableMethods.wait(10);
+
+        //adminPage.xbutton.click();
+        touchDown(700,330);
         OptionsMet.swipe(1250,1550,100,1550);
 
         // Bekleyen siparişi kabul et
         touchDown(1167,1514);
         //adminPage.clickActionButtonForPendingRows();
         ReusableMethods.wait(1);
-        adminPage.acceptButton.click();
-        ReusableMethods.wait(1);
+        //adminPage.acceptButton.click();
+        touchDown(564,1469);
+        ReusableMethods.wait(2);
         touchDown(444,1793); // yes, Accept it button . click
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
 
         // Siparişi "Delivered" olarak işaretle
         adminPage.dropdownMenu.click();
-        ReusableMethods.wait(1);
-        adminPage.labelDelivered.click();
-        ReusableMethods.wait(1);
+        //touchDown(558,1196);
+        ReusableMethods.wait(2);
+        touchDown(643,1653);
+        //adminPage.labelDelivered.click();
+        ReusableMethods.wait(2);
         System.out.println("Sipariş başarıyla 'Delivered' olarak işaretlendi.");
         System.out.println("Yönetici sipariş işlemlerini tamamladı.");
     }
@@ -1869,19 +1879,30 @@ public class Stepdefinition extends OptionsMet {
     }
     @When("User enters a note in the {string} field")
     public void user_enters_a_note_in_the_field(String string) throws InvalidMidiDataException {
-        card.returnReasonEditText.sendKeys("Product size does not fit.");
+        touchDown(535,1588);
+        ReusableMethods.wait(1);
+        card.returnReasonEditText.sendKeys("*******");
+        actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(2);
         OptionsMet.swipe(500,1800,500,900);
+        ReusableMethods.wait(2);
 
     }
     @When("User attaches a document or photo in the {string} field")
     public void user_attaches_a_document_or_photo_in_the_field(String string) {
-        card.returnReasonAttachmentButton.click();
-        ReusableMethods.wait(1);
-        card.selectImage.click();
+
+        touchDown(615,2135);
+        //card.returnReasonAttachmentButton.click();
+        ReusableMethods.wait(3);
+        touchDown(245,1065);
+        //card.selectImage.click();
+        ReusableMethods.wait(3);
     }
     @When("User clicks {string} button")
     public void user_clicks_button(String RequestReturn) {
-        card.requestReturnButton.click();
+        touchDown(410,2391);
+        ReusableMethods.wait(3);
+        //card.requestReturnButton.click();
 
     }
     @Then("User should be redirected to the Return Orders page")
@@ -1899,6 +1920,12 @@ public class Stepdefinition extends OptionsMet {
     @Given("User clicks the button with description Return Request")
     public void user_clicks_the_button_with_description_return_request() {
         touchDown(1050,2650);
+    }
+
+    @Then("The Order ID title should be displayed")
+    public void theOrderIdTitleShouldBeDisplayed() {
+        ReusableMethods.wait(2);
+        assertTrue(card.orderIdLabel.isDisplayed());
     }
 
 }

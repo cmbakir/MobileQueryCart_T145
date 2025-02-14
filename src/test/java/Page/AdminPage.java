@@ -40,18 +40,19 @@ public class AdminPage {
         //driver.get(ConfigReader.getProperty("managerLoginUrl"));
         urlbox.sendKeys(ConfigReader.getProperty("managerLoginUrl"));
         OptionsMet.touchDown(1245,2727);
-        ReusableMethods.wait(8);
+        ReusableMethods.wait(13);
 
         // Giriş yap
         OptionsMet.touchDown(600,1000);
-        inputEmail.sendKeys(managerEmail);
         ReusableMethods.wait(1);
+        inputEmail.sendKeys(managerEmail);
+        ReusableMethods.wait(2);
         OptionsMet.touchDown(600,1280);
         inputPassword.sendKeys(managerPassword);
 
         OptionsMet.touchDown(666,1577);
         //adminSignInButton.click();
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(9);
     }
 
     /**

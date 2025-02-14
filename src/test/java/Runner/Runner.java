@@ -6,10 +6,13 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty",
-                "json:target/cucumber.json",},
+                "json:target/cucumber.json", "json:target/cucumber-reports/CucumberTestReport.json",},
         features = "src/test/resources/features",
         glue = {"stepdefinitions", "Hooks"},
-        tags = " @ozlem" ,
+
+        monochrome = true,
+        tags = " @TP_01" ,
+
         dryRun = false
 
 

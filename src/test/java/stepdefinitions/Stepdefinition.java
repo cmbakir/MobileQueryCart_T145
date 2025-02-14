@@ -849,10 +849,12 @@ public class Stepdefinition extends OptionsMet {
     @Given("User fills card informations and clicks the confirm button")
     public void user_fills_card_informations_and_clicks_the_confirm_button() {
         ReusableMethods.wait(4);
-        card.stripeMethodCartBox.click();
+        touchDown(628, 548);
+        ReusableMethods.wait(1);
         actions.sendKeys("424242424242424212261231234512").perform();
         ReusableMethods.wait(2);
-        card.confirmbtnStripeMethod.click();
+        touchDown(691, 777);
+        //card.confirmbtnStripeMethod.click();
         ReusableMethods.wait(5);
 
 
@@ -877,7 +879,7 @@ public class Stepdefinition extends OptionsMet {
             }
             @Given("User verifies that order details could be appeared after click the last order history.")
             public void user_verifies_that_order_details_could_be_appeared_after_click_the_last_order_history () {
-
+                ReusableMethods.wait(2);
                touchDown(666,826);
                ReusableMethods.wait(1);
                assertTrue(card.orderDetailsTable.isDisplayed());
@@ -1863,6 +1865,12 @@ public class Stepdefinition extends OptionsMet {
         actions.sendKeys(Keys.ENTER).perform();
         card.signInLoginClick();
         hideKeyboard();
+    }
+
+    @Given("User clicks the Add To Cart icon")
+    public void user_clicks_the_add_to_cart_icon() {
+
+        touchDown(1191,2701);
     }
 
 

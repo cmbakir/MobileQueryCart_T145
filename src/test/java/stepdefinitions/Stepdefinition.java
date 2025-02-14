@@ -1,16 +1,17 @@
 package stepdefinitions;
 
-import Page.ManagerPage;
+import Page.AdminPage;
 import Page.QueryCardPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en_lol.AN;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
+import utilities.*;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -22,10 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import utilities.Driver;
-import utilities.OptionsMet;
-import utilities.ReusableMethods;
-
 
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -48,7 +45,6 @@ import java.sql.DriverManager;
 import java.time.Duration;
 
 
-import static Page.ManagerPage.clickActionButtonForPendingRows;
 import static org.junit.Assert.*;
 import static utilities.Driver.*;
 
@@ -940,7 +936,7 @@ public class Stepdefinition extends OptionsMet {
     @And("User clicks on the first order in the list")
     public void userClicksOnTheFirstOrderInTheList() {
         ReusableMethods.wait(2);
-        card.getFirstOrderDetailsButton().click();
+        touchDown(666,826);
     }
     @And("User scroll down the screen")
     public void userScrollDownTheScreen() throws InvalidMidiDataException {
@@ -960,36 +956,7 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
     }
 
-    @Given("Manager is on the Dashboard page and accept order")
-    public void manager_is_on_the_dashboard_page_and_accept_order() {
 
-        ManagerPage managerPage= new ManagerPage();
-        WebDriver webdriver = Driver.getWebdriver();
-
-        String managerLoginUrl = ConfigReader.getProperty("managerLoginUrl");
-        String managerEmail = ConfigReader.getProperty("managerEmail");
-        String registeredPassword = ConfigReader.getProperty("registeredPassword");
-
-        managerPage.managerLogin(managerLoginUrl, managerEmail, registeredPassword);
-
-        managerPage.managerButton.click();
-        ReusableMethods.wait(1);
-        managerPage.dashboardButton.click();
-        ReusableMethods.wait(1);
-        managerPage.onlineOrdersButton.click();
-        ReusableMethods.wait(2);
-
-        ManagerPage.clickActionButtonForPendingRows(webdriver);
-
-        managerPage.acceptButton.click();
-        ReusableMethods.wait(1);
-        managerPage.accept2button.click();
-        ReusableMethods.wait(1);
-        managerPage.dropdownMenu.click();
-        ReusableMethods.wait(1);
-        managerPage.labelDelivered.click();
-        ReusableMethods.wait(1);
-    }
     //TC01 regester Suleyman us007
     @Given("The user verifies und enabled that the {string} icon is on the page.")
     public void the_user_verifies_that_the_icon_is_on_the_page(String description) {
@@ -1698,6 +1665,75 @@ public class Stepdefinition extends OptionsMet {
 //cembakir
 
 
+
+
+
+
+    @Given("Manager is on the Dashboard page and accept order")
+    public void manager_is_on_the_dashboard_page_and_accept_order() throws InvalidMidiDataException {
+        System.out.println("Chrome tarayıcısına geçiş yapılıyor ve admin paneline giriş yapılıyor...");
+
+        ReusableMethods.wait(3);
+        // Chrome tarayıcısına geçiş yap
+        Driver.startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", false);
+
+        // Manager sayfasını başlat
+        AdminPage adminPage = new AdminPage();
+        // Manager giriş bilgileri
+        String managerEmail = ConfigReader.getProperty("managerEmail");
+        String managerPassword = ConfigReader.getProperty("registeredPassword");
+
+        // Admin paneline giriş yap
+        adminPage.managerLogin(managerEmail, managerPassword);
+        System.out.println("Yönetici başarıyla giriş yaptı.");
+        ReusableMethods.wait(4);
+
+        // Dashboard'a git
+        touchDown(1235,2710);
+        //adminPage.managerButton.click();
+        ReusableMethods.wait(2);
+        touchDown(222,1030);
+        //adminPage.dashboardButton.click();
+        ReusableMethods.wait(2);
+        touchDown(900,347);
+        //adminPage.sidebar.click();
+        ReusableMethods.wait(2);
+        touchDown(285,1093);
+        //adminPage.onlineOrdersButton.click();
+        ReusableMethods.wait(10);
+
+        //adminPage.xbutton.click();
+        touchDown(700,330);
+        OptionsMet.swipe(1250,1550,100,1550);
+
+        // Bekleyen siparişi kabul et
+        touchDown(1167,1514);
+        //adminPage.clickActionButtonForPendingRows();
+        ReusableMethods.wait(1);
+        //adminPage.acceptButton.click();
+        touchDown(564,1469);
+        ReusableMethods.wait(2);
+        touchDown(444,1793); // yes, Accept it button . click
+        ReusableMethods.wait(2);
+
+        // Siparişi "Delivered" olarak işaretle
+        adminPage.dropdownMenu.click();
+        //touchDown(558,1196);
+        ReusableMethods.wait(2);
+        touchDown(643,1653);
+        //adminPage.labelDelivered.click();
+        ReusableMethods.wait(2);
+        System.out.println("Sipariş başarıyla 'Delivered' olarak işaretlendi.");
+        System.out.println("Yönetici sipariş işlemlerini tamamladı.");
+    }
+
+    @Given("Returns to the Query Cart app as the user")
+    public void returns_to_the_query_cart_app_as_the_user() {
+        Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity", false);
+        ReusableMethods.wait(5);
+    }
+
+
     // ahmet push
     @Given("User verifies to be perform adding to cart, adding to favorite and view")
     public void user_verifies_to_be_perform_adding_to_cart_adding_to_favorite_and_view() throws InvalidMidiDataException {
@@ -1837,6 +1873,68 @@ public class Stepdefinition extends OptionsMet {
         touchDown(1191,2701);
     }
 
+
+
+    @Given("User is on the {string} page and should be selected product")
+    public void user_is_on_the_page_and_should_be_selected_product(String string) {
+        touchDown(142,649);
+    }
+    @When("User enters a reason for the return in the {string} field")
+    public void user_enters_a_reason_for_the_return_in_the_field(String string) throws InvalidMidiDataException {
+        card.returnReason.click();
+        ReusableMethods.wait(1);
+        card.returnReasonSelectButton.click();
+    }
+    @When("User enters a note in the {string} field")
+    public void user_enters_a_note_in_the_field(String string) throws InvalidMidiDataException {
+        touchDown(535,1588);
+        ReusableMethods.wait(1);
+        card.returnReasonEditText.sendKeys("*******");
+        actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(2);
+        OptionsMet.swipe(500,1800,500,900);
+        ReusableMethods.wait(2);
+
+    }
+    @When("User attaches a document or photo in the {string} field")
+    public void user_attaches_a_document_or_photo_in_the_field(String string) {
+
+        touchDown(615,2135);
+        //card.returnReasonAttachmentButton.click();
+        ReusableMethods.wait(3);
+        touchDown(245,1065);
+        //card.selectImage.click();
+        ReusableMethods.wait(3);
+    }
+    @When("User clicks {string} button")
+    public void user_clicks_button(String RequestReturn) {
+        touchDown(410,2391);
+        ReusableMethods.wait(3);
+        //card.requestReturnButton.click();
+
+    }
+    @Then("User should be redirected to the Return Orders page")
+    public void user_should_be_redirected_to_the_return_orders_page() {
+        assertTrue(card.returnOrdersTitle.isDisplayed());
+
+    }
+    @Then("the Return Orders page should show a notification or status indicating that the return process has started")
+    public void the_return_orders_page_should_show_a_notification_or_status_indicating_that_the_return_process_has_started() {
+        touchDown(1150,598);
+        ReusableMethods.wait(1);
+        assertTrue(card.returnResponseTitle.isDisplayed());
+    }
+
+    @Given("User clicks the button with description Return Request")
+    public void user_clicks_the_button_with_description_return_request() {
+        touchDown(1050,2650);
+    }
+
+    @Then("The Order ID title should be displayed")
+    public void theOrderIdTitleShouldBeDisplayed() {
+        ReusableMethods.wait(2);
+        assertTrue(card.orderIdLabel.isDisplayed());
+    }
 
 }
 

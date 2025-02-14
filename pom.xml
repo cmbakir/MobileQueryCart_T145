@@ -67,6 +67,12 @@
             <version>5.6.3</version> <!-- Güncel versiyon -->
         </dependency>
 
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.7.4</version>  <!-- Güncel versiyonu kullanabilirsiniz -->
+        </dependency>
+
 
     </dependencies>
 

@@ -1698,7 +1698,8 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.swipe(1250,1550,100,1550);
 
         // Bekleyen siparişi kabul et
-        adminPage.clickActionButtonForPendingRows();
+        touchDown(1167,1514);
+        //adminPage.clickActionButtonForPendingRows();
         ReusableMethods.wait(1);
         adminPage.acceptButton.click();
         ReusableMethods.wait(1);
@@ -1717,6 +1718,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("Returns to the Query Cart app as the user")
     public void returns_to_the_query_cart_app_as_the_user() {
         Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity", false);
+        ReusableMethods.wait(5);
     }
 
 
@@ -1894,7 +1896,10 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.returnResponseTitle.isDisplayed());
     }
 
-
+    @Given("User clicks the button with description Return Request")
+    public void user_clicks_the_button_with_description_return_request() {
+        touchDown(1050,2650);
+    }
 
 }
 

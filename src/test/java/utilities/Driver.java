@@ -61,6 +61,48 @@ public class Driver {
 
         return driver;
     }
+    public static AppiumDriver getAppiumDriver2() {
+
+
+        /**  Gercek cihaz icin url "http:0.0.0.0:4723/wd/hub";
+         Emilator cihaz icin url "http:127.0.0.1:4723/wd/hub";
+         *******   Driver null olduğunda telefonumuza ait özellikleri hazırlarız
+         */
+        if (driver == null) {
+            switch (ConfigReader.getProperty("platformName")) {
+                case "Android":
+                    options = new UiAutomator2Options();
+                    options.setPlatformName("Android").setAutomationName("UiAutomator2");
+                    options.setAppPackage("com.android.chrome");
+                    options.setAppActivity("com.google.android.apps.chrome.Main");
+                    options.setUdid("emulator-5554");
+                    options.setNoReset(false);
+                    options.setNewCommandTimeout(Duration.ofMinutes(20));
+                    try {
+                        driver = new AndroidDriver(
+                                new URL("http://0.0.0.0:4723"), options
+                        );
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    break;
+                case "IOS":
+
+                    break;
+                default:
+                    throw new RuntimeException("Desteklenmeyen Platform");
+            }
+        }
+
+        /**
+         * Her test basinda uygulamanin sifirlanmasini ve en bastan olmasini saglar.
+         * NoReset=true olursa uygulama kaldigi noktadan devam eder
+         */
+
+        return driver;
+    }
+
 
     public static void startActivity(String appPackage, String appActivity, boolean noReset) {
         if (getAppiumDriver() instanceof AndroidDriver) {

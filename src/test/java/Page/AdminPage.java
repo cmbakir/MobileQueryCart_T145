@@ -4,50 +4,61 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 import java.util.List;
 
-import static utilities.Driver.getAppiumDriver;
-import static utilities.Driver.startActivity;
+import static utilities.Driver.*;
 
 public class AdminPage {
 
-    AdminPage admin = new AdminPage();
     //Actions action = new Actions(startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", false));
 
     public AdminPage() {
-        PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver2()), this);
     }
 
     /**
      * Manager paneline giriş yapan method (Appium ile mobil tarayıcı üzerinden)
      */
+
     public void managerLogin(String managerEmail, String managerPassword) {
-        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver2();
 
         // Chrome tarayıcısına geçiş
         Driver.startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", false);
 
         // Admin login sayfasına git
-        driver.get(ConfigReader.getProperty("managerLoginUrl"));
+        chromeSearchBox.click();
+        //driver.get(ConfigReader.getProperty("managerLoginUrl"));
+        urlbox.sendKeys(ConfigReader.getProperty("managerLoginUrl"));
+        OptionsMet.touchDown(1245,2727);
+        ReusableMethods.wait(8);
 
         // Giriş yap
+        OptionsMet.touchDown(600,1000);
         inputEmail.sendKeys(managerEmail);
         ReusableMethods.wait(1);
+        OptionsMet.touchDown(600,1280);
         inputPassword.sendKeys(managerPassword);
-        adminSignInButton.click();
+
+        OptionsMet.touchDown(666,1577);
+        //adminSignInButton.click();
         ReusableMethods.wait(2);
     }
 
     /**
      * Bekleyen siparişleri tespit eder ve action butonuna tıklar.
      */
+/*
+
 
     public void clickActionButtonForPendingRows() {
         AndroidDriver driver = (AndroidDriver) getAppiumDriver();
@@ -92,12 +103,19 @@ public class AdminPage {
     }
 
 
+ */
+
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.android.chrome:id/search_box_text\"]")
+    public WebElement chromeSearchBox;
+
+    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"com.android.chrome:id/url_bar\"]")
+    public WebElement urlbox;
 
     // ======= Manager Giriş Elementleri =======
-    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"formEmail\"]")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"formEmail\")")
     public WebElement inputEmail;
 
-    @AndroidFindBy(xpath ="//android.widget.EditText[@resource-id=\"formPassword\"]")
+    @AndroidFindBy(uiAutomator ="new UiSelector().resourceId(\"formPassword\")")
     public WebElement inputPassword;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text=\"Sign In\"]")

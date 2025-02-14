@@ -8,7 +8,7 @@ Feature: QCM30-US025 As a registered user, I would like to have a page about the
     * User clicks the button with description "Sign In"
     * User clicks the button with "*Use Email Instead"
     * As a user must be "registeredEmail" email and "registeredPassword" password Login
-
+  @ozlem
   Scenario: QCM47 TC_01 -> US025 Return Request Button Visibility on Order History Page
     Given User clicks the button with description "Profile"
     When User clicks the button with description "Order History"
@@ -17,9 +17,9 @@ Feature: QCM30-US025 As a registered user, I would like to have a page about the
     And Returns to the Query Cart app as the user
     And User clicks on the first order in the list
     And User scroll down the screen
-    And User clicks the button with description "Return Request"
+    And User clicks the button with description Return Request
     Then The "Order ID: #" title should be displayed
-
+  @ozlem
   Scenario: QCM48 TC_02 -> US025 Add Return Reason, Note, Attachment and Return Process Started
     Given User is on the "Request Return" page and should be selected product
     When User enters a reason for the return in the "Return Reason" field

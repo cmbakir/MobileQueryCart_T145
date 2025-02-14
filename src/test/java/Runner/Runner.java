@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         glue = {"stepdefinitions", "Hooks"},
 
         monochrome = true,
-        tags = " @TP_01" ,
+        tags = "@ozlem" ,
 
         dryRun = false
 

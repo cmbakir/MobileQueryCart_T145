@@ -1936,11 +1936,6 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.orderIdLabel.isDisplayed());
     }
 
-    @Given("User clicks the Add To Cart icon")
-    public void user_clicks_the_add_to_cart_icon() {
-
-        touchDown(1191,2701);
-    }
 
 
 }

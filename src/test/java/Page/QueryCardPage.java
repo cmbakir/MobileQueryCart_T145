@@ -681,6 +681,36 @@ public class QueryCardPage {
 
 
 
+    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.ImageView[1]/android.view.View")
+    public WebElement returnReason;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"Sizing or fit issues\"]")
+    public WebElement returnReasonSelectButton;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
+    public WebElement returnReasonEditText;
+
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.widget.ImageView[2]/android.view.View")
+    public WebElement returnReasonAttachmentButton;
+
+    @AndroidFindBy(xpath = "(//android.widget.ImageView[@resource-id=\"com.google.android.documentsui:id/icon_thumb\"])[1]")
+    public WebElement selectImage;
+
+    @AndroidFindBy(xpath = "(//android.view.View[@content-desc=\"Request Return\"])[2]")
+    public WebElement requestReturnButton;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Return Orders\"]")
+    public WebElement returnOrdersTitle;
+
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Return Response\"]")
+    public WebElement returnResponseTitle;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Order ID: \"]")
+    public WebElement orderIdLabel;
+
+
+
 
 
 

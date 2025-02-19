@@ -670,6 +670,10 @@ public class QueryCardPage {
     @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Logout\"]")
     public WebElement logoutMenu;
 
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(6)")
+    public WebElement addToCartIcon;
+
+
 
 
 
@@ -879,7 +883,7 @@ public class QueryCardPage {
     public void addNewAddress () throws InterruptedException {
 
         fullNameTextBox.click();
-        fullNameTextBox.sendKeys(faker.name().fullName());
+        fullNameTextBox.sendKeys("Cemre Bulut");//faker.name().fullName());
         actions.sendKeys(Keys.TAB).perform();
         addNewAddressEmailTextBox.sendKeys(faker.internet().emailAddress());
         actions.sendKeys(Keys.TAB).perform();

@@ -1,4 +1,5 @@
 package Reports;
+
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 import java.io.File;
@@ -13,4 +14,6 @@ public class CucumberReportGenerator { //Json Raporu Html formatına çeviriyor.
         ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, config);
         reportBuilder.generateReports();
     }
+
 }
+

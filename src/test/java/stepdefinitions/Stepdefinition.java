@@ -1008,7 +1008,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("Fills out the form according to the rules.")
     public void fills_out_the_form_according_to_the_rules() {
         Faker faker = new Faker();
-        String fullName = faker.name().fullName(); // Rastgele isim
+        String fullName =faker.name().fullName(); // Rastgele isim
         String phoneNumber = faker.number().digits(10); // 7 haneli rastgele telefon numarası
         // İsim kutusuna tıkla ve Faker ile oluşturulan ismi gir
         clickAndVerify(card.getNameBoxElement());
@@ -1771,6 +1771,13 @@ public class Stepdefinition extends OptionsMet {
         assertTrue(card.logutMessage.getAttribute("contentDescription").contains("Logged Out"));
     }
     //pinar
+
+
+    @Given("User clicks the Add To Cart icon")
+    public void user_clicks_the_add_to_cart_icon() {
+
+        touchDown(1191,2701);
+    }
 
 
 }

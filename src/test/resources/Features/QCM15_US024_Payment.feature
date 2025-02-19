@@ -12,7 +12,7 @@ Background:User logs in and add an item to the shopping cart
   * User selects an address for shipping.
   * User clicks the button with description "Save & Pay"
 
-@US24
+  @US24
   Scenario: QCM-52 TC_01 -> QCM-15 US024 Testing that card information form of Stripe Payment Method could be filled and payment could be made
 
   * User clicks the confirm order button without selected payment method, then an error message should be appeared.
@@ -26,7 +26,7 @@ Background:User logs in and add an item to the shopping cart
   * Driver turns off
 
 
-
+  @US24
   Scenario: QCM-53 TC_02 -> QCM-15 US024 Testing that shopping must be resumed after completing the order.
 
     * User clicks the confirm order button without selected payment method, then an error message should be appeared.
